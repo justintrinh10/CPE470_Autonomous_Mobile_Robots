@@ -1,0 +1,4 @@
+[console_scripts]
+publisher = hw1_pkg.publisher:main
+subscriber = hw1_pkg.subscriber:main
+

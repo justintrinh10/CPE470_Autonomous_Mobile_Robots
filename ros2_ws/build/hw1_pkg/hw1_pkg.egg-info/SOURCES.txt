@@ -1,0 +1,14 @@
+package.xml
+setup.cfg
+setup.py
+hw1_pkg/__init__.py
+hw1_pkg/publisher.py
+hw1_pkg/subscriber.py
+hw1_pkg.egg-info/PKG-INFO
+hw1_pkg.egg-info/SOURCES.txt
+hw1_pkg.egg-info/dependency_links.txt
+hw1_pkg.egg-info/entry_points.txt
+hw1_pkg.egg-info/requires.txt
+hw1_pkg.egg-info/top_level.txt
+hw1_pkg.egg-info/zip-safe
+resource/hw1_pkg

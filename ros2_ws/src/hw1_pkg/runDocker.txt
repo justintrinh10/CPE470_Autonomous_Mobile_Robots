@@ -1,0 +1,31 @@
+*Running Docker*
+
+docker run -it --rm \
+    -v ~/ros2_ws:/root/ros2_ws \
+    --name justinDocker \
+    osrf/ros:humble-desktop \
+    bash
+
+*Making a New Pacakage*
+
+source /opt/ros/humble/setup.bash
+cd /root/ros2_ws/src
+ros2 pkg create --build-type ament_python NAME_pkg
+
+*Running Program*
+//Open New Terminal
+
+docker exec -it justinDocker bash
+
+unset FASTRTPS_DEFAULT_PROFILES_FILE
+
+source /opt/ros/humble/setup.bash
+
+cd /root/ros2_ws
+
+colcon build --symlink-install --packages-select PACKAGENAME_pkg
+
+source install/setup.bash
+
+ros2 run PACKAGENAME_pkg FILENAME
+

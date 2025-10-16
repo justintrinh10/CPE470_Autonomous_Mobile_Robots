@@ -1,0 +1,18 @@
+[0.860s] Invoking command in '/root/ros2_ws/build/hw1_pkg': PYTHONPATH=/root/ros2_ws/build/hw1_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/ros2_ws/build/hw1_pkg/build --no-deps symlink_data
+[1.215s] running develop
+[1.433s] running egg_info
+[1.434s] writing hw1_pkg.egg-info/PKG-INFO
+[1.435s] writing dependency_links to hw1_pkg.egg-info/dependency_links.txt
+[1.435s] writing entry points to hw1_pkg.egg-info/entry_points.txt
+[1.436s] writing requirements to hw1_pkg.egg-info/requires.txt
+[1.437s] writing top-level names to hw1_pkg.egg-info/top_level.txt
+[1.447s] reading manifest file 'hw1_pkg.egg-info/SOURCES.txt'
+[1.455s] writing manifest file 'hw1_pkg.egg-info/SOURCES.txt'
+[1.459s] running build_ext
+[1.461s] Creating /root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages/hw1-pkg.egg-link (link to .)
+[1.466s] Installing publisher script to /root/ros2_ws/install/hw1_pkg/lib/hw1_pkg
+[1.469s] Installing subscriber script to /root/ros2_ws/install/hw1_pkg/lib/hw1_pkg
+[1.474s] 
+[1.475s] Installed /root/ros2_ws/build/hw1_pkg
+[1.476s] running symlink_data
+[1.508s] Invoked command in '/root/ros2_ws/build/hw1_pkg' returned '0': PYTHONPATH=/root/ros2_ws/build/hw1_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/ros2_ws/build/hw1_pkg/build --no-deps symlink_data
