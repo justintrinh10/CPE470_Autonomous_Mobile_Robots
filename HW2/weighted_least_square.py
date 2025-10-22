@@ -42,8 +42,8 @@ def create_y_vector(data):
     return y_vector
 
 def main():
-    dataSet1 = polar_to_cartesian.read_file(DATA_FILES[0])
-    dataSet2 = polar_to_cartesian.read_file(DATA_FILES[1])
+    dataSet1 = polar_to_cartesian.read_file(DATA_FILES[0], 0)
+    dataSet2 = polar_to_cartesian.read_file(DATA_FILES[1], 1)
     completeDataSet = dataSet1 + dataSet2
     H_matrix = create_jacobian_matrix(completeDataSet)
     y_vec = create_y_vector(completeDataSet)
@@ -54,6 +54,7 @@ def main():
     print(f"y = mx + c")
     print(f"m = {X_hat[0][0]}, c = {X_hat[1][0]}")
     print(f"y = {X_hat[0][0]}x + {X_hat[1][0]}")
+    return X_hat[0][0], X_hat[1][0]
 
 if __name__ == "__main__":
     main()

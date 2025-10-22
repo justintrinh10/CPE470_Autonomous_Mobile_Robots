@@ -1,10 +1,11 @@
 import math
 
 class Measurement:
-    def __init__(self, a, d):
+    def __init__(self, a, d, l):
         self.angle = a
         self.dist = d
         self.x, self.y = self.polar_to_cartesian(self.angle, self.dist)
+        self.lidar = l
 
     def polar_to_cartesian(self, a, d):
         r = math.radians(a)
@@ -20,13 +21,18 @@ class Measurement:
     
     def getPolar(self):
         return self.angle, self.dist
+    
+    def getLidar(self):
+        return self.lidar
 
 DATA_FILES = ["lidar1.txt", "lidar2.txt"]
 
 def main():
     data = []
+    i = 1
     for file_name in DATA_FILES:
-        data.append(read_file(file_name))
+        data.append(read_file(file_name, i))
+        i += 1
     for i in range(len(data)):
         print(f"Data Set {i + 1}")
         print("(Angle[degrees], Range[cm]) (x[cm], y[cm])")
@@ -34,7 +40,7 @@ def main():
             measurement.output()
         print()
 
-def read_file(file_name):
+def read_file(file_name, l):
     measurements = [] 
     with open(file_name, 'r') as file:
         file.readline()
@@ -45,7 +51,7 @@ def read_file(file_name):
             items = line.split(',')
             angle = float(items[0])
             dist = float(items[1])
-            measurements.append(Measurement(angle, dist))
+            measurements.append(Measurement(angle, dist, l))
     return measurements
 
 if __name__ == "__main__":
