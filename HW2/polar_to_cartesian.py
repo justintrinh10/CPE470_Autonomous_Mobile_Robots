@@ -14,6 +14,12 @@ class Measurement:
     
     def output(self):
         print(f"({self.angle:.2f}, {self.dist:.2f}) ({self.x:.2f}, {self.y:.2f})")
+    
+    def getCartesian(self):
+        return self.x, self.y
+    
+    def getPolar(self):
+        return self.angle, self.dist
 
 DATA_FILES = ["lidar1.txt", "lidar2.txt"]
 
