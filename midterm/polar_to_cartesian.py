@@ -26,26 +26,7 @@ class Measurement:
         return self.lidar
 
 DATA_FILE = "lidar_data.csv"
-
-def main():
-    data = read_file(DATA_FILE)
-
-    print(f"Data Set")
-    print("(Angle[degrees], Range[cm]) (x[cm], y[cm])")
-    x = []
-    y = []
-    for data_point in data:
-        data_point.output()
-        x_cord, y_cord = data_point.getCartesian()
-        x.append(x_cord)
-        y.append(y_cord)
-
-    plt.scatter(x, y, s=1)
-    plt.title("Cartesian Plot for Lidar Data")
-    plt.xlabel("X-Axis [cm]")
-    plt.ylabel("Y-Axis [cm]")
-    plt.axis('equal')
-    plt.show()
+ERROR = 20
 
 def read_file(file_name):
     measurements = [] 
@@ -60,6 +41,31 @@ def read_file(file_name):
             dist = float(items[1])
             measurements.append(Measurement(angle, dist))
     return measurements
+
+def configure_scatter_plot(data):
+    x = []
+    y = []
+    for data_point in data:
+        x_cord, y_cord = data_point.getCartesian()
+        x.append(x_cord)
+        y.append(y_cord)
+
+    plt.scatter(x, y, s=1, color='blue')
+    plt.title("Cartesian Plot for Lidar Data")
+    plt.xlabel("X-Axis [cm]")
+    plt.ylabel("Y-Axis [cm]")
+    plt.axis('equal')
+
+def main():
+    data = read_file(DATA_FILE)
+
+    print(f"Data Set")
+    print("(Angle[degrees], Range[cm]) (x[cm], y[cm] +- {20 mm})")
+    for data_point in data:
+        data_point.output()
+
+    configure_scatter_plot(data)
+    plt.show()
 
 if __name__ == "__main__":
     main()
