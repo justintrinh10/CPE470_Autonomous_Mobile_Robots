@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 
 class Measurement:
     def __init__(self, a, d):
@@ -28,9 +29,23 @@ DATA_FILE = "lidar_data.csv"
 
 def main():
     data = read_file(DATA_FILE)
+
     print(f"Data Set")
     print("(Angle[degrees], Range[cm]) (x[cm], y[cm])")
-    data.output()
+    x = []
+    y = []
+    for data_point in data:
+        data_point.output()
+        x_cord, y_cord = data_point.getCartesian()
+        x.append(x_cord)
+        y.append(y_cord)
+
+    plt.scatter(x, y, s=1)
+    plt.title("Cartesian Plot for Lidar Data")
+    plt.xlabel("X-Axis [cm]")
+    plt.ylabel("Y-Axis [cm]")
+    plt.axis('equal')
+    plt.show()
 
 def read_file(file_name):
     measurements = [] 
