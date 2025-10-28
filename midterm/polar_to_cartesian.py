@@ -42,19 +42,20 @@ def read_file(file_name):
             measurements.append(Measurement(angle, dist))
     return measurements
 
-def configure_scatter_plot(data):
+def configure_scatter_plot():
+    plt.title("Cartesian Plot for Lidar Data")
+    plt.xlabel("X-Axis [cm]")
+    plt.ylabel("Y-Axis [cm]")
+    plt.axis('equal')
+
+def add_data_scatter(data, size, clr):
     x = []
     y = []
     for data_point in data:
         x_cord, y_cord = data_point.getCartesian()
         x.append(x_cord)
         y.append(y_cord)
-
-    plt.scatter(x, y, s=1, color='blue')
-    plt.title("Cartesian Plot for Lidar Data")
-    plt.xlabel("X-Axis [cm]")
-    plt.ylabel("Y-Axis [cm]")
-    plt.axis('equal')
+    plt.scatter(x, y, s=size, color=clr)
 
 def main():
     data = read_file(DATA_FILE)
@@ -64,7 +65,8 @@ def main():
     for data_point in data:
         data_point.output()
 
-    configure_scatter_plot(data)
+    configure_scatter_plot()
+    add_data_scatter(data, 1, "blue")
     plt.show()
 
 if __name__ == "__main__":
