@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 DATA_FILE = "lidar_data.csv"
 ERROR = 20
-THRESHOLD = 500
+THRESHOLD = 15
 
 def find_inflexion_points(data):
     second_derivatives = find_second_derivative(data)
@@ -46,7 +46,7 @@ def find_second_derivative(data):
             angle_diff = (cur_angle - prev_angle + 360) % 360
             if angle_diff > 180:
                 angle_diff -= 360
-            second_derivative = (first_derivatives[i] - first_derivatives[i - 1])/angle_diff
+            second_derivative = (first_derivatives[(i + 1)%len(first_derivatives)] - first_derivatives[i - 1])/angle_diff
         s_derv.append(second_derivative)
     return s_derv
 
@@ -83,14 +83,27 @@ def get_inflexion_points(data, ind):
         inflexion_points.append(data[i])
     return inflexion_points
 
+def find_wall_ends(data):
+    max_angle_gap = 0
+    max_angle_gap_index = 0
+    for i in range(len(data)):
+        cur_angle = data[i].getPolar()[0]
+        prev_angle = data[i - 1].getPolar()[0]
+        if cur_angle - prev_angle > max_angle_gap:
+            max_angle_gap = cur_angle - prev_angle
+            max_angle_gap_index = i
+    return data[max_angle_gap_index - 1], data[max_angle_gap_index]
+
 def main():
     data = ptc.read_file(DATA_FILE)
-    avg_data_set = create_average_data_set(data, 15, 5)
+    avg_data_set = create_average_data_set(data, 11, 4)
     inflexion_points_ind = find_inflexion_points(avg_data_set)
     inflexion_points = get_inflexion_points(data, inflexion_points_ind)
     ptc.configure_scatter_plot()
     ptc.add_data_scatter(data, 1, "blue")
     ptc.add_data_scatter(inflexion_points, 10, "red")
+    wall_end_points = find_wall_ends(data)
+    ptc.add_data_scatter(wall_end_points, 20, "orange")
     plt.show()
 
     # avg_data_set = create_average_data_set(data,15, 5)
