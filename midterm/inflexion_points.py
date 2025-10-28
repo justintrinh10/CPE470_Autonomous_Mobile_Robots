@@ -1,11 +1,11 @@
 import polar_to_cartesian as ptc
 import math
-import numpy
+import numpy as np
 import matplotlib.pyplot as plt
 
 DATA_FILE = "lidar_data.csv"
 ERROR = 20
-THRESHOLD = 2
+THRESHOLD = 500
 
 def find_inflexion_points(data):
     second_derivatives = find_second_derivative(data)
@@ -22,7 +22,8 @@ def find_first_derivative(data):
         prev_angle, prev_dist = data[i - 1].getPolar()
         derivative = 0
         if cur_angle == prev_angle:
-            derivative = f_derv[i - 1]
+            if i > 0:
+                derivative = f_derv[i - 1]
         else:
             angle_diff = (cur_angle - prev_angle + 360) % 360
             if angle_diff > 180:
@@ -39,7 +40,8 @@ def find_second_derivative(data):
         prev_angle, trash = data[i - 1].getPolar()
         second_derivative = 0
         if cur_angle == prev_angle:
-            second_derivative = s_derv[i - 1]
+            if i > 0:
+                second_derivative = s_derv[i - 1]
         else:
             angle_diff = (cur_angle - prev_angle + 360) % 360
             if angle_diff > 180:
@@ -48,20 +50,30 @@ def find_second_derivative(data):
         s_derv.append(second_derivative)
     return s_derv
 
-#window must be odd
-def create_average_data_set(data, window):
+#window must be odd && drop < window
+def create_average_data_set(data, window, drop):
     avg_data_set = []
     half_window = int(window/2)
     for i in range(len(data)):
-        total_angle = 0
-        total_dist = 0
+        angles = []
+        dists = []
         for j in range(i - half_window, i + half_window):
-            angle, dist = data[j%len(data)].getPolar()
-            total_angle += angle
-            total_dist += dist
-        angle_avg = total_angle/window
-        dist_avg = total_dist/window
-        measurement = ptc.Measurement(angle_avg, dist_avg)
+            angles.append(data[j%len(data)].getPolar()[0])
+            dists.append(data[j%len(data)].getPolar()[1])
+        angles = np.array(angles)
+        dists = np.array(dists)
+        median_dist = np.median(dists)
+        errors_from_median = np.empty((len(dists)))
+        for j in range(len(dists)):
+            errors_from_median[j] = abs(dists[j] - median_dist)
+        for j in range(drop):
+            max_error_index = np.argmax(errors_from_median)
+            errors_from_median = np.delete(errors_from_median, max_error_index)
+            dists = np.delete(dists, max_error_index)
+            angles = np.delete(angles, max_error_index)
+        avg_angle = np.mean(angles)
+        avg_dist = np.mean(dists)
+        measurement = ptc.Measurement(avg_angle, avg_dist)
         avg_data_set.append(measurement)
     return avg_data_set
 
@@ -73,7 +85,7 @@ def get_inflexion_points(data, ind):
 
 def main():
     data = ptc.read_file(DATA_FILE)
-    avg_data_set = create_average_data_set(data, 11)
+    avg_data_set = create_average_data_set(data, 15, 5)
     inflexion_points_ind = find_inflexion_points(avg_data_set)
     inflexion_points = get_inflexion_points(data, inflexion_points_ind)
     ptc.configure_scatter_plot()
@@ -81,7 +93,7 @@ def main():
     ptc.add_data_scatter(inflexion_points, 10, "red")
     plt.show()
 
-    # avg_data_set = create_average_data_set(data,11)
+    # avg_data_set = create_average_data_set(data,15, 5)
     # second_derivatives = find_second_derivative(avg_data_set)
     # x_axis = list(range(len(second_derivatives)))
     # plt.scatter(x_axis, second_derivatives, s=1)
