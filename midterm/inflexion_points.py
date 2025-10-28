@@ -5,14 +5,21 @@ import matplotlib.pyplot as plt
 
 DATA_FILE = "lidar_data.csv"
 ERROR = 20
-THRESHOLD = 500
+THRESHOLD = 1.75
 
 def find_inflexion_points(data):
     second_derivatives = find_second_derivative(data)
+    first_derivative = find_first_derivative(data)
+    possible_inflexion_points_ind = []
+    for i in range(1, len(first_derivative) - 1):
+        cur_derivative = first_derivative[i]
+        next_derivative = first_derivative[i + 1]
+        if cur_derivative > 0 and next_derivative < 0:
+            possible_inflexion_points_ind.append(i)
     inflexion_points_ind = []
-    for i in range(len(second_derivatives)):
-        if abs(second_derivatives[i]) > THRESHOLD:
-            inflexion_points_ind.append(i)
+    for i in range(len(possible_inflexion_points_ind)):
+        if second_derivatives[possible_inflexion_points_ind[i] + 1] < -THRESHOLD:
+            inflexion_points_ind.append(possible_inflexion_points_ind[i])
     return inflexion_points_ind
 
 def find_first_derivative(data):
@@ -24,6 +31,9 @@ def find_first_derivative(data):
         if cur_angle == prev_angle:
             if i > 0:
                 derivative = f_derv[i - 1]
+        #ignore large gaps in data
+        elif cur_angle - prev_angle > 5:
+            derivative = 0
         else:
             angle_diff = (cur_angle - prev_angle + 360) % 360
             if angle_diff > 180:
@@ -54,7 +64,7 @@ def find_second_derivative(data):
 def create_average_data_set(data, window, drop):
     avg_data_set = []
     half_window = int(window/2)
-    for i in range(len(data)):
+    for i in range(0, len(data), 10):
         angles = []
         dists = []
         for j in range(i - half_window, i + half_window):
@@ -78,6 +88,7 @@ def create_average_data_set(data, window, drop):
         avg_dist = np.mean(dists)
         measurement = ptc.Measurement(avg_angle, avg_dist)
         avg_data_set.append(measurement)
+    avg_data_set.sort()
 
     # ptc.configure_scatter_plot()
     # ptc.add_data_scatter(data, 1, "blue")
@@ -105,12 +116,13 @@ def find_wall_ends(data):
 
 def main():
     data = ptc.read_file(DATA_FILE)
-    avg_data_set = create_average_data_set(data, 15, 5)
+    avg_data_set = create_average_data_set(data, 21, 7)
     inflexion_points_ind = find_inflexion_points(avg_data_set)
-    inflexion_points = get_inflexion_points(data, inflexion_points_ind)
+    inflexion_points = get_inflexion_points(avg_data_set, inflexion_points_ind)
     ptc.configure_scatter_plot()
-    ptc.add_data_scatter(data, 1, "blue")
-    ptc.add_data_scatter(inflexion_points, 10, "red")
+    ptc.add_data_scatter(avg_data_set, 1, "blue")
+    ptc.add_data_scatter(data, 1, "black")
+    ptc.add_data_scatter(inflexion_points, 20, "red")
     wall_end_points = find_wall_ends(data)
     ptc.add_data_scatter(wall_end_points, 20, "orange")
     plt.show()
