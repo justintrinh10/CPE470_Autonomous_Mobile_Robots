@@ -85,6 +85,19 @@ def cartesian_to_polar(x, y):
     angle = math.degrees(math.atan2(y, x))
     return angle, dist
 
+def find_wall_opening(corners, wall_end_points):
+    wall_opening = []
+    wall_opening.append(corners[3])
+    wall_opening.append(wall_end_points[0])
+    return wall_opening
+
+def calculate_distance(point1, point2):
+    x1, y1 = point1.getCartesian()
+    x2, y2 = point2.getCartesian()
+    x_diff = x2 - x1
+    y_diff = y2 - y1
+    return math.sqrt(x_diff*x_diff + y_diff*y_diff)
+
 def main():
     data = ptc.read_file(DATA_FILE)
     avg_data_set = ip.create_average_data_set(data, 21, 7)
@@ -112,6 +125,14 @@ def main():
     ptc.add_data_scatter(corners,50, "red")
     ptc.add_data_scatter(wall_end_points, 50, "red")
     ip.display_labels(corners, wall_end_points)
+    print()
+    
+    wall_opening = find_wall_opening(corners, wall_end_points)
+    print("Location of Wall Opening")
+    for i in range(len(wall_opening)):
+        print(f"{wall_opening[i].getLabel()}: ({wall_opening[i].getCartesian()[0]}, {wall_opening[i].getCartesian()[1]})")
+    width = calculate_distance(wall_opening[0], wall_opening[1])
+    print(f"Width of Opening: {width} cm")
 
     plt.xlim((-150, 150))
     plt.ylim((-150, 150))
