@@ -60,16 +60,39 @@ def create_subset(data, point1, point2):
                 data_subset.append(data[i])
     return data_subset
 
+def create_and_display_line(data, point1, point2, clr):
+    subset = create_subset(data, point1, point2)
+    subset_x_hat = least_square(subset)
+    print_equation_line(subset_x_hat, point1, point2)
+    display_lines(subset_x_hat, point1, point2, clr)
+    return subset_x_hat
+
 def main():
     data = ptc.read_file(DATA_FILE)
     avg_data_set = ip.create_average_data_set(data, 21, 7)
     corners = ip.find_inflexion_points(avg_data_set)
     wall_end_points = ip.find_wall_ends(data)
     corners, wall_end_points = ip.fix_ordering_labels(corners, wall_end_points)
+    ip.print_corners(corners, wall_end_points)
 
+    ptc.configure_scatter_plot()
+    ptc.add_data_scatter(data, 1, "blue")
+    ptc.add_data_scatter(corners,50, "red")
+    ptc.add_data_scatter(wall_end_points, 50, "red")
+    ip.display_labels(corners, wall_end_points)
 
+    #Wall A to E
+    a_e_line = create_and_display_line(data, corners[0], wall_end_points[0], "orange")
+    #Wall F to C
+    f_c_line = create_and_display_line(data, wall_end_points[1], corners[2], "yellow")
+    #Wall C to B
+    create_and_display_line(data, corners[2], corners[1], "green")
+    #Wall B to A
+    create_and_display_line(data, corners[1], corners[0], "purple")
 
-
+    plt.xlim((-150, 150))
+    plt.ylim((-150, 150))
+    plt.show()
 
 if __name__ == "__main__":
     main()
