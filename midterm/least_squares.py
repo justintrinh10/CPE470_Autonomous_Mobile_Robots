@@ -85,10 +85,23 @@ def cartesian_to_polar(x, y):
     angle = math.degrees(math.atan2(y, x))
     return angle, dist
 
-def find_wall_opening(corners, wall_end_points):
+def find_wall_opening(data):
     wall_opening = []
-    wall_opening.append(corners[3])
-    wall_opening.append(wall_end_points[0])
+    max_seperation = 0
+    max_seperation_index = 0
+    for i in range(len(data)):
+        cur_point = data[i]
+        prev_point = data[i - 1]
+        seperation = calculate_distance(cur_point, prev_point)
+        if seperation > max_seperation:
+            max_seperation = seperation
+            max_seperation_index = i
+    point_D = data[max_seperation_index]
+    point_E = data[max_seperation_index - 1]
+    wall_opening.append(point_D)
+    wall_opening.append(point_E)
+    wall_opening[0].setLabel("D")
+    wall_opening[1].setLabel("E")
     return wall_opening
 
 def calculate_distance(point1, point2):
@@ -127,7 +140,7 @@ def main():
     ip.display_labels(corners, wall_end_points)
     print()
     
-    wall_opening = find_wall_opening(corners, wall_end_points)
+    wall_opening = find_wall_opening(data)
     print("Location of Wall Opening")
     for i in range(len(wall_opening)):
         print(f"{wall_opening[i].getLabel()}: ({wall_opening[i].getCartesian()[0]}, {wall_opening[i].getCartesian()[1]})")
