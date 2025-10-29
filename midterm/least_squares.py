@@ -35,19 +35,38 @@ def create_y_vector(data):
     return y_vector
 
 def print_equation_line(x_hat, point1, point2):
-    print(f"Equation of the line that represents the wall from point {point1} to {point2}:")
+    print(f"Equation of the line that represents the wall from point {point1.getLabel()} to {point2.getLabel()}:")
     print(f"y = mx + c")
     print(f"m = {x_hat[0][0]}, c = {x_hat[1][0]}")
     print(f"y = {x_hat[0][0]}x + {x_hat[1][0]}")
 
 def display_lines(x_hat, point1, point2, clr):
-    line_label = f"Line representing wall {point1} to {point2}"
+    line_label = f"Line representing wall {point1.getLabel()} to {point2.getLabel()}"
     plt.axline((0, x_hat[1][0]), slope=x_hat[0][0], color=clr, label=line_label)
      
+def create_subset(data, point1, point2):
+    data_subset = []
+    start_angle = point1.getPolar()[0]
+    end_angle = point2.getPolar()[0]
+    if start_angle <= end_angle:
+        for i in range(len(data)):
+            cur_angle = data[i].getPolar()[0]
+            if start_angle <= cur_angle and cur_angle <= end_angle:
+                data_subset.append(data[i])
+    else:
+        for i in range(len(data)):
+            cur_angle = data[i].getPolar()[0]
+            if cur_angle >= start_angle or cur_angle <= end_angle:
+                data_subset.append(data[i])
+    return data_subset
 
-
-     
 def main():
+    data = ptc.read_file(DATA_FILE)
+    avg_data_set = ip.create_average_data_set(data, 21, 7)
+    corners = ip.find_inflexion_points(avg_data_set)
+    wall_end_points = ip.find_wall_ends(data)
+    corners, wall_end_points = ip.fix_ordering_labels(corners, wall_end_points)
+
 
 
 
