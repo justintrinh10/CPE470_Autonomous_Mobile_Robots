@@ -39,6 +39,7 @@ def print_equation_line(x_hat, point1, point2):
     print(f"y = mx + c")
     print(f"m = {x_hat[0][0]}, c = {x_hat[1][0]}")
     print(f"y = {x_hat[0][0]}x + {x_hat[1][0]}")
+    print()
 
 def display_lines(x_hat, point1, point2, clr):
     line_label = f"Line representing wall {point1.getLabel()} to {point2.getLabel()}"
@@ -67,19 +68,32 @@ def create_and_display_line(data, point1, point2, clr):
     display_lines(subset_x_hat, point1, point2, clr)
     return subset_x_hat
 
+def find_intersection(x_hat1, x_hat2):
+    m1 = x_hat1[0][0]
+    m2 = x_hat2[0][0]
+    b1 = x_hat1[1][0]
+    b2 = x_hat2[1][0]
+    x = (b2 - b1)/(m1 - m2)
+    y = m1 * x + b1
+    angle, dist = cartesian_to_polar(x, y)
+    intersection = ptc.Measurement(angle, dist)
+    intersection.setLabel("D")
+    return intersection
+
+def cartesian_to_polar(x, y):
+    dist = math.sqrt(x*x + y*y)
+    angle = math.degrees(math.atan2(y, x))
+    return angle, dist
+
 def main():
     data = ptc.read_file(DATA_FILE)
     avg_data_set = ip.create_average_data_set(data, 21, 7)
     corners = ip.find_inflexion_points(avg_data_set)
     wall_end_points = ip.find_wall_ends(data)
     corners, wall_end_points = ip.fix_ordering_labels(corners, wall_end_points)
-    ip.print_corners(corners, wall_end_points)
 
     ptc.configure_scatter_plot()
     ptc.add_data_scatter(data, 1, "blue")
-    ptc.add_data_scatter(corners,50, "red")
-    ptc.add_data_scatter(wall_end_points, 50, "red")
-    ip.display_labels(corners, wall_end_points)
 
     #Wall A to E
     a_e_line = create_and_display_line(data, corners[0], wall_end_points[0], "orange")
@@ -89,6 +103,15 @@ def main():
     create_and_display_line(data, corners[2], corners[1], "green")
     #Wall B to A
     create_and_display_line(data, corners[1], corners[0], "purple")
+
+    intersection = find_intersection(a_e_line, f_c_line)
+    corners.append(intersection)
+
+    ip.print_corners(corners, wall_end_points)
+    print()
+    ptc.add_data_scatter(corners,50, "red")
+    ptc.add_data_scatter(wall_end_points, 50, "red")
+    ip.display_labels(corners, wall_end_points)
 
     plt.xlim((-150, 150))
     plt.ylim((-150, 150))
