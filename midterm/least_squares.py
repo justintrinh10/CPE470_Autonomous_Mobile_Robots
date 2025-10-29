@@ -6,7 +6,13 @@ import inflexion_points as ip
 
 DATA_FILE = "lidar_data.csv"
 
-def least_square(H, y):
+def least_square(data):
+    H_matrix = create_jacobian_matrix(data)
+    y_vec = create_y_vector(data)
+    X_hat = least_square_equation(H_matrix, y_vec)
+    return X_hat
+
+def least_square_equation(H, y):
     H_transposed = H.T
     temp1 = np.dot(H_transposed, H)
     temp1 = np.linalg.inv(temp1)
@@ -28,22 +34,23 @@ def create_y_vector(data):
         y_vector[i][0] = y
     return y_vector
 
-
-
-def main():
-    dataSet1 = polar_to_cartesian.read_file(DATA_FILES[0], 0)
-    dataSet2 = polar_to_cartesian.read_file(DATA_FILES[1], 1)
-    completeDataSet = dataSet1 + dataSet2
-    H_matrix = create_jacobian_matrix(completeDataSet)
-    y_vec = create_y_vector(completeDataSet)
-    covar_matrix = create_covariance_matrix(len(dataSet1), len(dataSet2))
-    X_hat = weighted_least_square(H_matrix, covar_matrix, y_vec)
-    print(f"Weight Least Squares")
-    print(f"Equation of the line that represents the wall:")
+def print_equation_line(x_hat, point1, point2):
+    print(f"Equation of the line that represents the wall from point {point1} to {point2}:")
     print(f"y = mx + c")
-    print(f"m = {X_hat[0][0]}, c = {X_hat[1][0]}")
-    print(f"y = {X_hat[0][0]}x + {X_hat[1][0]}")
-    return X_hat[0][0], X_hat[1][0]
+    print(f"m = {x_hat[0][0]}, c = {x_hat[1][0]}")
+    print(f"y = {x_hat[0][0]}x + {x_hat[1][0]}")
+
+def display_lines(x_hat, point1, point2, clr):
+    line_label = f"Line representing wall {point1} to {point2}"
+    plt.axline((0, x_hat[1][0]), slope=x_hat[0][0], color=clr, label=line_label)
+     
+
+
+     
+def main():
+
+
+
 
 if __name__ == "__main__":
     main()
