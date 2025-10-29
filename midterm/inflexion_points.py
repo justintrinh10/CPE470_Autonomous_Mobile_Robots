@@ -20,12 +20,13 @@ def find_inflexion_points(data):
     for i in range(len(possible_inflexion_points_ind)):
         if second_derivatives[possible_inflexion_points_ind[i] + 1] < -THRESHOLD:
             inflexion_points_ind.append(possible_inflexion_points_ind[i])
-    return inflexion_points_ind
+    inflexion_points = get_inflexion_points(data, inflexion_points_ind)
+    return inflexion_points
 
 def find_first_derivative(data):
     f_derv = []
     for i in range(len(data)):
-        cur_angle, cur_dist = data[(i)%len(data)].getPolar()
+        cur_angle, cur_dist = data[i].getPolar()
         prev_angle, prev_dist = data[i - 1].getPolar()
         derivative = 0
         if cur_angle == prev_angle:
@@ -46,7 +47,7 @@ def find_second_derivative(data):
     first_derivatives = find_first_derivative(data)
     s_derv = []
     for i in range(len(first_derivatives)):
-        cur_angle, trash = data[(i)%len(first_derivatives)].getPolar()
+        cur_angle, trash = data[i].getPolar()
         prev_angle, trash = data[i - 1].getPolar()
         second_derivative = 0
         if cur_angle == prev_angle:
@@ -56,7 +57,7 @@ def find_second_derivative(data):
             angle_diff = (cur_angle - prev_angle + 360) % 360
             if angle_diff > 180:
                 angle_diff -= 360
-            second_derivative = (first_derivatives[(i)%len(first_derivatives)] - first_derivatives[i - 1])/angle_diff
+            second_derivative = (first_derivatives[i] - first_derivatives[i - 1])/angle_diff
         s_derv.append(second_derivative)
     return s_derv
 
@@ -114,17 +115,50 @@ def find_wall_ends(data):
             max_angle_gap_index = i
     return data[max_angle_gap_index - 1], data[max_angle_gap_index]
 
+def print_corners(corners, wall_end_points):
+    print(f"Location of Points (x, y) [cm]")
+    for i in range(len(corners)):
+        print(f"{corners[i].getLabel()}: ({corners[i].getCartesian()[0]}, {corners[i].getCartesian()[1]})")
+    for i in range(len(wall_end_points)):
+        print(f"{wall_end_points[i].getLabel()}: ({wall_end_points[i].getCartesian()[0]}, {wall_end_points[i].getCartesian()[1]})")
+    
+def display_labels(corners, wall_end_points):
+    for i in range(len(corners)):
+        plt.text(corners[i].getCartesian()[0] + 5, corners[i].getCartesian()[1], corners[i].getLabel(), fontsize=15, color='black')
+    for i in range(len(wall_end_points)):
+        plt.text(wall_end_points[i].getCartesian()[0] + 5, wall_end_points[i].getCartesian()[1], wall_end_points[i].getLabel(), fontsize=15, color='black')
+
+def fix_ordering_labels(corners, wall_end_points):
+    new_corners = [None] * len(corners)
+    for i in range(len(corners)):
+        x, y = corners[i].getCartesian()
+        if x < 0 and y > 0:
+            new_corners[0] = corners[i]
+            new_corners[0].setLabel('A')
+        elif x > 0 and y > 0:
+            new_corners[1] = corners[i]
+            new_corners[1].setLabel('B')
+        elif x > 0 and y < 0:
+            new_corners[2] = corners[i]
+            new_corners[2].setLabel('C')
+    wall_end_points[0].setLabel('E')
+    wall_end_points[1].setLabel('F')
+    return new_corners, wall_end_points
+
 def main():
     data = ptc.read_file(DATA_FILE)
     avg_data_set = create_average_data_set(data, 21, 7)
-    inflexion_points_ind = find_inflexion_points(avg_data_set)
-    inflexion_points = get_inflexion_points(avg_data_set, inflexion_points_ind)
-    ptc.configure_scatter_plot()
-    ptc.add_data_scatter(avg_data_set, 1, "blue")
-    ptc.add_data_scatter(data, 1, "black")
-    ptc.add_data_scatter(inflexion_points, 20, "red")
+    corners = find_inflexion_points(avg_data_set)
     wall_end_points = find_wall_ends(data)
-    ptc.add_data_scatter(wall_end_points, 20, "orange")
+    corners, wall_end_points = fix_ordering_labels(corners, wall_end_points)
+    print_corners(corners, wall_end_points)
+
+    ptc.configure_scatter_plot()
+    # ptc.add_data_scatter(avg_data_set, 1, "black")
+    ptc.add_data_scatter(data, 1, "blue")
+    ptc.add_data_scatter(corners,50, "red")
+    ptc.add_data_scatter(wall_end_points, 50, "orange")
+    display_labels(corners, wall_end_points)
     plt.show()
 
     # avg_data_set = create_average_data_set(data, 11, 4)

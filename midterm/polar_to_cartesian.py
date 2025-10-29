@@ -6,6 +6,7 @@ class Measurement:
         self.angle = a
         self.dist = d
         self.x, self.y = self.polar_to_cartesian(self.angle, self.dist)
+        self.label = ""
 
     def polar_to_cartesian(self, a, d):
         r = math.radians(a)
@@ -22,8 +23,14 @@ class Measurement:
     def getPolar(self):
         return self.angle, self.dist
     
-    def getLidar(self):
-        return self.lidar
+    def __lt__(self, other):
+        return self.angle < other.angle
+    
+    def getLabel(self):
+        return self.label
+    
+    def setLabel(self, l):
+        self.label = l
 
 DATA_FILE = "lidar_data.csv"
 ERROR = 20
