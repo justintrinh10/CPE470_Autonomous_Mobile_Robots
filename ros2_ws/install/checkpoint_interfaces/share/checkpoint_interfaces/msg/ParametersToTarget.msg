@@ -1,2 +1,1 @@
-float32 alignment_error
-float32 distance_seperation
+/root/ros2_ws/src/checkpoint_interfaces/msg/ParametersToTarget.msg

@@ -1,6 +1,0 @@
-Invoking command in '/root/ros2_ws/build/checkpoint_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /root/ros2_ws/src/checkpoint_interfaces -DCMAKE_INSTALL_PREFIX=/root/ros2_ws/install/checkpoint_interfaces
-Invoked command in '/root/ros2_ws/build/checkpoint_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /root/ros2_ws/src/checkpoint_interfaces -DCMAKE_INSTALL_PREFIX=/root/ros2_ws/install/checkpoint_interfaces
-Invoking command in '/root/ros2_ws/build/checkpoint_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /root/ros2_ws/build/checkpoint_interfaces -- -j8 -l8
-Invoked command in '/root/ros2_ws/build/checkpoint_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /root/ros2_ws/build/checkpoint_interfaces -- -j8 -l8
-Invoking command in '/root/ros2_ws/build/checkpoint_interfaces': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /root/ros2_ws/build/checkpoint_interfaces
-Invoked command in '/root/ros2_ws/build/checkpoint_interfaces' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /root/ros2_ws/build/checkpoint_interfaces

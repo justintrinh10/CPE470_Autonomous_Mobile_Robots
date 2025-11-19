@@ -1,0 +1,406 @@
+[0.000000] (-) TimerEvent: {}
+[0.000411] (checkpoint_interfaces) JobQueued: {'identifier': 'checkpoint_interfaces', 'dependencies': OrderedDict()}
+[0.000467] (hw1_pkg) JobQueued: {'identifier': 'hw1_pkg', 'dependencies': OrderedDict()}
+[0.000494] (checkpoint_pkg) JobQueued: {'identifier': 'checkpoint_pkg', 'dependencies': OrderedDict([('checkpoint_interfaces', '/root/ros2_ws/install/checkpoint_interfaces')])}
+[0.001032] (checkpoint_interfaces) JobStarted: {'identifier': 'checkpoint_interfaces'}
+[0.017445] (hw1_pkg) JobStarted: {'identifier': 'hw1_pkg'}
+[0.044511] (checkpoint_interfaces) JobProgress: {'identifier': 'checkpoint_interfaces', 'progress': 'cmake'}
+[0.045147] (checkpoint_interfaces) Command: {'cmd': ['/usr/bin/cmake', '/root/ros2_ws/src/checkpoint_interfaces', '-DAMENT_CMAKE_SYMLINK_INSTALL=1', '-DCMAKE_INSTALL_PREFIX=/root/ros2_ws/install/checkpoint_interfaces'], 'cwd': '/root/ros2_ws/build/checkpoint_interfaces', 'env': OrderedDict([('HOSTNAME', 'teamjk-desktop'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/ros2_ws/install/checkpoint_interfaces/lib:/root/create3_ws/install/create3_coverage/lib:/root/create3_ws/install/create3_examples_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/install:/root/ros2_ws/src/checkpoint_pkg/install:/root/install:/root/create3_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_fastrtps_cpp'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '99'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_examples_py:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/root/ros2_ws/build/checkpoint_interfaces'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:/root/build/checkpoint_pkg:/root/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/checkpoint_pkg:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/root/create3_ws/install/create3_teleop/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_py/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('TZ', 'America/Los_Angeles'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_examples_py:/opt/ros/humble')]), 'shell': False}
+[0.099698] (-) TimerEvent: {}
+[0.200165] (-) TimerEvent: {}
+[0.301100] (-) TimerEvent: {}
+[0.401506] (-) TimerEvent: {}
+[0.501919] (-) TimerEvent: {}
+[0.602274] (-) TimerEvent: {}
+[0.702667] (-) TimerEvent: {}
+[0.803122] (-) TimerEvent: {}
+[0.903487] (-) TimerEvent: {}
+[1.003838] (-) TimerEvent: {}
+[1.104249] (-) TimerEvent: {}
+[1.129218] (hw1_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/root/ros2_ws/build/hw1_pkg/build', '--no-deps', 'symlink_data'], 'cwd': '/root/ros2_ws/build/hw1_pkg', 'env': {'HOSTNAME': 'teamjk-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/root/ros2_ws/install/checkpoint_interfaces/lib:/root/create3_ws/install/create3_coverage/lib:/root/create3_ws/install/create3_examples_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/root/ros2_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/root/ros2_ws/install:/root/ros2_ws/src/checkpoint_pkg/install:/root/install:/root/create3_ws/install', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_fastrtps_cpp', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'ROS_DOMAIN_ID': '99', 'AMENT_PREFIX_PATH': '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_examples_py:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/opt/ros/humble', 'DEBIAN_FRONTEND': 'noninteractive', 'PWD': '/root/ros2_ws/build/hw1_pkg', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/root/ros2_ws/build/hw1_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:/root/build/checkpoint_pkg:/root/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/checkpoint_pkg:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/root/create3_ws/install/create3_teleop/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_py/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'TZ': 'America/Los_Angeles', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs'}, 'shell': False}
+[1.204351] (-) TimerEvent: {}
+[1.304697] (-) TimerEvent: {}
+[1.405062] (-) TimerEvent: {}
+[1.471107] (hw1_pkg) StdoutLine: {'line': b'running develop\n'}
+[1.471783] (hw1_pkg) StderrLine: {'line': b'/usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.\n'}
+[1.472085] (hw1_pkg) StderrLine: {'line': b'  warnings.warn(\n'}
+[1.505166] (-) TimerEvent: {}
+[1.605514] (-) TimerEvent: {}
+[1.626924] (hw1_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[1.627277] (hw1_pkg) StdoutLine: {'line': b'creating hw1_pkg.egg-info\n'}
+[1.627416] (hw1_pkg) StdoutLine: {'line': b'writing hw1_pkg.egg-info/PKG-INFO\n'}
+[1.628104] (hw1_pkg) StdoutLine: {'line': b'writing dependency_links to hw1_pkg.egg-info/dependency_links.txt\n'}
+[1.628296] (hw1_pkg) StdoutLine: {'line': b'writing entry points to hw1_pkg.egg-info/entry_points.txt\n'}
+[1.628381] (hw1_pkg) StdoutLine: {'line': b'writing requirements to hw1_pkg.egg-info/requires.txt\n'}
+[1.628481] (hw1_pkg) StdoutLine: {'line': b'writing top-level names to hw1_pkg.egg-info/top_level.txt\n'}
+[1.628616] (hw1_pkg) StdoutLine: {'line': b"writing manifest file 'hw1_pkg.egg-info/SOURCES.txt'\n"}
+[1.630779] (hw1_pkg) StdoutLine: {'line': b"reading manifest file 'hw1_pkg.egg-info/SOURCES.txt'\n"}
+[1.631505] (hw1_pkg) StdoutLine: {'line': b"writing manifest file 'hw1_pkg.egg-info/SOURCES.txt'\n"}
+[1.664776] (hw1_pkg) StdoutLine: {'line': b'running build_ext\n'}
+[1.665192] (hw1_pkg) StdoutLine: {'line': b'Creating /root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages/hw1-pkg.egg-link (link to .)\n'}
+[1.667743] (hw1_pkg) StdoutLine: {'line': b'Installing publisher script to /root/ros2_ws/install/hw1_pkg/lib/hw1_pkg\n'}
+[1.668352] (hw1_pkg) StdoutLine: {'line': b'Installing subscriber script to /root/ros2_ws/install/hw1_pkg/lib/hw1_pkg\n'}
+[1.669010] (hw1_pkg) StdoutLine: {'line': b'\n'}
+[1.669238] (hw1_pkg) StdoutLine: {'line': b'Installed /root/ros2_ws/build/hw1_pkg\n'}
+[1.669558] (hw1_pkg) StdoutLine: {'line': b'running symlink_data\n'}
+[1.669824] (hw1_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/hw1_pkg/share/ament_index\n'}
+[1.670032] (hw1_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/hw1_pkg/share/ament_index/resource_index\n'}
+[1.670341] (hw1_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/hw1_pkg/share/ament_index/resource_index/packages\n'}
+[1.670580] (hw1_pkg) StdoutLine: {'line': b'symbolically linking /root/ros2_ws/build/hw1_pkg/resource/hw1_pkg -> /root/ros2_ws/install/hw1_pkg/share/ament_index/resource_index/packages\n'}
+[1.670715] (hw1_pkg) StdoutLine: {'line': b'symbolically linking /root/ros2_ws/build/hw1_pkg/package.xml -> /root/ros2_ws/install/hw1_pkg/share/hw1_pkg\n'}
+[1.705691] (-) TimerEvent: {}
+[1.756652] (hw1_pkg) CommandEnded: {'returncode': 0}
+[1.776764] (hw1_pkg) JobEnded: {'identifier': 'hw1_pkg', 'rc': 0}
+[1.805892] (-) TimerEvent: {}
+[1.906986] (-) TimerEvent: {}
+[2.007443] (-) TimerEvent: {}
+[2.107949] (-) TimerEvent: {}
+[2.208389] (-) TimerEvent: {}
+[2.308815] (-) TimerEvent: {}
+[2.388812] (checkpoint_interfaces) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[2.408934] (-) TimerEvent: {}
+[2.509328] (-) TimerEvent: {}
+[2.609760] (-) TimerEvent: {}
+[2.710201] (-) TimerEvent: {}
+[2.810740] (-) TimerEvent: {}
+[2.834642] (checkpoint_interfaces) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[2.869698] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[2.910842] (-) TimerEvent: {}
+[3.011289] (-) TimerEvent: {}
+[3.067518] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[3.078121] (checkpoint_interfaces) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[3.084300] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[3.086550] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[3.094071] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[3.111404] (-) TimerEvent: {}
+[3.211781] (-) TimerEvent: {}
+[3.270563] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[3.282012] (checkpoint_interfaces) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[3.282405] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[3.283128] (checkpoint_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[3.311886] (-) TimerEvent: {}
+[3.315258] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[3.411982] (-) TimerEvent: {}
+[3.512413] (-) TimerEvent: {}
+[3.578344] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[3.612523] (-) TimerEvent: {}
+[3.712913] (-) TimerEvent: {}
+[3.733778] (checkpoint_interfaces) StdoutLine: {'line': b'-- Override CMake install command with custom implementation using symlinks instead of copying resources\n'}
+[3.812996] (-) TimerEvent: {}
+[3.852310] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[3.875185] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[3.913119] (-) TimerEvent: {}
+[3.973470] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[4.013222] (-) TimerEvent: {}
+[4.113579] (-) TimerEvent: {}
+[4.145942] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[4.213695] (-) TimerEvent: {}
+[4.314063] (-) TimerEvent: {}
+[4.414446] (-) TimerEvent: {}
+[4.514896] (-) TimerEvent: {}
+[4.615353] (-) TimerEvent: {}
+[4.717977] (-) TimerEvent: {}
+[4.735062] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[4.819131] (-) TimerEvent: {}
+[4.919972] (-) TimerEvent: {}
+[5.020383] (-) TimerEvent: {}
+[5.116836] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[5.120470] (-) TimerEvent: {}
+[5.220745] (-) TimerEvent: {}
+[5.321123] (-) TimerEvent: {}
+[5.421536] (-) TimerEvent: {}
+[5.518909] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[5.521598] (-) TimerEvent: {}
+[5.564702] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[5.575998] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[5.621730] (-) TimerEvent: {}
+[5.639634] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/aarch64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[5.640099] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[5.640235] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[5.640329] (checkpoint_interfaces) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/aarch64-linux-gnu/libpython3.10.so\n'}
+[5.669283] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[5.721853] (-) TimerEvent: {}
+[5.750865] (checkpoint_interfaces) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[5.821345] (checkpoint_interfaces) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[5.821906] (-) TimerEvent: {}
+[5.824070] (checkpoint_interfaces) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[5.832189] (checkpoint_interfaces) StdoutLine: {'line': b'-- Configuring done\n'}
+[5.878505] (checkpoint_interfaces) StdoutLine: {'line': b'-- Generating done\n'}
+[5.882891] (checkpoint_interfaces) StdoutLine: {'line': b'-- Build files have been written to: /root/ros2_ws/build/checkpoint_interfaces\n'}
+[5.894961] (checkpoint_interfaces) CommandEnded: {'returncode': 0}
+[5.895663] (checkpoint_interfaces) JobProgress: {'identifier': 'checkpoint_interfaces', 'progress': 'build'}
+[5.896523] (checkpoint_interfaces) Command: {'cmd': ['/usr/bin/cmake', '--build', '/root/ros2_ws/build/checkpoint_interfaces', '--', '-j4', '-l4'], 'cwd': '/root/ros2_ws/build/checkpoint_interfaces', 'env': OrderedDict([('HOSTNAME', 'teamjk-desktop'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/ros2_ws/install/checkpoint_interfaces/lib:/root/create3_ws/install/create3_coverage/lib:/root/create3_ws/install/create3_examples_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/install:/root/ros2_ws/src/checkpoint_pkg/install:/root/install:/root/create3_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_fastrtps_cpp'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '99'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_examples_py:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/root/ros2_ws/build/checkpoint_interfaces'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:/root/build/checkpoint_pkg:/root/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/checkpoint_pkg:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/root/create3_ws/install/create3_teleop/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_py/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('TZ', 'America/Los_Angeles'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_examples_py:/opt/ros/humble')]), 'shell': False}
+[5.922046] (-) TimerEvent: {}
+[5.978504] (checkpoint_interfaces) StdoutLine: {'line': b'[  3%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[5.996330] (checkpoint_interfaces) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[6.015826] (checkpoint_interfaces) StdoutLine: {'line': b'[  6%] Built target ament_cmake_python_symlink_checkpoint_interfaces\n'}
+[6.024703] (-) TimerEvent: {}
+[6.126978] (-) TimerEvent: {}
+[6.227404] (-) TimerEvent: {}
+[6.328939] (-) TimerEvent: {}
+[6.421681] (checkpoint_interfaces) StdoutLine: {'line': b'running egg_info\n'}
+[6.422710] (checkpoint_interfaces) StdoutLine: {'line': b'creating checkpoint_interfaces.egg-info\n'}
+[6.423037] (checkpoint_interfaces) StdoutLine: {'line': b'writing checkpoint_interfaces.egg-info/PKG-INFO\n'}
+[6.423360] (checkpoint_interfaces) StdoutLine: {'line': b'writing dependency_links to checkpoint_interfaces.egg-info/dependency_links.txt\n'}
+[6.423605] (checkpoint_interfaces) StdoutLine: {'line': b'writing top-level names to checkpoint_interfaces.egg-info/top_level.txt\n'}
+[6.423890] (checkpoint_interfaces) StdoutLine: {'line': b"writing manifest file 'checkpoint_interfaces.egg-info/SOURCES.txt'\n"}
+[6.427033] (checkpoint_interfaces) StdoutLine: {'line': b"reading manifest file 'checkpoint_interfaces.egg-info/SOURCES.txt'\n"}
+[6.427753] (checkpoint_interfaces) StdoutLine: {'line': b"writing manifest file 'checkpoint_interfaces.egg-info/SOURCES.txt'\n"}
+[6.429040] (-) TimerEvent: {}
+[6.530056] (-) TimerEvent: {}
+[6.545238] (checkpoint_interfaces) StdoutLine: {'line': b'[  6%] Built target ament_cmake_python_build_checkpoint_interfaces_egg\n'}
+[6.577462] (checkpoint_interfaces) StdoutLine: {'line': b'[  6%] Built target checkpoint_interfaces__cpp\n'}
+[6.599824] (checkpoint_interfaces) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[6.600191] (checkpoint_interfaces) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[6.600409] (checkpoint_interfaces) StdoutLine: {'line': b'[ 16%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[6.622774] (checkpoint_interfaces) StdoutLine: {'line': b'[ 19%] \x1b[32mBuilding C object CMakeFiles/checkpoint_interfaces__rosidl_generator_c.dir/rosidl_generator_c/checkpoint_interfaces/msg/detail/parameters_to_target__functions.c.o\x1b[0m\n'}
+[6.630141] (-) TimerEvent: {}
+[6.730544] (-) TimerEvent: {}
+[6.832712] (checkpoint_interfaces) StdoutLine: {'line': b'[ 22%] \x1b[32m\x1b[1mLinking C shared library libcheckpoint_interfaces__rosidl_generator_c.so\x1b[0m\n'}
+[6.833057] (-) TimerEvent: {}
+[6.935948] (-) TimerEvent: {}
+[6.940860] (checkpoint_interfaces) StdoutLine: {'line': b'[ 22%] Built target checkpoint_interfaces__rosidl_generator_c\n'}
+[7.000164] (checkpoint_interfaces) StdoutLine: {'line': b'[ 25%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[7.036118] (-) TimerEvent: {}
+[7.093572] (checkpoint_interfaces) StdoutLine: {'line': b'[ 29%] \x1b[32mBuilding CXX object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/checkpoint_interfaces/msg/parameters_to_target__type_support.cpp.o\x1b[0m\n'}
+[7.121540] (checkpoint_interfaces) StdoutLine: {'line': b'[ 32%] \x1b[32mBuilding CXX object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/checkpoint_interfaces/msg/detail/parameters_to_target__type_support.cpp.o\x1b[0m\n'}
+[7.136252] (-) TimerEvent: {}
+[7.236635] (-) TimerEvent: {}
+[7.337141] (-) TimerEvent: {}
+[7.437602] (-) TimerEvent: {}
+[7.443363] (checkpoint_interfaces) StdoutLine: {'line': b'[ 35%] \x1b[32mBuilding CXX object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/checkpoint_interfaces/msg/detail/dds_fastrtps/parameters_to_target__type_support.cpp.o\x1b[0m\n'}
+[7.537730] (-) TimerEvent: {}
+[7.638168] (-) TimerEvent: {}
+[7.738611] (-) TimerEvent: {}
+[7.841981] (-) TimerEvent: {}
+[7.942416] (-) TimerEvent: {}
+[7.997086] (checkpoint_interfaces) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding CXX object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/checkpoint_interfaces/msg/detail/parameters_to_target__type_support_c.cpp.o\x1b[0m\n'}
+[8.042556] (-) TimerEvent: {}
+[8.142982] (-) TimerEvent: {}
+[8.240387] (checkpoint_interfaces) StdoutLine: {'line': b'[ 41%] \x1b[32m\x1b[1mLinking CXX shared library libcheckpoint_interfaces__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[8.243128] (-) TimerEvent: {}
+[8.341912] (checkpoint_interfaces) StdoutLine: {'line': b'[ 41%] Built target checkpoint_interfaces__rosidl_typesupport_cpp\n'}
+[8.344412] (-) TimerEvent: {}
+[8.372530] (checkpoint_interfaces) StdoutLine: {'line': b'[ 45%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[8.444551] (-) TimerEvent: {}
+[8.534992] (checkpoint_interfaces) StdoutLine: {'line': b'[ 48%] \x1b[32m\x1b[1mLinking CXX shared library libcheckpoint_interfaces__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[8.544697] (-) TimerEvent: {}
+[8.646991] (-) TimerEvent: {}
+[8.653667] (checkpoint_interfaces) StdoutLine: {'line': b'[ 48%] Built target checkpoint_interfaces__rosidl_typesupport_introspection_cpp\n'}
+[8.686137] (checkpoint_interfaces) StdoutLine: {'line': b'[ 51%] \x1b[32m\x1b[1mLinking CXX shared library libcheckpoint_interfaces__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[8.696505] (checkpoint_interfaces) StdoutLine: {'line': b'[ 54%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[8.749069] (-) TimerEvent: {}
+[8.836065] (checkpoint_interfaces) StdoutLine: {'line': b'[ 58%] \x1b[32m\x1b[1mLinking CXX shared library libcheckpoint_interfaces__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[8.853814] (-) TimerEvent: {}
+[8.932248] (checkpoint_interfaces) StdoutLine: {'line': b'[ 58%] Built target checkpoint_interfaces__rosidl_typesupport_fastrtps_cpp\n'}
+[8.954023] (-) TimerEvent: {}
+[9.017035] (checkpoint_interfaces) StdoutLine: {'line': b'[ 61%] \x1b[32mBuilding C object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/checkpoint_interfaces/msg/detail/parameters_to_target__type_support.c.o\x1b[0m\n'}
+[9.054128] (-) TimerEvent: {}
+[9.079122] (checkpoint_interfaces) StdoutLine: {'line': b'[ 61%] Built target checkpoint_interfaces__rosidl_typesupport_fastrtps_c\n'}
+[9.125963] (checkpoint_interfaces) StdoutLine: {'line': b'[ 64%] \x1b[32m\x1b[1mLinking C shared library libcheckpoint_interfaces__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[9.154251] (-) TimerEvent: {}
+[9.224556] (checkpoint_interfaces) StdoutLine: {'line': b'[ 64%] Built target checkpoint_interfaces__rosidl_typesupport_introspection_c\n'}
+[9.254402] (-) TimerEvent: {}
+[9.283522] (checkpoint_interfaces) StdoutLine: {'line': b'[ 67%] \x1b[32mBuilding CXX object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/checkpoint_interfaces/msg/parameters_to_target__type_support.cpp.o\x1b[0m\n'}
+[9.354544] (-) TimerEvent: {}
+[9.359188] (checkpoint_interfaces) StdoutLine: {'line': b'[ 70%] \x1b[32m\x1b[1mLinking CXX shared library libcheckpoint_interfaces__rosidl_typesupport_c.so\x1b[0m\n'}
+[9.439493] (checkpoint_interfaces) StdoutLine: {'line': b'[ 70%] Built target checkpoint_interfaces__rosidl_typesupport_c\n'}
+[9.454660] (-) TimerEvent: {}
+[9.482887] (checkpoint_interfaces) StdoutLine: {'line': b'[ 70%] Built target checkpoint_interfaces\n'}
+[9.522724] (checkpoint_interfaces) StdoutLine: {'line': b'[ 74%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[9.554767] (-) TimerEvent: {}
+[9.655149] (-) TimerEvent: {}
+[9.755495] (-) TimerEvent: {}
+[9.855857] (-) TimerEvent: {}
+[9.957392] (-) TimerEvent: {}
+[10.002914] (checkpoint_interfaces) StdoutLine: {'line': b'[ 74%] Built target checkpoint_interfaces__py\n'}
+[10.041403] (checkpoint_interfaces) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding C object CMakeFiles/checkpoint_interfaces__rosidl_generator_py.dir/rosidl_generator_py/checkpoint_interfaces/msg/_parameters_to_target_s.c.o\x1b[0m\n'}
+[10.057513] (-) TimerEvent: {}
+[10.157967] (-) TimerEvent: {}
+[10.258381] (-) TimerEvent: {}
+[10.329964] (checkpoint_interfaces) StdoutLine: {'line': b'[ 80%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/checkpoint_interfaces/libcheckpoint_interfaces__rosidl_generator_py.so\x1b[0m\n'}
+[10.358474] (-) TimerEvent: {}
+[10.417002] (checkpoint_interfaces) StdoutLine: {'line': b'[ 80%] Built target checkpoint_interfaces__rosidl_generator_py\n'}
+[10.456744] (checkpoint_interfaces) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/checkpoint_interfaces/_checkpoint_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[10.457098] (checkpoint_interfaces) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/checkpoint_interfaces/_checkpoint_interfaces_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[10.457238] (checkpoint_interfaces) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/checkpoint_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/checkpoint_interfaces/_checkpoint_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[10.458940] (-) TimerEvent: {}
+[10.559789] (-) TimerEvent: {}
+[10.638997] (checkpoint_interfaces) StdoutLine: {'line': b'[ 93%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\x1b[0m\n'}
+[10.640565] (checkpoint_interfaces) StdoutLine: {'line': b'[ 96%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\x1b[0m\n'}
+[10.642452] (checkpoint_interfaces) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\x1b[0m\n'}
+[10.659935] (-) TimerEvent: {}
+[10.725521] (checkpoint_interfaces) StdoutLine: {'line': b'[100%] Built target checkpoint_interfaces__rosidl_typesupport_introspection_c__pyext\n'}
+[10.728607] (checkpoint_interfaces) StdoutLine: {'line': b'[100%] Built target checkpoint_interfaces__rosidl_typesupport_fastrtps_c__pyext\n'}
+[10.729545] (checkpoint_interfaces) StdoutLine: {'line': b'[100%] Built target checkpoint_interfaces__rosidl_typesupport_c__pyext\n'}
+[10.749290] (checkpoint_interfaces) CommandEnded: {'returncode': 0}
+[10.760019] (-) TimerEvent: {}
+[10.860375] (-) TimerEvent: {}
+[10.863479] (checkpoint_interfaces) JobProgress: {'identifier': 'checkpoint_interfaces', 'progress': 'install'}
+[10.886531] (checkpoint_interfaces) Command: {'cmd': ['/usr/bin/cmake', '--install', '/root/ros2_ws/build/checkpoint_interfaces'], 'cwd': '/root/ros2_ws/build/checkpoint_interfaces', 'env': OrderedDict([('HOSTNAME', 'teamjk-desktop'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/root/ros2_ws/install/checkpoint_interfaces/lib:/root/create3_ws/install/create3_coverage/lib:/root/create3_ws/install/create3_examples_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/ros2_ws'), ('ROS_PYTHON_VERSION', '3'), ('COLCON_PREFIX_PATH', '/root/ros2_ws/install:/root/ros2_ws/src/checkpoint_pkg/install:/root/install:/root/create3_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('RMW_IMPLEMENTATION', 'rmw_fastrtps_cpp'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('ROS_DOMAIN_ID', '99'), ('AMENT_PREFIX_PATH', '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_examples_py:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/root/ros2_ws/build/checkpoint_interfaces'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:/root/build/checkpoint_pkg:/root/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/checkpoint_pkg:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/root/create3_ws/install/create3_teleop/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_py/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('TZ', 'America/Los_Angeles'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_examples_py:/opt/ros/humble')]), 'shell': False}
+[10.903215] (checkpoint_interfaces) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[10.904041] (checkpoint_interfaces) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[10.904513] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/ament_index/resource_index/rosidl_interfaces/checkpoint_interfaces\n'}
+[10.924113] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__functions.h\n'}
+[10.941101] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__struct.h\n'}
+[10.957495] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__type_support.h\n'}
+[10.960444] (-) TimerEvent: {}
+[10.976406] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/parameters_to_target.h\n'}
+[10.995949] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/rosidl_generator_c__visibility_control.h\n'}
+[11.012623] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/library_path.sh\n'}
+[11.029031] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/library_path.dsv\n'}
+[11.045754] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__rosidl_typesupport_fastrtps_c.h\n'}
+[11.060544] (-) TimerEvent: {}
+[11.061882] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[11.083056] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__rosidl_typesupport_introspection_c.h\n'}
+[11.101455] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[11.118320] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__builder.hpp\n'}
+[11.134677] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__struct.hpp\n'}
+[11.151365] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__traits.hpp\n'}
+[11.160630] (-) TimerEvent: {}
+[11.168152] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/parameters_to_target.hpp\n'}
+[11.191397] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[11.212043] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[11.229255] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/include/checkpoint_interfaces/checkpoint_interfaces/msg/detail/parameters_to_target__rosidl_typesupport_introspection_cpp.hpp\n'}
+[11.245954] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/pythonpath.sh\n'}
+[11.260753] (-) TimerEvent: {}
+[11.262885] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/pythonpath.dsv\n'}
+[11.282779] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[11.300705] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[11.317420] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[11.335041] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[11.352526] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/__init__.py\n'}
+[11.360895] (-) TimerEvent: {}
+[11.370096] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/_checkpoint_interfaces_s.ep.rosidl_typesupport_c.c\n'}
+[11.391540] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/_checkpoint_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[11.407882] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/_checkpoint_interfaces_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[11.424595] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\n'}
+[11.440859] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\n'}
+[11.457197] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\n'}
+[11.460945] (-) TimerEvent: {}
+[11.474991] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/libcheckpoint_interfaces__rosidl_generator_py.so\n'}
+[11.495457] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/msg/__init__.py\n'}
+[11.511829] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/msg/_parameters_to_target.py\n'}
+[11.529739] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/msg/_parameters_to_target_s.c\n'}
+[11.546407] (checkpoint_interfaces) StdoutLine: {'line': b'-- Up-to-date symlink: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-aarch64-linux-gnu.so\n'}
+[11.546709] (checkpoint_interfaces) StdoutLine: {'line': b'-- Up-to-date symlink: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-aarch64-linux-gnu.so\n'}
+[11.547008] (checkpoint_interfaces) StdoutLine: {'line': b'-- Up-to-date symlink: /root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/checkpoint_interfaces_s__rosidl_typesupport_c.cpython-310-aarch64-linux-gnu.so\n'}
+[11.547284] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/msg/ParametersToTarget.idl\n'}
+[11.561051] (-) TimerEvent: {}
+[11.564418] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/msg/ParametersToTarget.msg\n'}
+[11.585526] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/ament_index/resource_index/package_run_dependencies/checkpoint_interfaces\n'}
+[11.603712] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/ament_index/resource_index/parent_prefix_path/checkpoint_interfaces\n'}
+[11.620480] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/ament_prefix_path.sh\n'}
+[11.636564] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/ament_prefix_path.dsv\n'}
+[11.653641] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/path.sh\n'}
+[11.661127] (-) TimerEvent: {}
+[11.670745] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/environment/path.dsv\n'}
+[11.692009] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/local_setup.bash\n'}
+[11.709295] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/local_setup.sh\n'}
+[11.725777] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/local_setup.zsh\n'}
+[11.742608] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/local_setup.dsv\n'}
+[11.759350] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/package.dsv\n'}
+[11.761200] (-) TimerEvent: {}
+[11.778700] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/ament_index/resource_index/packages/checkpoint_interfaces\n'}
+[11.797930] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/rosidl_cmake-extras.cmake\n'}
+[11.815112] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[11.832525] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[11.848393] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[11.861296] (-) TimerEvent: {}
+[11.865308] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[11.886940] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[11.907768] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[11.925483] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfacesConfig.cmake\n'}
+[11.945345] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfacesConfig-version.cmake\n'}
+[11.961418] (-) TimerEvent: {}
+[11.962505] (checkpoint_interfaces) StdoutLine: {'line': b'-- Symlinking: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/package.xml\n'}
+[11.981732] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_generator_c.so\n'}
+[11.982355] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_generator_c.so" to ""\n'}
+[11.982603] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_fastrtps_c.so\n'}
+[11.983337] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[11.984142] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_introspection_c.so\n'}
+[11.984761] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_introspection_c.so" to ""\n'}
+[11.984946] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_c.so\n'}
+[11.985792] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_c.so" to ""\n'}
+[11.985962] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_fastrtps_cpp.so\n'}
+[11.986070] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[11.986355] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_introspection_cpp.so\n'}
+[11.987122] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[11.987421] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_cpp.so\n'}
+[11.987506] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_typesupport_cpp.so" to ""\n'}
+[12.054496] (checkpoint_interfaces) StdoutLine: {'line': b"Listing '/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces'...\n"}
+[12.054814] (checkpoint_interfaces) StdoutLine: {'line': b"Compiling '/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/__init__.py'...\n"}
+[12.054958] (checkpoint_interfaces) StdoutLine: {'line': b"Listing '/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/msg'...\n"}
+[12.055044] (checkpoint_interfaces) StdoutLine: {'line': b"Compiling '/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/msg/__init__.py'...\n"}
+[12.055118] (checkpoint_interfaces) StdoutLine: {'line': b"Compiling '/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages/checkpoint_interfaces/msg/_parameters_to_target.py'...\n"}
+[12.061524] (-) TimerEvent: {}
+[12.064454] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_generator_py.so\n'}
+[12.065062] (checkpoint_interfaces) StdoutLine: {'line': b'-- Set runtime path of "/root/ros2_ws/install/checkpoint_interfaces/lib/libcheckpoint_interfaces__rosidl_generator_py.so" to ""\n'}
+[12.065213] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_generator_cExport.cmake\n'}
+[12.065407] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_generator_cExport-noconfig.cmake\n'}
+[12.065635] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[12.065810] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[12.066011] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_introspection_cExport.cmake\n'}
+[12.066202] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[12.066393] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_cExport.cmake\n'}
+[12.066570] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[12.066749] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_generator_cppExport.cmake\n'}
+[12.066940] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[12.067119] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[12.067306] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[12.067475] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[12.067725] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_cppExport.cmake\n'}
+[12.068251] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/checkpoint_interfaces__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[12.068486] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_generator_pyExport.cmake\n'}
+[12.068799] (checkpoint_interfaces) StdoutLine: {'line': b'-- Installing: /root/ros2_ws/install/checkpoint_interfaces/share/checkpoint_interfaces/cmake/export_checkpoint_interfaces__rosidl_generator_pyExport-noconfig.cmake\n'}
+[12.072642] (checkpoint_interfaces) CommandEnded: {'returncode': 0}
+[12.161638] (-) TimerEvent: {}
+[12.228101] (checkpoint_interfaces) JobEnded: {'identifier': 'checkpoint_interfaces', 'rc': 0}
+[12.229785] (checkpoint_pkg) JobStarted: {'identifier': 'checkpoint_pkg'}
+[12.261746] (-) TimerEvent: {}
+[12.362097] (-) TimerEvent: {}
+[12.462456] (-) TimerEvent: {}
+[12.562938] (-) TimerEvent: {}
+[12.663274] (-) TimerEvent: {}
+[12.763627] (-) TimerEvent: {}
+[12.863966] (-) TimerEvent: {}
+[12.964298] (-) TimerEvent: {}
+[13.064652] (-) TimerEvent: {}
+[13.147778] (checkpoint_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/root/ros2_ws/build/checkpoint_pkg/build', '--no-deps', 'symlink_data'], 'cwd': '/root/ros2_ws/build/checkpoint_pkg', 'env': {'HOSTNAME': 'teamjk-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/root/ros2_ws/install/checkpoint_interfaces/lib:/root/create3_ws/install/create3_coverage/lib:/root/create3_ws/install/create3_examples_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/root/ros2_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/root/ros2_ws/install:/root/ros2_ws/src/checkpoint_pkg/install:/root/install:/root/create3_ws/install', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_fastrtps_cpp', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'ROS_DOMAIN_ID': '99', 'AMENT_PREFIX_PATH': '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg:/root/install/checkpoint_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_examples_py:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/opt/ros/humble', 'DEBIAN_FRONTEND': 'noninteractive', 'PWD': '/root/ros2_ws/build/checkpoint_pkg', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/root/ros2_ws/build/checkpoint_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:/root/build/checkpoint_pkg:/root/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/checkpoint_pkg:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/root/create3_ws/install/create3_teleop/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_py/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'TZ': 'America/Los_Angeles', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs'}, 'shell': False}
+[13.164727] (-) TimerEvent: {}
+[13.265060] (-) TimerEvent: {}
+[13.365395] (-) TimerEvent: {}
+[13.465732] (-) TimerEvent: {}
+[13.482744] (checkpoint_pkg) StdoutLine: {'line': b'running develop\n'}
+[13.483343] (checkpoint_pkg) StderrLine: {'line': b'/usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.\n'}
+[13.483548] (checkpoint_pkg) StderrLine: {'line': b'  warnings.warn(\n'}
+[13.565835] (-) TimerEvent: {}
+[13.625894] (checkpoint_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[13.626151] (checkpoint_pkg) StdoutLine: {'line': b'creating checkpoint_pkg.egg-info\n'}
+[13.626288] (checkpoint_pkg) StdoutLine: {'line': b'writing checkpoint_pkg.egg-info/PKG-INFO\n'}
+[13.626606] (checkpoint_pkg) StdoutLine: {'line': b'writing dependency_links to checkpoint_pkg.egg-info/dependency_links.txt\n'}
+[13.626796] (checkpoint_pkg) StdoutLine: {'line': b'writing entry points to checkpoint_pkg.egg-info/entry_points.txt\n'}
+[13.626945] (checkpoint_pkg) StdoutLine: {'line': b'writing requirements to checkpoint_pkg.egg-info/requires.txt\n'}
+[13.627054] (checkpoint_pkg) StdoutLine: {'line': b'writing top-level names to checkpoint_pkg.egg-info/top_level.txt\n'}
+[13.627273] (checkpoint_pkg) StdoutLine: {'line': b"writing manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'\n"}
+[13.629423] (checkpoint_pkg) StdoutLine: {'line': b"reading manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'\n"}
+[13.630131] (checkpoint_pkg) StdoutLine: {'line': b"writing manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'\n"}
+[13.632212] (checkpoint_pkg) StdoutLine: {'line': b'running build_ext\n'}
+[13.632525] (checkpoint_pkg) StdoutLine: {'line': b'Creating /root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages/checkpoint-pkg.egg-link (link to .)\n'}
+[13.633755] (checkpoint_pkg) StdoutLine: {'line': b'Installing aruco_pose_node script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[13.634027] (checkpoint_pkg) StdoutLine: {'line': b'Installing find_opening script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[13.634175] (checkpoint_pkg) StdoutLine: {'line': b'Installing lidar_node script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[13.634296] (checkpoint_pkg) StdoutLine: {'line': b'Installing move_robot script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[13.634421] (checkpoint_pkg) StdoutLine: {'line': b'Installing rotate_robot script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[13.634669] (checkpoint_pkg) StdoutLine: {'line': b'\n'}
+[13.634750] (checkpoint_pkg) StdoutLine: {'line': b'Installed /root/ros2_ws/build/checkpoint_pkg\n'}
+[13.634813] (checkpoint_pkg) StdoutLine: {'line': b'running symlink_data\n'}
+[13.634927] (checkpoint_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/checkpoint_pkg/share/ament_index\n'}
+[13.635058] (checkpoint_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/checkpoint_pkg/share/ament_index/resource_index\n'}
+[13.635167] (checkpoint_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/checkpoint_pkg/share/ament_index/resource_index/packages\n'}
+[13.635285] (checkpoint_pkg) StdoutLine: {'line': b'symbolically linking /root/ros2_ws/build/checkpoint_pkg/resource/checkpoint_pkg -> /root/ros2_ws/install/checkpoint_pkg/share/ament_index/resource_index/packages\n'}
+[13.635360] (checkpoint_pkg) StdoutLine: {'line': b'symbolically linking /root/ros2_ws/build/checkpoint_pkg/package.xml -> /root/ros2_ws/install/checkpoint_pkg/share/checkpoint_pkg\n'}
+[13.665935] (-) TimerEvent: {}
+[13.709535] (checkpoint_pkg) CommandEnded: {'returncode': 0}
+[13.718175] (checkpoint_pkg) JobEnded: {'identifier': 'checkpoint_pkg', 'rc': 0}
+[13.719789] (-) EventReactorShutdown: {}

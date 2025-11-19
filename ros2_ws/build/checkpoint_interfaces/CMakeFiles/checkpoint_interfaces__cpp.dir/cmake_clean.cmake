@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "rosidl_generator_cpp/checkpoint_interfaces/msg/detail/parameters_to_target__builder.hpp"
   "rosidl_generator_cpp/checkpoint_interfaces/msg/detail/parameters_to_target__struct.hpp"
   "rosidl_generator_cpp/checkpoint_interfaces/msg/detail/parameters_to_target__traits.hpp"
-  "rosidl_generator_cpp/checkpoint_interfaces/msg/detail/parameters_to_target__type_support.hpp"
   "rosidl_generator_cpp/checkpoint_interfaces/msg/parameters_to_target.hpp"
 )
 

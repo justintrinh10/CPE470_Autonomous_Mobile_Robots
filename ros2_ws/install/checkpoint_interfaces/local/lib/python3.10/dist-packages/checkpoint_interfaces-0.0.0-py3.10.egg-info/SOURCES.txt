@@ -1,6 +1,1 @@
-setup.py
-checkpoint_interfaces/__init__.py
-checkpoint_interfaces.egg-info/PKG-INFO
-checkpoint_interfaces.egg-info/SOURCES.txt
-checkpoint_interfaces.egg-info/dependency_links.txt
-checkpoint_interfaces.egg-info/top_level.txt
+/root/ros2_ws/build/checkpoint_interfaces/ament_cmake_python/checkpoint_interfaces/checkpoint_interfaces.egg-info/SOURCES.txt

@@ -1,0 +1,30 @@
+[1.047s] Invoking command in '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg': PYTHONPATH=/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/build --no-deps symlink_data
+[1.467s] running develop
+[1.468s] /usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.
+[1.468s]   warnings.warn(
+[1.701s] running egg_info
+[1.702s] creating checkpoint_pkg.egg-info
+[1.703s] writing checkpoint_pkg.egg-info/PKG-INFO
+[1.703s] writing dependency_links to checkpoint_pkg.egg-info/dependency_links.txt
+[1.703s] writing entry points to checkpoint_pkg.egg-info/entry_points.txt
+[1.703s] writing requirements to checkpoint_pkg.egg-info/requires.txt
+[1.703s] writing top-level names to checkpoint_pkg.egg-info/top_level.txt
+[1.703s] writing manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'
+[1.709s] reading manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'
+[1.711s] writing manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'
+[1.723s] running build_ext
+[1.723s] Creating /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages/checkpoint-pkg.egg-link (link to .)
+[1.729s] Installing aruco_pose_node script to /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/checkpoint_pkg
+[1.731s] Installing find_opening script to /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/checkpoint_pkg
+[1.732s] Installing lidar_node script to /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/checkpoint_pkg
+[1.737s] Installing move_robot script to /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/checkpoint_pkg
+[1.737s] Installing rotate_robot script to /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/checkpoint_pkg
+[1.737s] 
+[1.737s] Installed /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg
+[1.737s] running symlink_data
+[1.737s] creating /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/ament_index
+[1.737s] creating /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/ament_index/resource_index
+[1.738s] creating /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/ament_index/resource_index/packages
+[1.738s] symbolically linking /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/resource/checkpoint_pkg -> /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/ament_index/resource_index/packages
+[1.738s] symbolically linking /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/package.xml -> /root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg
+[1.847s] Invoked command in '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg' returned '0': PYTHONPATH=/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/build --no-deps symlink_data

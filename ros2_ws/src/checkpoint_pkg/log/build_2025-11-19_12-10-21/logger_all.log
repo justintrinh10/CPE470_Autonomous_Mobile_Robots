@@ -1,0 +1,93 @@
+[0.201s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--symlink-install', '--packages-select', 'checkpoint_pkg']
+[0.202s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=True, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['checkpoint_pkg'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffff8b3bc7c0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffff8b3bc310>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffff8b3bc310>>, mixin_verb=('build',))
+[0.402s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.403s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/Gazebo.meta'
+[0.404s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/fastrtps.meta'
+[0.405s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.405s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.405s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.405s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.405s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.405s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/root/ros2_ws/src/checkpoint_pkg'
+[0.405s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.405s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.405s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.405s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.405s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.405s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.406s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.406s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.406s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.429s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_python' and name 'checkpoint_pkg'
+[0.429s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.429s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.429s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.429s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.429s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'cmake_args' from command line to 'None'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'cmake_target' from command line to 'None'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'cmake_clean_cache' from command line to 'False'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'cmake_clean_first' from command line to 'False'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'cmake_force_configure' from command line to 'False'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'ament_cmake_args' from command line to 'None'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'catkin_cmake_args' from command line to 'None'
+[0.464s] Level 5:colcon.colcon_core.verb:set package 'checkpoint_pkg' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.464s] DEBUG:colcon.colcon_core.verb:Building package 'checkpoint_pkg' with the following arguments: {'ament_cmake_args': None, 'build_base': '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg', 'merge_install': False, 'path': '/root/ros2_ws/src/checkpoint_pkg', 'symlink_install': True, 'test_result_base': None}
+[0.464s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.466s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.466s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/root/ros2_ws/src/checkpoint_pkg' with build type 'ament_python'
+[0.466s] Level 1:colcon.colcon_core.shell:create_environment_hook('checkpoint_pkg', 'ament_prefix_path')
+[0.470s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.470s] INFO:colcon.colcon_core.shell:Creating environment hook '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/hook/ament_prefix_path.ps1'
+[0.472s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/hook/ament_prefix_path.dsv'
+[0.473s] INFO:colcon.colcon_core.shell:Creating environment hook '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/hook/ament_prefix_path.sh'
+[0.474s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.475s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.892s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/root/ros2_ws/src/checkpoint_pkg'
+[0.893s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.894s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.516s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg': PYTHONPATH=/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/build --no-deps symlink_data
+[2.312s] Level 1:colcon.colcon_core.shell:create_environment_hook('checkpoint_pkg', 'pythonpath_develop')
+[2.313s] INFO:colcon.colcon_core.shell:Creating environment hook '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/share/checkpoint_pkg/hook/pythonpath_develop.ps1'
+[2.314s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg' returned '0': PYTHONPATH=/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py develop --editable --build-directory /root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/build --no-deps symlink_data
+[2.315s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/share/checkpoint_pkg/hook/pythonpath_develop.dsv'
+[2.315s] INFO:colcon.colcon_core.shell:Creating environment hook '/root/ros2_ws/src/checkpoint_pkg/build/checkpoint_pkg/share/checkpoint_pkg/hook/pythonpath_develop.sh'
+[2.323s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg' for CMake module files
+[2.324s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg' for CMake config files
+[2.325s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib'
+[2.326s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/bin'
+[2.326s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/pkgconfig/checkpoint_pkg.pc'
+[2.327s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/lib/python3.10/site-packages'
+[2.327s] Level 1:colcon.colcon_core.shell:create_environment_hook('checkpoint_pkg', 'pythonpath')
+[2.327s] INFO:colcon.colcon_core.shell:Creating environment hook '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/hook/pythonpath.ps1'
+[2.328s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/hook/pythonpath.dsv'
+[2.329s] INFO:colcon.colcon_core.shell:Creating environment hook '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/hook/pythonpath.sh'
+[2.330s] Level 1:colcon.colcon_core.environment:checking '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/bin'
+[2.330s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(checkpoint_pkg)
+[2.331s] INFO:colcon.colcon_core.shell:Creating package script '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/package.ps1'
+[2.333s] INFO:colcon.colcon_core.shell:Creating package descriptor '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/package.dsv'
+[2.335s] INFO:colcon.colcon_core.shell:Creating package script '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/package.sh'
+[2.337s] INFO:colcon.colcon_core.shell:Creating package script '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/package.bash'
+[2.339s] INFO:colcon.colcon_core.shell:Creating package script '/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/checkpoint_pkg/package.zsh'
+[2.340s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/root/ros2_ws/src/checkpoint_pkg/install/checkpoint_pkg/share/colcon-core/packages/checkpoint_pkg)
+[2.341s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[2.345s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[2.345s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[2.345s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[2.363s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[2.363s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[2.363s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[2.363s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[2.370s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.Spawn.ExecFailed: /usr/bin/dbus-launch terminated abnormally without any error message
+[2.370s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[2.371s] INFO:colcon.colcon_core.shell:Creating prefix script '/root/ros2_ws/src/checkpoint_pkg/install/local_setup.ps1'
+[2.377s] INFO:colcon.colcon_core.shell:Creating prefix util module '/root/ros2_ws/src/checkpoint_pkg/install/_local_setup_util_ps1.py'
+[2.381s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/root/ros2_ws/src/checkpoint_pkg/install/setup.ps1'
+[2.385s] INFO:colcon.colcon_core.shell:Creating prefix script '/root/ros2_ws/src/checkpoint_pkg/install/local_setup.sh'
+[2.389s] INFO:colcon.colcon_core.shell:Creating prefix util module '/root/ros2_ws/src/checkpoint_pkg/install/_local_setup_util_sh.py'
+[2.390s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/root/ros2_ws/src/checkpoint_pkg/install/setup.sh'
+[2.395s] INFO:colcon.colcon_core.shell:Creating prefix script '/root/ros2_ws/src/checkpoint_pkg/install/local_setup.bash'
+[2.397s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/root/ros2_ws/src/checkpoint_pkg/install/setup.bash'
+[2.401s] INFO:colcon.colcon_core.shell:Creating prefix script '/root/ros2_ws/src/checkpoint_pkg/install/local_setup.zsh'
+[2.402s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/root/ros2_ws/src/checkpoint_pkg/install/setup.zsh'

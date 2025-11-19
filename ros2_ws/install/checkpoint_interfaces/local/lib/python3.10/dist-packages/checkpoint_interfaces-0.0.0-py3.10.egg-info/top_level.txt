@@ -1,1 +1,1 @@
-checkpoint_interfaces
+/root/ros2_ws/build/checkpoint_interfaces/ament_cmake_python/checkpoint_interfaces/checkpoint_interfaces.egg-info/top_level.txt

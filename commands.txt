@@ -73,6 +73,12 @@ unset FASTRTPS_DEFAULT_PROFILES_FILE
 source /opt/ros/humble/setup.bash
 source /root/ros2_ws/install/setup.bash
 
+echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
+echo "export ROS_DOMAIN_ID=99" >> ~/.bashrc
+export ROS_DOMAIN_ID=99
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
+
 # Run each node in its own shell (examples):
 ros2 run checkpoint_pkg lidar_node
 ros2 run checkpoint_pkg find_opening

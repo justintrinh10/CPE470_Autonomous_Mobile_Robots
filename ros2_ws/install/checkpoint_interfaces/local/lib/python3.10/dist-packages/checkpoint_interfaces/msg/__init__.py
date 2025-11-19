@@ -1,1 +1,1 @@
-from checkpoint_interfaces.msg._parameters_to_target import ParametersToTarget  # noqa: F401
+/root/ros2_ws/build/checkpoint_interfaces/rosidl_generator_py/checkpoint_interfaces/msg/__init__.py
