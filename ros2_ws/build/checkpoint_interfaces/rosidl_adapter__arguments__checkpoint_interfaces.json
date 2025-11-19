@@ -1,0 +1,6 @@
+{
+  "package_name": "checkpoint_interfaces",
+  "non_idl_tuples": [
+    "/root/ros2_ws/src/checkpoint_interfaces:msg/ParametersToTarget.msg"
+  ]
+}

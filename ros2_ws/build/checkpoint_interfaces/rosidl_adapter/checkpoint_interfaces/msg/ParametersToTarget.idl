@@ -1,0 +1,14 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from checkpoint_interfaces/msg/ParametersToTarget.msg
+// generated code does not contain a copyright notice
+
+
+module checkpoint_interfaces {
+  module msg {
+    struct ParametersToTarget {
+      float alignment_error;
+
+      float distance_seperation;
+    };
+  };
+};
