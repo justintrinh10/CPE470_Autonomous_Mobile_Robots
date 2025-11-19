@@ -20,21 +20,27 @@ class RotateRobot(Node):
         self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
         self.publisher_stop_ = self.create_publisher(Bool, 'rotation_complete', 10)
         self.angular_velocity = 0.005  # radians per second
+        self.counter = 0
 
     def listener_callback(self, msg):
-        alignment_error = msg.alignment_error
-        distance_seperation = msg.distance_seperation
-
-        if abs(alignment_error) < alignment_threshold:
+        if self.counter >= 5:
             self.get_logger().info("Robot aligned with target. Stopping rotation.")
             self.get_logger().info(f"Final Alignment Error: {alignment_error:.2f} degrees, Distance Seperation: {distance_seperation:.2f} meters")
             stop_msg = Bool()
             stop_msg.data = True
             self.publisher_stop_.publish(stop_msg)
-            rclpy.shutdown()
-            self.destroy_node()
-            return
+            self.stop_robot()
+            return 
 
+        alignment_error = msg.alignment_error
+        distance_seperation = msg.distance_seperation
+
+        if abs(alignment_error) < alignment_threshold:
+            self.stop_robot()
+            self.counter += 1
+            return
+        else:
+            self.counter = 0
         angular_velocity_val = self.angular_velocity
         if alignment_error > 0:
             angular_velocity_val *= -1
@@ -47,9 +53,8 @@ class RotateRobot(Node):
         command.angular.y = 0.0
         command.angular.z = angular_velocity_val
         self.publisher_.publish(command)
-            
     
-    def destroy_node(self):
+    def stop_robot(self):
         command = Twist()
         command.linear.x = 0.0
         command.linear.y = 0.0
@@ -58,12 +63,14 @@ class RotateRobot(Node):
         command.angular.y = 0.0
         command.angular.z = 0.0
         self.publisher_.publish(command)
-        super().destroy_node()
+
 
 def main(args=None):
     rclpy.init(args=args)
     rotate_robot = RotateRobot()
     rclpy.spin(rotate_robot)
+    rotate_robot.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
