@@ -31,8 +31,8 @@ class RotateRobot(Node):
             stop_msg = Bool()
             stop_msg.data = True
             self.publisher_stop_.publish(stop_msg)
-            rclpy.shutdown()
-            self.destroy_node()
+            # rclpy.shutdown()
+            # self.destroy_node()
             return
 
         angular_velocity_val = self.angular_velocity
@@ -64,6 +64,8 @@ def main(args=None):
     rclpy.init(args=args)
     rotate_robot = RotateRobot()
     rclpy.spin(rotate_robot)
+    rotate_robot.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
