@@ -3,6 +3,17 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 import numpy as np
+import os
+import time
+
+# optional plotting
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    HAVE_MPL = True
+except Exception:
+    HAVE_MPL = False
 
 num_points = 360
 
@@ -50,6 +61,12 @@ class FindOpening(Node):
         opening_point2 = (self.point_cloud[0, max_distance_index], self.point_cloud[1, max_distance_index])
         opening_point1_cartesian = self.polar_to_cartesian(opening_point1)
         opening_point2_cartesian = self.polar_to_cartesian(opening_point2)
+        # plot scan and opening endpoints (best-effort; failures do not stop publish)
+        try:
+            self._plot_scan_and_opening(opening_point1_cartesian, opening_point2_cartesian)
+        except Exception as e:
+            self.get_logger().warning(f"Plotting failed: {e}")
+
         msg = String()
         msg.data += f"{opening_point1_cartesian[0]:.3f},{opening_point1_cartesian[1]:.3f}\n"
         msg.data += f"{opening_point2_cartesian[0]:.3f},{opening_point2_cartesian[1]:.3f}\n"
@@ -75,6 +92,33 @@ class FindOpening(Node):
         index = np.argsort(self.point_cloud[0])
         self.point_cloud[0] = self.point_cloud[0][index]
         self.point_cloud[1] = self.point_cloud[1][index]
+
+    def _plot_scan_and_opening(self, p1, p2):
+        """Save a quick plot (or CSV) of the current scan and mark opening endpoints.
+        This is non-blocking and intended for debugging/logging.
+        """
+        angles = self.point_cloud[0, :]
+        ranges = self.point_cloud[1, :]
+        xs = ranges * np.cos(np.deg2rad(angles))
+        ys = ranges * np.sin(np.deg2rad(angles))
+
+        os.makedirs('logs', exist_ok=True)
+        ts = int(time.time())
+        if HAVE_MPL:
+            fig, ax = plt.subplots(figsize=(6,6))
+            ax.scatter(xs, ys, s=6, c='blue')
+            ax.scatter([p1[0], p2[0]], [p1[1], p2[1]], s=50, c=['red','orange'], marker='x')
+            ax.set_xlabel('x (m)')
+            ax.set_ylabel('y (m)')
+            ax.axis('equal')
+            filepath = f'logs/scan_plot_{ts}.png'
+            fig.savefig(filepath, bbox_inches='tight')
+            plt.close(fig)
+            self.get_logger().info(f'Wrote scan plot to {filepath}')
+        else:
+            csvpath = f'logs/scan_{ts}.csv'
+            np.savetxt(csvpath, np.column_stack((xs, ys)), delimiter=',', header='x,y', comments='')
+            self.get_logger().info(f'Wrote scan CSV to {csvpath}')
 
     def destroy_node(self):
         super().destroy_node()
