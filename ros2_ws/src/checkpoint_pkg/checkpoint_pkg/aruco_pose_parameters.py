@@ -79,8 +79,15 @@ class ArucoPoseNode(Node):
         
         img_center_x = frame.shape[1] // 2
         horiz_dist_ci_cx = cX - img_center_x
-        rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(corners, self.marker_length, self.camera_matrix, self.dist_coeffs)
-        rvec, tvec = rvecs[0], tvecs[0]
+
+        rvecs, tvecs, _ = cv2.aruco.estimatePoseSingleMarkers(
+            corners, self.marker_length, self.camera_matrix, self.dist_coeffs
+        )
+
+        # Extract the vector correctly: (N, 1, 3) → (3,)
+        rvec = rvecs[0][0]
+        tvec = tvecs[0][0]
+
         alignment_error = horiz_dist_ci_cx / frame.shape[1] * self.camera_fov
         distance_seperation = self.find_distance_seperation(tvec)
         msg = ParametersToTarget()
@@ -90,11 +97,9 @@ class ArucoPoseNode(Node):
         self.get_logger().info(f"Published ArUco Pose Parameters: Alignment Error = {alignment_error:.2f} degrees, Distance Seperation = {distance_seperation:.2f} meters")
 
     def find_distance_seperation(self, tvec):
-        horizontal_tvec = tvec.copy()
-        horizontal_tvec[1] = 0
-        distance = np.linalg.norm(horizontal_tvec)
-        return distance
-
+        tvec = tvec.flatten()
+        x, y, z = tvec
+        return np.hypot(x, z)
 
     def __del__(self):
         self.cap.release()

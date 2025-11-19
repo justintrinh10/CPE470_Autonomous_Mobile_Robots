@@ -36,7 +36,7 @@ class RotateRobot(Node):
             return
 
         angular_velocity_val = self.angular_velocity
-        if alignment_error < 0:
+        if alignment_error > 0:
             angular_velocity_val *= -1
 
         command = Twist()
