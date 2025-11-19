@@ -11,7 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'numpy', 'opencv-python', 'pyserial', 'matplotlib'],
     zip_safe=True,
     maintainer='root',
     maintainer_email='root@todo.todo',
@@ -20,6 +20,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'lidar_node = checkpoint_pkg.lidar:main',
+            'rotate_robot = checkpoint_pkg.rotate_robot:main',
+            'move_robot = checkpoint_pkg.move_robot:main',
+            'find_opening = checkpoint_pkg.find_opening:main',
+            'aruco_pose_node = checkpoint_pkg.aruco_pose_parameters:main',
         ],
     },
 )
