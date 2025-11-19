@@ -23,6 +23,9 @@ class RotateRobot(Node):
         self.counter = 0
 
     def listener_callback(self, msg):
+        alignment_error = msg.alignment_error
+        distance_seperation = msg.distance_seperation
+
         if self.counter >= 5:
             self.get_logger().info("Robot aligned with target. Stopping rotation.")
             self.get_logger().info(f"Final Alignment Error: {alignment_error:.2f} degrees, Distance Seperation: {distance_seperation:.2f} meters")
@@ -31,9 +34,6 @@ class RotateRobot(Node):
             self.publisher_stop_.publish(stop_msg)
             self.stop_robot()
             return 
-
-        alignment_error = msg.alignment_error
-        distance_seperation = msg.distance_seperation
 
         if abs(alignment_error) < alignment_threshold:
             self.stop_robot()
