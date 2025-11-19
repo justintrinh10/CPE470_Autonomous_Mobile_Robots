@@ -18,7 +18,7 @@ ros2 pkg create --build-type ament_python NAME_pkg
 *Running Program*
 //Open New Terminal
 
-docker exec -it justinDocker bash
+docker exec -it teamjk bash
 
 unset FASTRTPS_DEFAULT_PROFILES_FILE
 
@@ -68,8 +68,11 @@ source install/setup.bash
 
 # 3) Run nodes (open new host terminals and attach, or use multiple shells)
 # attach to running container from a new terminal:
-docker exec -it justinDocker bash
+docker exec -it teamjk bash
+
+**BREAKS ROS2 TOPIC LIST**
 unset FASTRTPS_DEFAULT_PROFILES_FILE
+
 source /opt/ros/humble/setup.bash
 source /root/ros2_ws/install/setup.bash
 

@@ -5,7 +5,7 @@ from std_msgs.msg import String
 import numpy as np
 import matplotlib.pyplot as plt
 
-num_points = 360
+num_points = 1000
 
 class FindOpening(Node):
     def __init__(self):

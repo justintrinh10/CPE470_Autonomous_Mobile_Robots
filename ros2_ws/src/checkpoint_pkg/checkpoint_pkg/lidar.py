@@ -5,7 +5,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 import numpy as np
 
-points_required = 360
+points_required = 1000
 num_points_collected = 0
 #row 0: angle in degrees
 #row 1: distance in meters
@@ -109,6 +109,8 @@ class Lidar(Node):
         for i in range(12):
             if num_points_collected < points_required:
                 if distance[i] == 0:
+                    continue
+                if distance[i] > 1500:
                     continue
                 point_cloud_polar[1][num_points_collected] = distance[i] / 1000.0
                 point_cloud_polar[0][num_points_collected] = angles[i]
