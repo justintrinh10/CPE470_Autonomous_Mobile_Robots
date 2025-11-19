@@ -1,10 +1,13 @@
 *Running Docker*
 
 docker run -it --rm \
-    -v ~/ros2_ws:/root/ros2_ws \
+    -v /Users/justin0523/ros2_docker_ws/CPE470_Autonomous_Mobile_Robots/ros2_ws:/root/ros2_ws \
     --name justinDocker \
     osrf/ros:humble-desktop \
     bash
+
+cd /root/ros2_ws
+ls
 
 *Making a New Pacakage*
 
