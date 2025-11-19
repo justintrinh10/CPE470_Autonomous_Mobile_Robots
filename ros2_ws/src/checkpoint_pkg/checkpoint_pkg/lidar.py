@@ -8,7 +8,7 @@ import numpy as np
 points_required = 360
 num_points_collected = 0
 #row 0: angle in degrees
-#row 1: distance in mm
+#row 1: distance in meters
 point_cloud_polar = np.zeros((2, points_required))
 
 CRC_TABLE = [
@@ -50,11 +50,14 @@ class Lidar(Node):
         if not self.ser.is_open:
             return
         if num_points_collected >= points_required:
-            # publish point cloud data
+            idx = np.argsort(point_cloud_polar[0])
+            sorted_angles = point_cloud_polar[0][idx]
+            sorted_distances = point_cloud_polar[1][idx]
+
             msg = String()
             msg.data = ""
             for i in range(points_required):
-                msg.data += f"{point_cloud_polar[0][i]:.2f},{point_cloud_polar[1][i]:.0f}\n"
+                msg.data += f"{point_cloud_polar[0][i]:.2f},{point_cloud_polar[1][i]:.3f}\n"
             self.publisher_.publish(msg)
             self.get_logger().info("Published Lidar Data")
             rclpy.shutdown()
@@ -92,7 +95,6 @@ class Lidar(Node):
         end_angle = end_angle / 100.0
         angles = []
         step = (end_angle - start_angle) / 11.0
-        #distance in mm
         distance = []
         intensity = []
         for i in range(12):
@@ -108,10 +110,11 @@ class Lidar(Node):
             if num_points_collected < points_required:
                 if distance[i] == 0:
                     continue
-                point_cloud_polar[1][num_points_collected] = distance[i]
+                point_cloud_polar[1][num_points_collected] = distance[i] / 1000.0
                 point_cloud_polar[0][num_points_collected] = angles[i]
                 num_points_collected += 1
-                self.get_logger().info(f"Point {num_points_collected}: Distance = {distance[i]:.2f} mm, Angle = {angles[i]:.2f} degrees")
+                if num_points_collected % 36 == 0:
+                    self.get_logger().info(f"Collected {num_points_collected} points")
             
 
     def destroy_node(self):

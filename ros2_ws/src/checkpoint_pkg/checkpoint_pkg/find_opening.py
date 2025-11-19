@@ -16,7 +16,7 @@ class FindOpening(Node):
             10,
         )
         self.publisher_ = self.create_publisher(String, "openingData", 10)
-        self.point_cloud = np.zeros((2, num_points))  # row 0: angle in degrees, row 1: distance in mm
+        self.point_cloud = np.zeros((2, num_points))  # row 0: angle in degrees, row 1: distance in meters
 
     def listener_callback(self, msg):
         data_lines = msg.data.strip().split("\n")
@@ -40,18 +40,24 @@ class FindOpening(Node):
             if distance_between_points > max_distance:
                 max_distance = distance_between_points
                 max_distance_index = i
+        last_point = (self.point_cloud[0, num_points - 1], self.point_cloud[1, num_points - 1])
+        first_point = (self.point_cloud[0, 0], self.point_cloud[1, 0])
+        wrap_distance = self.find_distance_between_points(first_point, last_point)
+        if wrap_distance > max_distance:
+            max_distance = wrap_distance
+            max_distance_index = 0
         opening_point1 = (self.point_cloud[0, max_distance_index - 1], self.point_cloud[1, max_distance_index - 1])
         opening_point2 = (self.point_cloud[0, max_distance_index], self.point_cloud[1, max_distance_index])
         opening_point1_cartesian = self.polar_to_cartesian(opening_point1)
         opening_point2_cartesian = self.polar_to_cartesian(opening_point2)
         msg = String()
-        msg.data += f"{opening_point1_cartesian[0]:.2f},{opening_point1_cartesian[1]:.2f}\n"
-        msg.data += f"{opening_point2_cartesian[0]:.2f},{opening_point2_cartesian[1]:.2f}\n"
+        msg.data += f"{opening_point1_cartesian[0]:.3f},{opening_point1_cartesian[1]:.3f}\n"
+        msg.data += f"{opening_point2_cartesian[0]:.3f},{opening_point2_cartesian[1]:.3f}\n"
         self.publisher_.publish(msg)
         self.get_logger().info("Published Opening Data")
         self.get_logger().info("Opening Points (Cartesian):")
-        self.get_logger().info(f"Point 1: x = {opening_point1_cartesian[0]:.2f} mm, y = {opening_point1_cartesian[1]:.2f} mm")
-        self.get_logger().info(f"Point 2: x = {opening_point2_cartesian[0]:.2f} mm, y = {opening_point2_cartesian[1]:.2f} mm")
+        self.get_logger().info(f"Point 1: x = {opening_point1_cartesian[0]:.3f} m, y = {opening_point1_cartesian[1]:.3f} m")
+        self.get_logger().info(f"Point 2: x = {opening_point2_cartesian[0]:.3f} m, y = {opening_point2_cartesian[1]:.3f} m")
     
     def find_distance_between_points(self, point1, point2):
         x1, y1 = self.polar_to_cartesian(point1)
