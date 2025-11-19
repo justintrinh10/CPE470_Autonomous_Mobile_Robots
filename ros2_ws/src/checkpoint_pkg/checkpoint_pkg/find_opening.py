@@ -3,17 +3,7 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 import numpy as np
-import os
-import time
-
-# optional plotting
-try:
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    HAVE_MPL = True
-except Exception:
-    HAVE_MPL = False
+import matplotlib.pyplot as plt
 
 num_points = 360
 
@@ -75,6 +65,7 @@ class FindOpening(Node):
         self.get_logger().info("Opening Points (Cartesian):")
         self.get_logger().info(f"Point 1: x = {opening_point1_cartesian[0]:.3f} m, y = {opening_point1_cartesian[1]:.3f} m")
         self.get_logger().info(f"Point 2: x = {opening_point2_cartesian[0]:.3f} m, y = {opening_point2_cartesian[1]:.3f} m")
+        self._plot_scan_and_opening(opening_point1_cartesian, opening_point2_cartesian)
     
     def find_distance_between_points(self, point1, point2):
         x1, y1 = self.polar_to_cartesian(point1)
@@ -94,31 +85,19 @@ class FindOpening(Node):
         self.point_cloud[1] = self.point_cloud[1][index]
 
     def _plot_scan_and_opening(self, p1, p2):
-        """Save a quick plot (or CSV) of the current scan and mark opening endpoints.
-        This is non-blocking and intended for debugging/logging.
-        """
         angles = self.point_cloud[0, :]
         ranges = self.point_cloud[1, :]
         xs = ranges * np.cos(np.deg2rad(angles))
         ys = ranges * np.sin(np.deg2rad(angles))
 
-        os.makedirs('logs', exist_ok=True)
-        ts = int(time.time())
-        if HAVE_MPL:
-            fig, ax = plt.subplots(figsize=(6,6))
-            ax.scatter(xs, ys, s=6, c='blue')
-            ax.scatter([p1[0], p2[0]], [p1[1], p2[1]], s=50, c=['red','orange'], marker='x')
-            ax.set_xlabel('x (m)')
-            ax.set_ylabel('y (m)')
-            ax.axis('equal')
-            filepath = f'logs/scan_plot_{ts}.png'
-            fig.savefig(filepath, bbox_inches='tight')
-            plt.close(fig)
-            self.get_logger().info(f'Wrote scan plot to {filepath}')
-        else:
-            csvpath = f'logs/scan_{ts}.csv'
-            np.savetxt(csvpath, np.column_stack((xs, ys)), delimiter=',', header='x,y', comments='')
-            self.get_logger().info(f'Wrote scan CSV to {csvpath}')
+        plt.figure()
+        plt.scatter(xs, ys, s=5)
+        plt.scatter([p1[0], p2[0]], [p1[1], p2[1]], s=50, marker='x')
+        plt.xlabel('x (m)')
+        plt.ylabel('y (m)')
+        plt.axis('equal')
+        plt.title('LiDAR Scan')
+        plt.show()
 
     def destroy_node(self):
         super().destroy_node()
