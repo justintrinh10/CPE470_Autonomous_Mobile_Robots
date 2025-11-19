@@ -106,6 +106,8 @@ class Lidar(Node):
         #add to point cloud
         for i in range(12):
             if num_points_collected < points_required:
+                if distance[i] == 0:
+                    continue
                 point_cloud_polar[1][num_points_collected] = distance[i]
                 point_cloud_polar[0][num_points_collected] = angles[i]
                 num_points_collected += 1
