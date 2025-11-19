@@ -1,0 +1,58 @@
+[0.000000] (-) TimerEvent: {}
+[0.001044] (-) JobUnselected: {'identifier': 'checkpoint_interfaces'}
+[0.002374] (-) JobUnselected: {'identifier': 'hw1_pkg'}
+[0.003316] (checkpoint_pkg) JobQueued: {'identifier': 'checkpoint_pkg', 'dependencies': OrderedDict([('checkpoint_interfaces', '/root/ros2_ws/install/checkpoint_interfaces')])}
+[0.004116] (checkpoint_pkg) JobStarted: {'identifier': 'checkpoint_pkg'}
+[0.170334] (-) TimerEvent: {}
+[0.272168] (-) TimerEvent: {}
+[0.373308] (-) TimerEvent: {}
+[0.474380] (-) TimerEvent: {}
+[0.576071] (-) TimerEvent: {}
+[0.679251] (-) TimerEvent: {}
+[0.780079] (-) TimerEvent: {}
+[0.881280] (-) TimerEvent: {}
+[0.983250] (-) TimerEvent: {}
+[1.084475] (-) TimerEvent: {}
+[1.189303] (-) TimerEvent: {}
+[1.290200] (-) TimerEvent: {}
+[1.391268] (-) TimerEvent: {}
+[1.412737] (checkpoint_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/root/ros2_ws/build/checkpoint_pkg/build', '--no-deps', 'symlink_data'], 'cwd': '/root/ros2_ws/build/checkpoint_pkg', 'env': {'HOSTNAME': 'dbcc137ea1f0', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/root/ros2_ws/install/checkpoint_interfaces/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/root/ros2_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/root/ros2_ws/install', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/checkpoint_interfaces:/opt/ros/humble', 'PWD': '/root/ros2_ws/build/checkpoint_pkg', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/root/ros2_ws/build/checkpoint_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/root/ros2_ws/install/checkpoint_interfaces'}, 'shell': False}
+[1.492266] (-) TimerEvent: {}
+[1.593396] (-) TimerEvent: {}
+[1.694336] (-) TimerEvent: {}
+[1.795204] (-) TimerEvent: {}
+[1.876907] (checkpoint_pkg) StdoutLine: {'line': b'running develop\n'}
+[1.896238] (-) TimerEvent: {}
+[1.997284] (-) TimerEvent: {}
+[2.097647] (checkpoint_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[2.099273] (-) TimerEvent: {}
+[2.100361] (checkpoint_pkg) StdoutLine: {'line': b'creating checkpoint_pkg.egg-info\n'}
+[2.103009] (checkpoint_pkg) StdoutLine: {'line': b'writing checkpoint_pkg.egg-info/PKG-INFO\n'}
+[2.106429] (checkpoint_pkg) StdoutLine: {'line': b'writing dependency_links to checkpoint_pkg.egg-info/dependency_links.txt\n'}
+[2.110194] (checkpoint_pkg) StdoutLine: {'line': b'writing entry points to checkpoint_pkg.egg-info/entry_points.txt\n'}
+[2.114145] (checkpoint_pkg) StdoutLine: {'line': b'writing requirements to checkpoint_pkg.egg-info/requires.txt\n'}
+[2.116438] (checkpoint_pkg) StdoutLine: {'line': b'writing top-level names to checkpoint_pkg.egg-info/top_level.txt\n'}
+[2.121730] (checkpoint_pkg) StdoutLine: {'line': b"writing manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'\n"}
+[2.139532] (checkpoint_pkg) StdoutLine: {'line': b"reading manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'\n"}
+[2.180867] (checkpoint_pkg) StdoutLine: {'line': b"writing manifest file 'checkpoint_pkg.egg-info/SOURCES.txt'\n"}
+[2.185309] (checkpoint_pkg) StdoutLine: {'line': b'running build_ext\n'}
+[2.194639] (checkpoint_pkg) StdoutLine: {'line': b'Creating /root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages/checkpoint-pkg.egg-link (link to .)\n'}
+[2.201044] (-) TimerEvent: {}
+[2.218875] (checkpoint_pkg) StdoutLine: {'line': b'Installing aruco_pose_node script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[2.226708] (checkpoint_pkg) StdoutLine: {'line': b'Installing find_opening script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[2.232139] (checkpoint_pkg) StdoutLine: {'line': b'Installing lidar_node script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[2.241306] (checkpoint_pkg) StdoutLine: {'line': b'Installing move_robot script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[2.249199] (checkpoint_pkg) StdoutLine: {'line': b'Installing rotate_robot script to /root/ros2_ws/install/checkpoint_pkg/lib/checkpoint_pkg\n'}
+[2.257045] (checkpoint_pkg) StdoutLine: {'line': b'\n'}
+[2.263782] (checkpoint_pkg) StdoutLine: {'line': b'Installed /root/ros2_ws/build/checkpoint_pkg\n'}
+[2.267070] (checkpoint_pkg) StdoutLine: {'line': b'running symlink_data\n'}
+[2.270385] (checkpoint_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/checkpoint_pkg/share/ament_index\n'}
+[2.271577] (checkpoint_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/checkpoint_pkg/share/ament_index/resource_index\n'}
+[2.273177] (checkpoint_pkg) StdoutLine: {'line': b'creating /root/ros2_ws/install/checkpoint_pkg/share/ament_index/resource_index/packages\n'}
+[2.274428] (checkpoint_pkg) StdoutLine: {'line': b'symbolically linking /root/ros2_ws/build/checkpoint_pkg/resource/checkpoint_pkg -> /root/ros2_ws/install/checkpoint_pkg/share/ament_index/resource_index/packages\n'}
+[2.279175] (checkpoint_pkg) StdoutLine: {'line': b'symbolically linking /root/ros2_ws/build/checkpoint_pkg/package.xml -> /root/ros2_ws/install/checkpoint_pkg/share/checkpoint_pkg\n'}
+[2.301409] (-) TimerEvent: {}
+[2.330619] (checkpoint_pkg) CommandEnded: {'returncode': 0}
+[2.402252] (-) TimerEvent: {}
+[2.431466] (checkpoint_pkg) JobEnded: {'identifier': 'checkpoint_pkg', 'rc': 0}
+[2.437117] (-) EventReactorShutdown: {}

@@ -1,0 +1,7 @@
+[console_scripts]
+aruco_pose_node = checkpoint_pkg.aruco_pose_parameters:main
+find_opening = checkpoint_pkg.find_opening:main
+lidar_node = checkpoint_pkg.lidar:main
+move_robot = checkpoint_pkg.move_robot:main
+rotate_robot = checkpoint_pkg.rotate_robot:main
+

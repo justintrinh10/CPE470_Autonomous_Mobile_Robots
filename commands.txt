@@ -39,3 +39,55 @@ entry_points={
         'NODE_NAME = PACKAGE_NAME_pkg.NODE_FILENAME:main'
     ]
 }
+
+---
+# Recommended full workflow: copy & paste these blocks into your host terminal.
+
+# 1) Start a Docker container with the workspace mounted and common devices forwarded
+#    (add --device=/dev/video0 or --device=/dev/ttyUSB0 if you need camera/LiDAR passthrough)
+# Use --network host only if you understand the host networking implications.
+
+docker run -it --rm \
+  -v /Users/justin0523/ros2_docker_ws/CPE470_Autonomous_Mobile_Robots/ros2_ws:/root/ros2_ws \
+  --name justinDocker \
+  --network host \
+  osrf/ros:humble-desktop \
+  bash
+
+# inside the container
+cd /root/ros2_ws
+ls
+
+# 2) Prepare the environment and build the package
+source /opt/ros/humble/setup.bash
+cd /root/ros2_ws
+# (optional) install Python dependencies if colcon fails to fetch them
+# pip3 install --user opencv-python pyserial numpy matplotlib
+colcon build --symlink-install --packages-select checkpoint_pkg
+source install/setup.bash
+
+# 3) Run nodes (open new host terminals and attach, or use multiple shells)
+# attach to running container from a new terminal:
+docker exec -it justinDocker bash
+unset FASTRTPS_DEFAULT_PROFILES_FILE
+source /opt/ros/humble/setup.bash
+source /root/ros2_ws/install/setup.bash
+
+# Run each node in its own shell (examples):
+ros2 run checkpoint_pkg lidar_node
+ros2 run checkpoint_pkg find_opening
+ros2 run checkpoint_pkg aruco_pose_node
+ros2 run checkpoint_pkg rotate_robot
+ros2 run checkpoint_pkg move_robot
+
+# 4) Quick single-terminal background example (run lidar and log output)
+ros2 run checkpoint_pkg lidar_node &> /root/ros2_ws/logs/lidar.log &
+tail -f /root/ros2_ws/logs/lidar.log
+
+# Troubleshooting notes:
+# - If you see ModuleNotFoundError for cv2 or other Python packages, run
+#   pip3 install --user opencv-python pyserial numpy matplotlib
+#   then re-run `colcon build` or simply source the workspace and run the node directly.
+# - To give the container access to a USB LiDAR or camera device, restart docker with
+#   --device=/dev/ttyUSB0 (or /dev/video0) and optionally --privileged (less secure).
+# - For convenience, use tmux or screen inside the container to manage multiple node terminals.
