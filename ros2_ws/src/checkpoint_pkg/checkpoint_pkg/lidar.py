@@ -5,7 +5,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 import numpy as np
 
-points_required = 1000
+points_required = 500
 num_points_collected = 0
 #row 0: angle in degrees
 #row 1: distance in meters
