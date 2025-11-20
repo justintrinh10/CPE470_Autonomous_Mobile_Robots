@@ -6,6 +6,9 @@ from cv_bridge import CvBridge
 import cv2
 import numpy as np
 from cv2 import aruco
+from geometry_msgs.msg import Twist
+
+angular_velocity_val = 0.005
 
 class ArucoPoseNode(Node):
     def __init__(self):
@@ -13,6 +16,9 @@ class ArucoPoseNode(Node):
         self.camera_fov = 60  # degrees
 
         self.publisher_ = self.create_publisher(ParametersToTarget, "aruco_pose_parameters", 10)
+
+        self.publisher_robot_rotate = self.create_publisher(Twist, '/cmd_vel', 10)
+
 
         # Camera setup
         self.cap = cv2.VideoCapture(0)
@@ -72,6 +78,14 @@ class ArucoPoseNode(Node):
 
         if ids is None:
             self.get_logger().error("No ArUco detected")
+            command = Twist()
+            command.linear.x = 0.0
+            command.linear.y = 0.0
+            command.linear.z = 0.0
+            command.angular.x = 0.0
+            command.angular.y = 0.0
+            command.angular.z = angular_velocity_val
+            self.publisher_robot_rotate.publish(command)
             return
         elif len(ids) > 1:
             self.get_logger().error("More than one ArUco detected")
