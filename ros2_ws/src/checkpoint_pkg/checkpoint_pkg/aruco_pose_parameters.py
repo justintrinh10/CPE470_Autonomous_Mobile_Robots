@@ -10,6 +10,8 @@ from geometry_msgs.msg import Twist
 
 angular_velocity_val = 0.005
 
+camera_to_robot_center = 0.12 # meters
+
 class ArucoPoseNode(Node):
     def __init__(self):
         super().__init__('aruco_pose_node')
@@ -103,7 +105,7 @@ class ArucoPoseNode(Node):
         tvec = tvecs[0][0]
 
         alignment_error = horiz_dist_ci_cx / frame.shape[1] * self.camera_fov
-        distance_seperation = self.find_distance_seperation(tvec)
+        distance_seperation = self.find_distance_seperation(tvec) + camera_to_robot_center
         msg = ParametersToTarget()
         msg.alignment_error = alignment_error
         msg.distance_seperation = distance_seperation
