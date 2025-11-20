@@ -6,12 +6,26 @@ from geometry_msgs.msg import Twist
 import math
 from std_msgs.msg import Bool
 from irobot_create_msgs.msg import WheelTicks
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 
 desired_distance = 0.30  # meters
 
 class MoveRobot(Node):
     def __init__(self):
         super().__init__('move_robot')
+
+        wheel_qos = QoSProfile(
+            depth=10,
+            reliability=ReliabilityPolicy.BEST_EFFORT
+        )
+
+        self.subscription_wheel_enconder = self.create_subscription(
+            WheelTicks,
+            '/wheel_ticks',
+            self.listener_callback_wheel_encoder,
+            wheel_qos
+        )
+
         self.subscription_parameters = self.create_subscription(
             ParametersToTarget,
             'aruco_pose_parameters',
@@ -22,12 +36,6 @@ class MoveRobot(Node):
             Bool,
             'rotation_complete',
             self.listener_callback_rotation_complete,
-            10
-        )
-        self.subscription_wheel_enconder = self.create_subscription(
-            WheelTicks,
-            '/wheel_ticks',
-            self.listener_callback_wheel_encoder,
             10
         )
 
