@@ -33,6 +33,8 @@ class RotateRobot(Node):
             stop_msg.data = True
             self.publisher_stop_.publish(stop_msg)
             self.stop_robot()
+            self.destroy_node()
+            rclpy.shutdown()
             return 
 
         if abs(alignment_error) < alignment_threshold:
