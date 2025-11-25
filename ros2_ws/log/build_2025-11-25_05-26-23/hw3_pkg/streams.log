@@ -1,0 +1,25 @@
+[1.090s] Invoking command in '/root/ros2_ws/build/hw3_pkg': PYTHONPATH=/root/ros2_ws/build/hw3_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/hw3_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/ros2_ws/build/hw3_pkg/build --no-deps symlink_data
+[1.535s] running develop
+[1.843s] running egg_info
+[1.844s] creating hw3_pkg.egg-info
+[1.845s] writing hw3_pkg.egg-info/PKG-INFO
+[1.846s] writing dependency_links to hw3_pkg.egg-info/dependency_links.txt
+[1.848s] writing entry points to hw3_pkg.egg-info/entry_points.txt
+[1.849s] writing requirements to hw3_pkg.egg-info/requires.txt
+[1.850s] writing top-level names to hw3_pkg.egg-info/top_level.txt
+[1.852s] writing manifest file 'hw3_pkg.egg-info/SOURCES.txt'
+[1.863s] reading manifest file 'hw3_pkg.egg-info/SOURCES.txt'
+[1.869s] writing manifest file 'hw3_pkg.egg-info/SOURCES.txt'
+[1.873s] running build_ext
+[1.873s] Creating /root/ros2_ws/install/hw3_pkg/lib/python3.10/site-packages/hw3-pkg.egg-link (link to .)
+[1.879s] Installing camera_publisher script to /root/ros2_ws/install/hw3_pkg/lib/hw3_pkg
+[1.882s] Installing camera_subscriber script to /root/ros2_ws/install/hw3_pkg/lib/hw3_pkg
+[1.886s] 
+[1.887s] Installed /root/ros2_ws/build/hw3_pkg
+[1.889s] running symlink_data
+[1.890s] creating /root/ros2_ws/install/hw3_pkg/share/ament_index
+[1.892s] creating /root/ros2_ws/install/hw3_pkg/share/ament_index/resource_index
+[1.893s] creating /root/ros2_ws/install/hw3_pkg/share/ament_index/resource_index/packages
+[1.894s] symbolically linking /root/ros2_ws/build/hw3_pkg/resource/hw3_pkg -> /root/ros2_ws/install/hw3_pkg/share/ament_index/resource_index/packages
+[1.895s] symbolically linking /root/ros2_ws/build/hw3_pkg/package.xml -> /root/ros2_ws/install/hw3_pkg/share/hw3_pkg
+[1.931s] Invoked command in '/root/ros2_ws/build/hw3_pkg' returned '0': PYTHONPATH=/root/ros2_ws/build/hw3_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/hw3_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/ros2_ws/build/hw3_pkg/build --no-deps symlink_data
