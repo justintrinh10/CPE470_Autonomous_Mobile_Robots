@@ -1,0 +1,6 @@
+[0.000000] (-) TimerEvent: {}
+[0.000759] (-) JobUnselected: {'identifier': 'checkpoint_interfaces'}
+[0.001080] (-) JobUnselected: {'identifier': 'checkpoint_pkg'}
+[0.001433] (-) JobUnselected: {'identifier': 'hw1_pkg'}
+[0.001674] (-) JobUnselected: {'identifier': 'hw3_pkg'}
+[0.001936] (-) EventReactorShutdown: {}
