@@ -7,12 +7,11 @@ class LineSegment:
         self.point1 = self.get_point_on_line(point1)
         self.point2 = self.get_point_on_line(point2)
 
-    def from_two_points(self, point1, point2):
-        self.point1 = point1
-        self.point2 = point2
-        self.slope = (point2.get_y() - point1.get_y()) / (point2.get_x() - point1.get_x())
-        self.intercept = point1.get_y() - self.slope * point1.get_x()
-        return self
+    @classmethod
+    def from_two_points(cls, point1, point2):
+        slope = (point2.get_y() - point1.get_y()) / (point2.get_x() - point1.get_x())
+        intercept = point1.get_y() - slope * point1.get_x()
+        return cls(point1, point2, slope, intercept)
 
     def distance(self, p1, p2):
         return math.sqrt((p2.get_x() - p1.get_x())**2 + (p2.get_y() - p1.get_y())**2)
@@ -68,13 +67,16 @@ class LineSegment:
         return (dist1 < robot_radius or dist2 < robot_radius or dist3 < robot_radius or dist4 < robot_radius)
 
 class Point:
-    def __init__(self, angle, distance):
-        self.x, self.y = self.polar_to_cartesian(angle, distance)
-
-    def from_cartesian(self, x, y):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
-        return self
+
+    @classmethod
+    def from_polar(cls, angle_deg, distance):
+        a = math.radians(angle_deg)
+        x = distance * math.cos(a)
+        y = distance * math.sin(a)
+        return cls(x, y)
 
     def get_x(self):
         return self.x
