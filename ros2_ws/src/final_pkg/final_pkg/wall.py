@@ -7,6 +7,12 @@ class LineSegment:
         self.point1 = self.get_point_on_line(point1)
         self.point2 = self.get_point_on_line(point2)
 
+    def from_two_points(self, point1, point2):
+        self.point1 = point1
+        self.point2 = point2
+        self.slope = (point2.get_y() - point1.get_y()) / (point2.get_x() - point1.get_x())
+        self.intercept = point1.get_y() - self.slope * point1.get_x()
+
     def distance(self, p1, p2):
         return math.sqrt((p2.get_x() - p1.get_x())**2 + (p2.get_y() - p1.get_y())**2)
 
@@ -59,7 +65,6 @@ class LineSegment:
         dist4 = other.get_distance_to_point(self.point2)
 
         return (dist1 < robot_radius or dist2 < robot_radius or dist3 < robot_radius or dist4 < robot_radius)
-
 
 class Point:
     def __init__(self, angle, distance):
