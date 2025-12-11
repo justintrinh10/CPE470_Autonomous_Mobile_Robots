@@ -12,6 +12,7 @@ class LineSegment:
         self.point2 = point2
         self.slope = (point2.get_y() - point1.get_y()) / (point2.get_x() - point1.get_x())
         self.intercept = point1.get_y() - self.slope * point1.get_x()
+        return self
 
     def distance(self, p1, p2):
         return math.sqrt((p2.get_x() - p1.get_x())**2 + (p2.get_y() - p1.get_y())**2)
@@ -68,20 +69,21 @@ class LineSegment:
 
 class Point:
     def __init__(self, angle, distance):
-        self.angle = angle
-        self.distance = distance
+        self.x, self.y = self.polar_to_cartesian(angle, distance)
 
-    def from_cartesian(x, y):
-        angle = math.degrees(math.atan2(y, x))
-        dist = math.sqrt(x*x + y*y)
-        return Point(angle, dist)
-
-    def get_cartesian(self):
-        a = math.radians(self.angle)
-        return (self.distance * math.cos(a), self.distance * math.sin(a))
+    def from_cartesian(self, x, y):
+        self.x = x
+        self.y = y
+        return self
 
     def get_x(self):
-        return self.get_cartesian()[0]
+        return self.x
 
     def get_y(self):
-        return self.get_cartesian()[1]
+        return self.y
+    
+    def get_angle(self):
+        return math.degrees(math.atan2(self.y, self.x))
+    
+    def get_distance(self):
+        return math.sqrt(self.x**2 + self.y**2)
