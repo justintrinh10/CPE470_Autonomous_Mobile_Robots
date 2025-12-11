@@ -1,0 +1,135 @@
+import serial
+import math
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+import numpy as np
+
+points_required = 500
+distance_threshold = 1.5  # meters
+num_points_collected = 0
+#row 0: angle in degrees
+#row 1: distance in meters
+point_cloud_polar = np.zeros((2, points_required))
+
+CRC_TABLE = [
+    0x00,0x4d,0x9a,0xd7,0x79,0x34,0xe3,0xae,0xf2,0xbf,0x68,0x25,0x8b,0xc6,0x11,0x5c,
+    0xa9,0xe4,0x33,0x7e,0xd0,0x9d,0x4a,0x07,0x5b,0x16,0xc1,0x8c,0x22,0x6f,0xb8,0xf5,
+    0x1f,0x52,0x85,0xc8,0x66,0x2b,0xfc,0xb1,0xed,0xa0,0x77,0x3a,0x94,0xd9,0x0e,0x43,
+    0xb6,0xfb,0x2c,0x61,0xcf,0x82,0x55,0x18,0x44,0x09,0xde,0x93,0x3d,0x70,0xa7,0xea,
+    0x3e,0x73,0xa4,0xe9,0x47,0x0a,0xdd,0x90,0xcc,0x81,0x56,0x1b,0xb5,0xf8,0x2f,0x62,
+    0x97,0xda,0x0d,0x40,0xee,0xa3,0x74,0x39,0x65,0x28,0xff,0xb2,0x1c,0x51,0x86,0xcb,
+    0x21,0x6c,0xbb,0xf6,0x58,0x15,0xc2,0x8f,0xd3,0x9e,0x49,0x04,0xaa,0xe7,0x30,0x7d,
+    0x27,0x6a,0xbd,0xf0,0x5e,0x13,0xc4,0x89,0x63,0x2e,0xf9,0xb4,0x1a,0x57,0x80,0xcd,
+    0x91,0xdc,0x0b,0x46,0xe8,0xa5,0x72,0x3f,0xca,0x87,0x50,0x1d,0xb3,0xfe,0x29,0x64,
+    0x38,0x75,0xa2,0xef,0x41,0x0c,0xdb,0x96,0x42,0x0f,0xd8,0x95,0x3b,0x76,0xa1,0xec,
+    0xb0,0xfd,0x2a,0x67,0xc9,0x84,0x53,0x1e,0xeb,0xa6,0x71,0x3c,0x92,0xdf,0x08,0x45,
+    0x19,0x54,0x83,0xce,0x60,0x2d,0xfa,0xb7,0x5d,0x10,0xc7,0x8a,0x24,0x69,0xbe,0xf3,
+    0xaf,0xe2,0x35,0x78,0xd6,0x9b,0x4c,0x01,0xf4,0xb9,0x6e,0x23,0x8d,0xc0,0x17,0x5a,
+    0x06,0x4b,0x9c,0xd1,0x7f,0x32,0xe5,0xa8,0x41,0x0c,0xdb,0x96,0x42,0x0f,0xd8,0x95,
+    0x3b,0x76,0xa1,0xec,0xb0,0xfd,0x2a,0x67,0xc9,0x84,0x53,0x1e,0xb3,0xfe,0x29,0x64,
+    0x38,0x75,0xa2,0xef,0x41,0x0c,0xdb,0x96,0x42,0x0f,0xd8,0x95,0x3b,0x76,0xa1,0xec
+]
+
+def calc_crc8(data: bytes) -> int:
+    crc = 0
+    for b in data:
+        crc = CRC_TABLE[(crc ^ b) & 0xFF]
+    return crc
+
+class Lidar(Node):
+    def __init__(self):
+        super().__init__("lidar")
+        self.publisher_ = self.create_publisher(String, "lidarDataPolar", 10)
+        timer_period = 0.01  # seconds
+        self.ser = serial.Serial("/dev/ttyUSB0", 230400, timeout=1)
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+
+    def timer_callback(self):
+        global num_points_collected
+        global point_cloud_polar
+        if not self.ser.is_open:
+            return
+        if num_points_collected >= points_required:
+            idx = np.argsort(point_cloud_polar[0])
+            sorted_angles = point_cloud_polar[0][idx]
+            sorted_distances = point_cloud_polar[1][idx]
+
+            msg = String()
+            msg.data = ""
+            for i in range(points_required):
+                msg.data += f"{point_cloud_polar[0][i]:.2f},{point_cloud_polar[1][i]:.3f}\n"
+            self.publisher_.publish(msg)
+            self.get_logger().info("Published Lidar Data")
+            rclpy.shutdown()
+            return
+        b = self.ser.read(1)
+        if not b or b[0] != 0x54:
+            return
+        
+        ver_len = self.ser.read(1)
+        if not ver_len or ver_len[0] != 0x2C:
+            return
+
+        frame = b + ver_len + self.ser.read(45)
+        if len(frame) != 47:
+            return
+
+        header = frame[0]
+        ver_len = frame[1]
+        #degrees per second
+        speed = int.from_bytes(frame[2:4], "little")
+        #unit of 0.01 degree
+        start_angle = int.from_bytes(frame[4:6], "little")
+        data_block = frame[6:42]
+        #unit of 0.01 degree
+        end_angle = int.from_bytes(frame[42:44], "little")
+        #milliseconds
+        timestamp = int.from_bytes(frame[44:46], "little")
+        crc = frame[46]
+
+        calculated_crc = calc_crc8(frame[:-1])
+        if calculated_crc != crc:
+            return
+
+        start_angle = start_angle / 100.0
+        end_angle = end_angle / 100.0
+        angles = []
+        step = (end_angle - start_angle) / 11.0
+        distance = []
+        intensity = []
+        for i in range(12):
+            temp_distance = int.from_bytes(data_block[i*3:i*3+2], "little")
+            temp_intensity = data_block[i*3+2]
+            temp_angle = start_angle + step * i
+            distance.append(float(temp_distance))
+            intensity.append(temp_intensity)
+            angles.append(temp_angle)
+        
+        #add to point cloud
+        for i in range(12):
+            if num_points_collected < points_required:
+                if distance[i] == 0:
+                    continue
+                if distance[i] > distance_threshold * 1000:
+                    continue
+                point_cloud_polar[1][num_points_collected] = distance[i] / 1000.0
+                point_cloud_polar[0][num_points_collected] = angles[i]
+                num_points_collected += 1
+                if num_points_collected % 36 == 0:
+                    self.get_logger().info(f"Collected {num_points_collected} points")
+            
+
+    def destroy_node(self):
+        if self.ser.is_open:
+            self.ser.close()
+        super().destroy_node()
+
+def main(args=None):
+    rclpy.init(args=args)
+    lidarNode = Lidar()
+    rclpy.spin(lidarNode)
+    lidarNode.destroy_node()
+
+if __name__ == "__main__":
+    main()
