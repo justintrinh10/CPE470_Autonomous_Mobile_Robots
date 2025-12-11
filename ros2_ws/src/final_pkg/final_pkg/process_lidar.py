@@ -18,6 +18,7 @@ class ProcesssLidar(Node):
             10,
         )
         self.publisher_ = self.create_publisher(String, "openingData", 10)
+        self.publisher_ = self.create_publisher(String, "wallData", 10)
         self.point_cloud = np.zeros((2, num_points))  # row 0: angle in degrees, row 1: distance in meters
 
     def listener_callback(self, msg):
@@ -29,6 +30,7 @@ class ProcesssLidar(Node):
             self.point_cloud[0, i] = angle
             self.point_cloud[1, i] = distance
         self.find_largest_opening()
+        self.find_walls()
     
     def find_largest_opening(self):
         self.sort_points_by_angle()
@@ -99,6 +101,40 @@ class ProcesssLidar(Node):
         plt.axis('equal')
         plt.title('LiDAR Scan')
         plt.show()
+
+    def find_walls(self):
+        lidar_points = self.point_cloud
+        least_aquare_result = self.least_square_points(lidar_points)
+        slope = least_aquare_result[0][0]
+        intercept = least_aquare_result[1][0]
+
+    def least_square(self, data):
+        H_matrix = self.create_jacobian_matrix(data)
+        y_vec = self.create_y_vector(data)
+        X_hat = self.least_square_equation(H_matrix, y_vec)
+        return X_hat
+
+    def least_square_equation(self,H, y):
+        H_transposed = H.T
+        temp1 = np.dot(H_transposed, H)
+        temp1 = np.linalg.inv(temp1)
+        temp2 = np.dot(H_transposed, y)
+        return np.dot(temp1, temp2)
+
+    def create_jacobian_matrix(self, data):
+        jacobian_matrix = np.empty((len(data), 2))
+        for i in range(len(data)):
+                x, y = data[i].getCartesian()
+                jacobian_matrix[i][0] = x
+                jacobian_matrix[i][1] = 1
+        return jacobian_matrix
+
+    def create_y_vector(self, data):
+        y_vector = np.empty((len(data), 1))
+        for i in range(len(data)):
+            x, y = data[i].getCartesian()
+            y_vector[i][0] = y
+        return y_vector
 
     def destroy_node(self):
         super().destroy_node()
