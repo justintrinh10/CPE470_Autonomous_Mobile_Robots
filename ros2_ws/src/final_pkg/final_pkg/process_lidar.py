@@ -54,11 +54,16 @@ class ProcesssLidar(Node):
         self.publisher_.publish(path_msg)
     
     def find_walls(self):
-        
-        pass
+        breakpoints = self.segmented_least_squares()
+        walls = []
+        for i in range(len(breakpoints) - 1):
+            pass
 
-    def segmented_least_squares(self, data):
-        pass
+
+    def segmented_least_squares(self):
+        breakpoints = []
+
+        return breakpoints        
 
     def find_point_outside_box(self, opening_point1, opening_point2, origin):
         x1, y1 = opening_point1.get_x(), opening_point1.get_y()
@@ -146,27 +151,50 @@ class ProcesssLidar(Node):
     def create_jacobian_matrix(self, data):
         jacobian_matrix = np.empty((len(data), 2))
         for i in range(len(data)):
-                x, y = data[i].getCartesian()
-                jacobian_matrix[i][0] = x
-                jacobian_matrix[i][1] = 1
+            x = data[i].get_x()
+            jacobian_matrix[i][0] = x
+            jacobian_matrix[i][1] = 1
         return jacobian_matrix
 
     def create_y_vector(self, data):
         y_vector = np.empty((len(data), 1))
         for i in range(len(data)):
-            x, y = data[i].getCartesian()
+            y = data[i].get_y()
             y_vector[i][0] = y
         return y_vector
+    
+    def create_subset(self, data, point1, point2):
+        data_subset = []
+
+        def norm_angle_deg(a):
+            return a % 360
+
+        start_angle = norm_angle_deg(point1.get_angle())
+        end_angle = norm_angle_deg(point2.get_angle())
+
+        for p in data:
+            try:
+                cur_angle = norm_angle_deg(p.get_angle())
+            except Exception:
+                continue
+
+            if start_angle <= end_angle:
+                if start_angle <= cur_angle <= end_angle:
+                    data_subset.append(p)
+            else:
+                if cur_angle >= start_angle or cur_angle <= end_angle:
+                    data_subset.append(p)
+
+        return data_subset
 
     def destroy_node(self):
         super().destroy_node()
     
 def main(args=None):
     rclpy.init(args=args)
-    findOpeningNode = FindOpening()
-    rclpy.spin(findOpeningNode)
-    findOpeningNode.destroy_node()
-    rclpy.shutdown()
+    process_lidar = ProcesssLidar()
+    rclpy.spin(process_lidar)
+    process_lidar.destroy_node()
 
 if __name__ == "__main__":
     main()
