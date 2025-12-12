@@ -48,4 +48,8 @@ class VisibilityGraph:
         return distance
 
     def find_shortest_path_dijkstra(self):
-        pass
+        shortest_path = nx.dijkstra_path(self.visibility_graph, self.start, self.goal)
+        return shortest_path
+    
+    def get_edge_weights(self, point1, point2):
+        return self.visibility_graph.edges[point1, point2]['weight']
