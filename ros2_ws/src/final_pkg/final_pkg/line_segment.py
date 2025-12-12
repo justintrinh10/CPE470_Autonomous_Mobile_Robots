@@ -56,7 +56,7 @@ class LineSegment:
 
         return False
     
-    def get_minkowski_sum_edges(self, robot_radius):
+    def get_minkowski_sum(self, robot_radius):
         x1, y1 = self.point1.get_x(), self.point1.get_y()
         x2, y2 = self.point2.get_x(), self.point2.get_y()
         dx = x2 - x1
@@ -78,20 +78,20 @@ class LineSegment:
 
 
     def intersect_with_minkowski_sum(self, other, robot_radius):
-        point3, point4, point5, point6 = self.get_minkowski_sum(robot_radius)
+        point3, point4, point5, point6 = other.get_minkowski_sum(robot_radius)
 
         line1 = LineSegment.from_two_points(point3, point4)
         line2 = LineSegment.from_two_points(point5, point6)
         line3 = LineSegment.from_two_points(point3, point5)
         line4 = LineSegment.from_two_points(point4, point6)
 
-        if line1.intersect_with_line_segment(other):
+        if line1.intersect_with_line_segment(self):
             return True
-        if line2.intersect_with_line_segment(other):
+        if line2.intersect_with_line_segment(self):
             return True
-        if line3.intersect_with_line_segment(other):
+        if line3.intersect_with_line_segment(self):
             return True
-        if line4.intersect_with_line_segment(other):
+        if line4.intersect_with_line_segment(self):
             return True
         
         return False
