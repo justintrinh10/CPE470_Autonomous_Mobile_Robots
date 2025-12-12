@@ -5,8 +5,14 @@ from std_msgs.msg import String
 from std_msgs.msg import Bool
 import numpy as np
 import matplotlib.pyplot as plt
+from point import Point
+from path import Path
+from line_segment import LineSegment
+from visibility_graph import VisibilityGraph
 
 num_points = 500
+robot_radius = 0.18  # meters
+dist_outside_box = 0.5  # meters
 
 class ProcesssLidar(Node):
     def __init__(self):
@@ -17,8 +23,8 @@ class ProcesssLidar(Node):
             self.listener_callback,
             10,
         )
-        self.publisher_ = self.create_publisher(String, "openingData", 10)
-        self.publisher_ = self.create_publisher(String, "wallData", 10)
+
+        self.publisher_ = self.create_publisher(String, "move_robot_out_of_box", 10)
         self.point_cloud = np.zeros((2, num_points))  # row 0: angle in degrees, row 1: distance in meters
 
     def listener_callback(self, msg):
@@ -29,9 +35,62 @@ class ProcesssLidar(Node):
             distance = float(distance_str)
             self.point_cloud[0, i] = angle
             self.point_cloud[1, i] = distance
-        self.find_largest_opening()
-        self.find_walls()
+
+        self.sort_points_by_angle()
+        opening_point1, opening_point2 = self.find_largest_opening()
+        start_point = Point(0.0, 0.0)
+        end_point = self.find_point_outside_box(opening_point1, opening_point2, start_point)
+        walls = self.find_walls()
+        visibility_graph = VisibilityGraph(walls, start_point, end_point, robot_radius)
+        path_points = visibility_graph.find_shortest_path_dijkstra()
+        self.publish_path(path_points)
+
+    def publish_path(self, path):
+        path_msg = String()
+        path_str = ""
+        for point in path:
+            path_str += f"{point.get_x()},{point.get_y()}\n"
+        path_msg.data = path_str.strip()
+        self.publisher_.publish(path_msg)
     
+    def find_walls(self):
+        
+        pass
+
+    def segmented_least_squares(self, data):
+        pass
+
+    def find_point_outside_box(self, opening_point1, opening_point2, origin):
+        x1, y1 = opening_point1.get_x(), opening_point1.get_y()
+        x2, y2 = opening_point2.get_x(), opening_point2.get_y()
+        mid_x = (x1 + x2) / 2.0
+        mid_y = (y1 + y2) / 2.0
+
+        vx = x2 - x1
+        vy = y2 - y1
+        nx = -vy
+        ny = vx
+        nmag = math.hypot(nx, ny)
+        nx /= nmag
+        ny /= nmag
+
+        ox = mid_x - origin.get_x()
+        oy = mid_y - origin.get_y()
+        dot = nx * ox + ny * oy
+        if dot < 0:
+            nx = -nx
+            ny = -ny
+        dir_x = nx
+        dir_y = ny
+
+        offset = dist_outside_box + robot_radius
+        target_x = mid_x + dir_x * offset
+        target_y = mid_y + dir_y * offset
+
+        outside_point = Point(target_x, target_y)
+
+        return outside_point
+
     def find_largest_opening(self):
         self.sort_points_by_angle()
         max_distance = 0
@@ -50,26 +109,10 @@ class ProcesssLidar(Node):
         if wrap_distance > max_distance:
             max_distance = wrap_distance
             max_distance_index = 0
-        opening_point1 = (self.point_cloud[0, max_distance_index - 1], self.point_cloud[1, max_distance_index - 1])
-        opening_point2 = (self.point_cloud[0, max_distance_index], self.point_cloud[1, max_distance_index])
-        opening_point1_cartesian = self.polar_to_cartesian(opening_point1)
-        opening_point2_cartesian = self.polar_to_cartesian(opening_point2)
-        # plot scan and opening endpoints
-        try:
-            self._plot_scan_and_opening(opening_point1_cartesian, opening_point2_cartesian)
-        except Exception as e:
-            self.get_logger().warning(f"Plotting failed: {e}")
+        opening_point1 = Point.from_polar(self.point_cloud[0, max_distance_index - 1], self.point_cloud[1, max_distance_index - 1])
+        opening_point2 = Point.from_polar(self.point_cloud[0, max_distance_index], self.point_cloud[1, max_distance_index])
+        return opening_point1, opening_point2
 
-        msg = String()
-        msg.data += f"{opening_point1_cartesian[0]:.3f},{opening_point1_cartesian[1]:.3f}\n"
-        msg.data += f"{opening_point2_cartesian[0]:.3f},{opening_point2_cartesian[1]:.3f}\n"
-        self.publisher_.publish(msg)
-        self.get_logger().info("Published Opening Data")
-        self.get_logger().info("Opening Points (Cartesian):")
-        self.get_logger().info(f"Point 1: x = {opening_point1_cartesian[0]:.3f} m, y = {opening_point1_cartesian[1]:.3f} m")
-        self.get_logger().info(f"Point 2: x = {opening_point2_cartesian[0]:.3f} m, y = {opening_point2_cartesian[1]:.3f} m")
-        self._plot_scan_and_opening(opening_point1_cartesian, opening_point2_cartesian)
-    
     def find_distance_between_points(self, point1, point2):
         x1, y1 = self.polar_to_cartesian(point1)
         x2, y2 = self.polar_to_cartesian(point2)
@@ -86,27 +129,6 @@ class ProcesssLidar(Node):
         index = np.argsort(self.point_cloud[0])
         self.point_cloud[0] = self.point_cloud[0][index]
         self.point_cloud[1] = self.point_cloud[1][index]
-
-    def _plot_scan_and_opening(self, p1, p2):
-        angles = self.point_cloud[0, :]
-        ranges = self.point_cloud[1, :]
-        xs = ranges * np.cos(np.deg2rad(angles))
-        ys = ranges * np.sin(np.deg2rad(angles))
-
-        plt.figure()
-        plt.scatter(xs, ys, s=5)
-        plt.scatter([p1[0], p2[0]], [p1[1], p2[1]], s=50, marker='x')
-        plt.xlabel('x (m)')
-        plt.ylabel('y (m)')
-        plt.axis('equal')
-        plt.title('LiDAR Scan')
-        plt.show()
-
-    def find_walls(self):
-        lidar_points = self.point_cloud
-        least_aquare_result = self.least_square_points(lidar_points)
-        slope = least_aquare_result[0][0]
-        intercept = least_aquare_result[1][0]
 
     def least_square(self, data):
         H_matrix = self.create_jacobian_matrix(data)
