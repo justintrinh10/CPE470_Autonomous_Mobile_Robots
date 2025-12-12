@@ -54,17 +54,47 @@ class LineSegment:
             return True
 
         return False
+    
+    def get_minkowski_sum_edges(self, robot_radius):
+        x1, y1 = self.point1.get_x(), self.point1.get_y()
+        x2, y2 = self.point2.get_x(), self.point2.get_y()
+        dx = x2 - x1
+        dy = y2 - y1
+        length = math.sqrt(dx*dx + dy*dy)
+        if length == 0:
+            raise ValueError("Wall segment has zero length")
+        nx = dx / length
+        ny = dy / length
+        px = -ny
+        py = nx
+
+        point3  = Point(x1 + robot_radius * px, y1 + robot_radius * py)
+        point4 = Point(x1 - robot_radius * px, y1 - robot_radius * py)
+        point5  = Point(x2 + robot_radius * px, y2 + robot_radius * py)
+        point6 = Point(x2 - robot_radius * px, y2 - robot_radius * py)
+
+        return point3, point4, point5, point6
+
 
     def intersect_with_minkowski_sum(self, other, robot_radius):
-        if self.intersect_with_line_segment(other):
+        point3, point4, point5, point6 = self.get_minkowski_sum(robot_radius)
+
+        line1 = LineSegment.from_two_points(point3, point4)
+        line2 = LineSegment.from_two_points(point5, point6)
+        line3 = LineSegment.from_two_points(point3, point5)
+        line4 = LineSegment.from_two_points(point4, point6)
+
+        if line1.intersect_with_line_segment(other):
             return True
+        if line2.intersect_with_line_segment(other):
+            return True
+        if line3.intersect_with_line_segment(other):
+            return True
+        if line4.intersect_with_line_segment(other):
+            return True
+        
+        return False
 
-        dist1 = self.get_distance_to_point(other.point1)
-        dist2 = self.get_distance_to_point(other.point2)
-        dist3 = other.get_distance_to_point(self.point1)
-        dist4 = other.get_distance_to_point(self.point2)
-
-        return (dist1 < robot_radius or dist2 < robot_radius or dist3 < robot_radius or dist4 < robot_radius)
 
 class Point:
     def __init__(self, x, y):
