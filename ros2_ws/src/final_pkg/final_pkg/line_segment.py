@@ -1,4 +1,5 @@
 import math
+import point as pt
 
 class LineSegment:
     def __init__(self, point1, point2, slope, intercept):
@@ -23,7 +24,7 @@ class LineSegment:
         x = (perp_intercept - self.intercept) / (self.slope - perp_slope)
         y = self.slope * x + self.intercept
 
-        return Point.from_cartesian(x, y)
+        return pt.Point.from_cartesian(x, y)
 
     def get_distance_to_point(self, point):
         proj = self.get_point_on_line(point)
@@ -48,7 +49,7 @@ class LineSegment:
 
         x = (b2 - b1) / (m1 - m2)
         y = m1 * x + b1
-        pt = Point.from_cartesian(x, y)
+        pt = pt.Point.from_cartesian(x, y)
 
         if self.point_within_segment(pt) and other.point_within_segment(pt):
             return True
@@ -68,10 +69,10 @@ class LineSegment:
         px = -ny
         py = nx
 
-        point3  = Point(x1 + robot_radius * px, y1 + robot_radius * py)
-        point4 = Point(x1 - robot_radius * px, y1 - robot_radius * py)
-        point5  = Point(x2 + robot_radius * px, y2 + robot_radius * py)
-        point6 = Point(x2 - robot_radius * px, y2 - robot_radius * py)
+        point3  = pt.Point(x1 + robot_radius * px, y1 + robot_radius * py)
+        point4 = pt.Point(x1 - robot_radius * px, y1 - robot_radius * py)
+        point5  = pt.Point(x2 + robot_radius * px, y2 + robot_radius * py)
+        point6 = pt.Point(x2 - robot_radius * px, y2 - robot_radius * py)
 
         return point3, point4, point5, point6
 
@@ -94,28 +95,3 @@ class LineSegment:
             return True
         
         return False
-
-
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    @classmethod
-    def from_polar(cls, angle_deg, distance):
-        a = math.radians(angle_deg)
-        x = distance * math.cos(a)
-        y = distance * math.sin(a)
-        return cls(x, y)
-
-    def get_x(self):
-        return self.x
-
-    def get_y(self):
-        return self.y
-    
-    def get_angle(self):
-        return math.degrees(math.atan2(self.y, self.x))
-    
-    def get_distance(self):
-        return math.sqrt(self.x**2 + self.y**2)
