@@ -13,7 +13,7 @@ class MoveRobotOutOfBox(Node):
         super().__init__("move_robot_out_of_box")
         self.publisher_ = self.create_publisher(Bool, "move_robot_out_of_box_complete", 10)
 
-        self.publisher_move_distance_ = self.create_publisher(String, "move_robot_distance", 10)
+        self.publisher_move_distance_ = self.create_publisher(Float32, "move_robot_distance", 10)
         self.subscriber_move_distance_complete_ = self.create_subscription(
             Bool,
             "move_robot_distance_complete",
