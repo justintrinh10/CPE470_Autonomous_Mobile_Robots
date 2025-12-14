@@ -8,10 +8,10 @@ import numpy as np
 from point import Point
 from path import Path
 
-class MoveRobotOutOfBox(Node):
+class MoveRobotFollowPath(Node):
     def __init__(self):
-        super().__init__("move_robot_out_of_box")
-        self.publisher_ = self.create_publisher(Bool, "move_robot_out_of_box_complete", 10)
+        super().__init__("move_robot_follow_path")
+        self.publisher_ = self.create_publisher(Bool, "move_robot_follow_path_complete", 10)
 
         self.publisher_move_distance_ = self.create_publisher(Float32, "move_robot_distance", 10)
         self.subscriber_move_distance_complete_ = self.create_subscription(
@@ -29,17 +29,17 @@ class MoveRobotOutOfBox(Node):
             10,
         )
 
-        self.subscriber_move_robot_out_of_box_ = self.create_subscription(
+        self.subscriber_move_robot_follow_path = self.create_subscription(
             String,
-            "move_robot_out_of_box",
-            self.listener_callback_move_robot_out_of_box,
+            "move_robot_follow_path",
+            self.listener_callback_move_robot_follow_path,
             10,
         )
 
         self.moving = False
         self.rotating = False
 
-    def listener_callback_move_robot_out_of_box(self, msg):
+    def listener_callback_move_robot_follow_path(self, msg):
         path = self.convert_msg_to_path(msg)
         for i in range(len(path.points)):
             angle_command = path.angle_changes[i]
@@ -83,9 +83,9 @@ class MoveRobotOutOfBox(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    move_robot_out_of_box = MoveRobotOutOfBox()
-    rclpy.spin(move_robot_out_of_box)
-    move_robot_out_of_box.destroy_node()
+    move_robot_follow_path = MoveRobotFollowPath()
+    rclpy.spin(move_robot_follow_path)
+    move_robot_follow_path.destroy_node()
     rclpy.shutdown()
 
 if __name__ == "__main__":
