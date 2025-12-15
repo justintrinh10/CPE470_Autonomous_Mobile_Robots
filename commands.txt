@@ -83,11 +83,24 @@ export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
 
 # Run each node in its own shell (examples):
-ros2 run checkpoint_pkg lidar_node
-ros2 run checkpoint_pkg find_opening
-ros2 run checkpoint_pkg aruco_pose_node
-ros2 run checkpoint_pkg rotate_robot
-ros2 run checkpoint_pkg move_robot
+ros2 run final_pkg user_interface
+ros2 run final_pkg aruco_pose_node
+ros2 run final_pkg lidar
+ros2 run final_pkg move_robot_follow_path
+ros2 run final_pkg move_robot_outside_box
+ros2 run final_pkg move_robot_to_aruco
+ros2 run final_pkg move_robot
+ros2 run final_pkg process_lidar
+ros2 run final_pkg rotate_robot_to_aruco
+ros2 run final_pkg rotate_robot
+ros2 run final_pkg robot_manager
+ros2 run final_pkg navigator
+ros2 run final_pkg localizer
+ros2 run final_pkg aruco_detector
+
+
+
+
 
 # 4) Quick single-terminal background example (run lidar and log output)
 ros2 run checkpoint_pkg lidar_node &> /root/ros2_ws/logs/lidar.log &
@@ -100,3 +113,16 @@ tail -f /root/ros2_ws/logs/lidar.log
 # - To give the container access to a USB LiDAR or camera device, restart docker with
 #   --device=/dev/ttyUSB0 (or /dev/video0) and optionally --privileged (less secure).
 # - For convenience, use tmux or screen inside the container to manage multiple node terminals.
+
+docker exec -it teamjk bash
+source /opt/ros/humble/setup.bash
+cd /root/ros2_ws
+source install/setup.bash
+source /opt/ros/humble/setup.bash
+source /root/ros2_ws/install/setup.bash
+echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
+echo "export ROS_DOMAIN_ID=99" >> ~/.bashrc
+export ROS_DOMAIN_ID=99
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+cd /root/ros2_ws
+source install/setup.bash
