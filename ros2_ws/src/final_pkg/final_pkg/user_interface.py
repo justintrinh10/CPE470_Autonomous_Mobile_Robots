@@ -9,18 +9,18 @@ import numpy as np
 class UserInterface(Node):
     def __init__(self):
         super().__init__("user_interface")
-        self.publisher_ = self.create_publisher(String, "pointInput", 10)
+
+        self.publisher_ = self.create_publisher(String, "user_interface_complete", 10)
+
         self.subscriber_ = self.create_subscription(
             Bool,
-            "referenceFrameReady",
+            "start_user_interface",
             self.listener_callback,
             10,
         )
-        self.get_logger().info("User Interface Node Initialized. Waiting for Reference Frame Processing...")
     
     def listener_callback(self, msg):
-        self.get_logger().info(f"Reference Frame Ready: {msg.data}")
-        self.get_logger().info("You may now input points. (meters)")
+        self.get_logger().info("Enter desired point. (meters)")
         self.get_logger().info("X: ")
         x = float(input())
         self.get_logger().info("Y: ")
