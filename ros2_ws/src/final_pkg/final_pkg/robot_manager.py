@@ -25,7 +25,7 @@ class RobotManager(Node):
         self.user_point =  ""
         self.user_interface_running = False
 
-        self.publisher_start_move_robot_to_point = self.create_publisher(String, 'move_robot_to_point', 10)
+        self.publisher_start_move_robot_to_point = self.create_publisher(String, 'start_move_robot_to_point', 10)
         self.subscriber_move_robot_to_point_complete = self.create_subscription(
             Bool,
             'move_robot_to_point_complete',
@@ -43,7 +43,7 @@ class RobotManager(Node):
         )
         self.moving_robot_outside_box = False
 
-        self.publisher_start_move_robot_to_aruco = self.create_publisher(Int, 'move_robot_to_aruco', 10)
+        self.publisher_start_move_robot_to_aruco = self.create_publisher(Int, 'start_move_robot_to_aruco', 10)
         self.subcriber_move_robot_to_aruco_complete = self.create_subscription(
             Bool,
             'move_robot_to_aruco_complete',

@@ -19,12 +19,12 @@ class ProcesssLidar(Node):
         super().__init__("process_lidar")
         self.subscriber_ = self.create_subscription(
             String,
-            "lidarDataPolar",
+            "start_process_lidar",
             self.listener_callback,
             10,
         )
 
-        self.publisher_ = self.create_publisher(String, "move_robot_out_of_box", 10)
+        self.publisher_ = self.create_publisher(String, "process_lidar_complete", 10)
         self.point_cloud = np.zeros((2, num_points))  # row 0: angle in degrees, row 1: distance in meters
 
     def listener_callback(self, msg):

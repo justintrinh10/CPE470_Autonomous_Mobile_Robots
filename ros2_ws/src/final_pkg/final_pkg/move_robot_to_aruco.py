@@ -24,7 +24,7 @@ class MoveRobotToAruco(Node):
 
         self.subscription_start_move_to_aruco = self.create_subscription(
             Int,
-            'move_robot_to_aruco',
+            'start_move_robot_to_aruco',
             self.start_move_callback,
             10
         )

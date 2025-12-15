@@ -3,6 +3,7 @@ import math
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+from std_msgs.msg import Int
 import numpy as np
 
 points_required = 500
@@ -40,12 +41,33 @@ def calc_crc8(data: bytes) -> int:
 class Lidar(Node):
     def __init__(self):
         super().__init__("lidar")
-        self.publisher_ = self.create_publisher(String, "lidarDataPolar", 10)
         timer_period = 0.01  # seconds
         self.ser = serial.Serial("/dev/ttyUSB0", 230400, timeout=1)
+
+        self.publisher_ = self.create_publisher(String, "lidar_complete", 10)
+        self.subscriber_ = self.create_subscription(
+            Int,
+            "start_lidar",
+            self.listener_callback,
+            10,
+        )
+        self.lidar_running = False
+
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
+    def listener_callback(self, msg):
+        self.lidar_running = True
+        global num_points_collected
+        num_points_collected = 0
+        global points_required
+        points_required = msg.data
+        global point_cloud_polar
+        point_cloud_polar = np.zeros((2, points_required))
+        self.get_logger().info("Lidar Started")
+
     def timer_callback(self):
+        if not self.lidar_running:
+            return
         global num_points_collected
         global point_cloud_polar
         if not self.ser.is_open:
@@ -58,11 +80,12 @@ class Lidar(Node):
             msg = String()
             msg.data = ""
             for i in range(points_required):
-                msg.data += f"{point_cloud_polar[0][i]:.2f},{point_cloud_polar[1][i]:.3f}\n"
+                msg.data += f"{sorted_angles[i]:.2f},{sorted_distances[i]:.3f}\n"
             self.publisher_.publish(msg)
             self.get_logger().info("Published Lidar Data")
-            rclpy.shutdown()
+            self.lidar_running = False
             return
+        
         b = self.ser.read(1)
         if not b or b[0] != 0x54:
             return
