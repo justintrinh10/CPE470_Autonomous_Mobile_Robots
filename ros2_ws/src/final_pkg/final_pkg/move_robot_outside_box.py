@@ -4,7 +4,7 @@ from checkpoint_interfaces.msg import ParametersToTarget
 import numpy as np
 from geometry_msgs.msg import Twist
 import math
-from std_msgs.msg import Int
+from std_msgs.msg import Int32
 from std_msgs.msg import Bool
 from std_msgs.msg import Float32
 from std_msgs.msg import String
@@ -21,7 +21,7 @@ class MoveRobotOutsideBox(Node):
             10
         )
 
-        self.publisher_start_lidar = self.create_publisher(Int, 'start_lidar', 10)
+        self.publisher_start_lidar = self.create_publisher(Int32, 'start_lidar', 10)
         self.subscriber_lidar_complete = self.create_subscription(
             String,
             'lidar_complete',
@@ -52,7 +52,7 @@ class MoveRobotOutsideBox(Node):
         self.moving_robot_follow_path = False
 
     def start_move_callback(self, msg):
-        lidar_msg = Int()
+        lidar_msg = Int32()
         lidar_msg.data = self.num_points
         self.publisher_start_lidar.publish(lidar_msg)
         self.lidar_running = True

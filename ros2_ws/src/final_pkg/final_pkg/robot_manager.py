@@ -4,7 +4,7 @@ from checkpoint_interfaces.msg import ParametersToTarget
 import numpy as np
 from geometry_msgs.msg import Twist
 import math
-from std_msgs.msg import Int
+from std_msgs.msg import Int32
 from std_msgs.msg import Bool
 from std_msgs.msg import Float32
 from std_msgs.msg import String
@@ -43,7 +43,7 @@ class RobotManager(Node):
         )
         self.moving_robot_outside_box = False
 
-        self.publisher_start_move_robot_to_aruco = self.create_publisher(Int, 'start_move_robot_to_aruco', 10)
+        self.publisher_start_move_robot_to_aruco = self.create_publisher(Int32, 'start_move_robot_to_aruco', 10)
         self.subcriber_move_robot_to_aruco_complete = self.create_subscription(
             Bool,
             'move_robot_to_aruco_complete',
@@ -79,7 +79,7 @@ class RobotManager(Node):
         while self.moving_robot_outside_box == True:
             rclpy.spin_once(self)
 
-        move_to_aruco_msg = Int()
+        move_to_aruco_msg = Int32()
         move_to_aruco_msg.data = aruco_id_target
         self.publisher_start_move_robot_to_aruco.publish(move_to_aruco_msg)
         self.moving_robot_to_aruco = True

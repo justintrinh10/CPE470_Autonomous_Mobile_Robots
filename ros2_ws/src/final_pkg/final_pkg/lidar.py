@@ -3,7 +3,7 @@ import math
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from std_msgs.msg import Int
+from std_msgs.msg import Int32
 import numpy as np
 
 points_required = 500
@@ -46,7 +46,7 @@ class Lidar(Node):
 
         self.publisher_ = self.create_publisher(String, "lidar_complete", 10)
         self.subscriber_ = self.create_subscription(
-            Int,
+            Int32,
             "start_lidar",
             self.listener_callback,
             10,

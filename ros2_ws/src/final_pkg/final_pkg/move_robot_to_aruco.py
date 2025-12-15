@@ -4,7 +4,7 @@ from checkpoint_interfaces.msg import ParametersToTarget
 import numpy as np
 from geometry_msgs.msg import Twist
 import math
-from std_msgs.msg import Int
+from std_msgs.msg import Int32
 from std_msgs.msg import Bool
 from std_msgs.msg import Float32
 
@@ -20,10 +20,10 @@ class MoveRobotToAruco(Node):
             10
         )
         
-        self.publisher_start_aruco_detection = self.create_publisher(Int, 'start_aruco_detection', 10)
+        self.publisher_start_aruco_detection = self.create_publisher(Int32, 'start_aruco_detection', 10)
 
         self.subscription_start_move_to_aruco = self.create_subscription(
-            Int,
+            Int32,
             'start_move_robot_to_aruco',
             self.start_move_callback,
             10
@@ -58,7 +58,7 @@ class MoveRobotToAruco(Node):
 
     def start_move_callback(self, msg):
         self.Wanted_ID = msg.data
-        start_msg = Int()
+        start_msg = Int32()
         start_msg.data = self.Wanted_ID
         self.publisher_start_aruco_detection.publish(start_msg)
         self.get_logger().info(f"Started Move Robot to Aruco with ID: {self.Wanted_ID}")

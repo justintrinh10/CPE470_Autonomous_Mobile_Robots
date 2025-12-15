@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 from cv2 import aruco
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Int
+from std_msgs.msg import Int32
 from std_msgs.msg import Float32
 from std_msgs.msg import Bool
 
@@ -23,7 +23,7 @@ class ArucoPoseNode(Node):
         self.publisher_ = self.create_publisher(ParametersToTarget, "aruco_pose_parameters", 10)
 
         self.subscriber_start_aruco_detection = self.create_subscription(
-            Int,
+            Int32,
             "start_aruco_detection",
             self.start_callback,
             10,
