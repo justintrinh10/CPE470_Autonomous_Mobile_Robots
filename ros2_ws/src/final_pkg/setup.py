@@ -20,6 +20,20 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'aruco_detector = final_pkg.aruco_detector:main',
+            'aruco_pose_node = final_pkg.aruco_pose_parameters:main',
+            'lidar = final_pkg.process_lidar:main',
+            'localizer = final_pkg.localizer:main',
+            'move_robot_follow_path = final_pkg.move_robot_follow_path:main',
+            'move_robot_outside_box = final_pkg.move_robot_outside_box:main',
+            'move_robot_to_aruco = final_pkg.move_robot_to_aruco:main',
+            'move_robot = final_pkg.move_robot:main',
+            'navigator = final_pkg.navigator:main',
+            'process_lidar = final_pkg.process_lidar:main',
+            'robot_manager = final_pkg.robot_manager:main',
+            'rotate_robot_to_aruco = final_pkg.rotate_robot_to_aruco:main',
+            'rotate_robot = final_pkg.rotate_robot:main',
+            'user_interface = final_pkg.user_interface:main',  
         ],
     },
 )

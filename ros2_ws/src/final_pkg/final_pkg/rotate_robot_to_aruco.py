@@ -10,7 +10,7 @@ alignment_threshold = 1.5  # degrees
 
 class RotateRobot(Node):
     def __init__(self):
-        super().__init__('rotate_robot')
+        super().__init__('rotate_robot_to_aruco')
         self.subscription = self.create_subscription(
             ParametersToTarget,
             'aruco_pose_parameters',
