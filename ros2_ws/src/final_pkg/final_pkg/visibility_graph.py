@@ -1,7 +1,7 @@
 import math
 import networkx as nx
-import point as pt
-import line_segment as ls
+from . import point as pt
+from . import line_segment as ls
 
 class VisibilityGraph:
     def __init__(self, walls, start, goal, robot_radius):

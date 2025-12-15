@@ -1,0 +1,30 @@
+[1.117s] Invoking command in '/root/ros2_ws/build/final_pkg': PYTHONPATH=/root/ros2_ws/build/final_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/final_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/ros2_ws/build/final_pkg/build --no-deps symlink_data
+[1.492s] running develop
+[1.729s] running egg_info
+[1.731s] writing final_pkg.egg-info/PKG-INFO
+[1.732s] writing dependency_links to final_pkg.egg-info/dependency_links.txt
+[1.734s] writing entry points to final_pkg.egg-info/entry_points.txt
+[1.735s] writing requirements to final_pkg.egg-info/requires.txt
+[1.736s] writing top-level names to final_pkg.egg-info/top_level.txt
+[1.755s] reading manifest file 'final_pkg.egg-info/SOURCES.txt'
+[1.772s] writing manifest file 'final_pkg.egg-info/SOURCES.txt'
+[1.776s] running build_ext
+[1.778s] Creating /root/ros2_ws/install/final_pkg/lib/python3.10/site-packages/final-pkg.egg-link (link to .)
+[1.783s] Installing aruco_detector script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.786s] Installing aruco_pose_node script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.790s] Installing lidar script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.793s] Installing localizer script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.797s] Installing move_robot script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.800s] Installing move_robot_follow_path script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.803s] Installing move_robot_outside_box script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.807s] Installing move_robot_to_aruco script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.810s] Installing navigator script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.814s] Installing process_lidar script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.817s] Installing robot_manager script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.822s] Installing rotate_robot script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.825s] Installing rotate_robot_to_aruco script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.830s] Installing user_interface script to /root/ros2_ws/install/final_pkg/lib/final_pkg
+[1.835s] 
+[1.836s] Installed /root/ros2_ws/build/final_pkg
+[1.837s] running symlink_data
+[1.902s] Invoked command in '/root/ros2_ws/build/final_pkg' returned '0': PYTHONPATH=/root/ros2_ws/build/final_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/final_pkg/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /root/ros2_ws/build/final_pkg/build --no-deps symlink_data

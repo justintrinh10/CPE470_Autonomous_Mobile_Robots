@@ -1,5 +1,5 @@
 import math
-import point as pt
+from . import point as pt
 
 class LineSegment:
     def __init__(self, point1, point2, slope, intercept):

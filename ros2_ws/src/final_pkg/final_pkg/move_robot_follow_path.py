@@ -5,8 +5,8 @@ from std_msgs.msg import String
 from std_msgs.msg import Bool
 from std_msgs.msg import Float32
 import numpy as np
-from point import Point
-from path import Path
+from .point import Point
+from .path import Path
 
 class MoveRobotFollowPath(Node):
     def __init__(self):

@@ -5,10 +5,10 @@ from std_msgs.msg import String
 from std_msgs.msg import Bool
 import numpy as np
 import matplotlib.pyplot as plt
-from point import Point
-from path import Path
-from line_segment import LineSegment
-from visibility_graph import VisibilityGraph
+from .point import Point
+from .path import Path
+from .line_segment import LineSegment
+from .visibility_graph import VisibilityGraph
 
 num_points = 500
 robot_radius = 0.18  # meters
