@@ -214,7 +214,7 @@ class ProcesssLidar(Node):
             y_vector[i][0] = y
         return y_vector
     
-    def create_subset(data, point1, point2):
+    def create_subset(self, data, point1, point2):
         data_subset = []
         start_angle = point1.get_angle()
         end_angle = point2.get_angle()
@@ -294,15 +294,14 @@ class ProcesssLidar(Node):
         x = polar_point[1] * math.cos(angle_rad)
         y = polar_point[1] * math.sin(angle_rad)
         return (x, y)
-
-    def destroy_node(self):
-        super().destroy_node()
     
 def main(args=None):
     rclpy.init(args=args)
     process_lidar = ProcesssLidar()
     rclpy.spin(process_lidar)
     process_lidar.destroy_node()
+    rclpy.shutdown()
+    
 
 if __name__ == "__main__":
     main()

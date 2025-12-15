@@ -49,9 +49,9 @@ class LineSegment:
 
         x = (b2 - b1) / (m1 - m2)
         y = m1 * x + b1
-        pt = pt.Point.from_cartesian(x, y)
+        point = pt.Point(x, y)
 
-        if self.point_within_segment(pt) and other.point_within_segment(pt):
+        if self.point_within_segment(point) and other.point_within_segment(point):
             return True
 
         return False

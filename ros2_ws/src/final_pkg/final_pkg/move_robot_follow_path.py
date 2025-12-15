@@ -21,7 +21,7 @@ class MoveRobotFollowPath(Node):
             10,
         )
 
-        self.publisher_rotate_angle_ = self.create_publisher(String, "rotate_robot_angle", 10)
+        self.publisher_rotate_angle_ = self.create_publisher(Float32, "rotate_robot_angle", 10)
         self.subscriber_rotate_angle_complete_ = self.create_subscription(
             Bool,
             "rotate_robot_angle_complete",
