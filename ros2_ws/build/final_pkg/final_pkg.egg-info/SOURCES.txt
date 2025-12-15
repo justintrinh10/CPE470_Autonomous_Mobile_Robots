@@ -10,6 +10,7 @@ final_pkg/localizer.py
 final_pkg/marker_map.py
 final_pkg/move_robot.py
 final_pkg/move_robot_follow_path.py
+final_pkg/move_robot_outside_box.py
 final_pkg/move_robot_to_aruco.py
 final_pkg/navigator.py
 final_pkg/path.py

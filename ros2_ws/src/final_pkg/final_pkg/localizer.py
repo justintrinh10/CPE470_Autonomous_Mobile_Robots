@@ -3,7 +3,7 @@ from rclpy.node import Node
 import numpy as np
 from std_msgs.msg import String, Bool
 from checkpoint_interfaces.msg import ParametersToTarget
-from marker_map import MARKER_MAP
+from .marker_map import MARKER_MAP
 
 class Localizer(Node):
     def __init__(self):
