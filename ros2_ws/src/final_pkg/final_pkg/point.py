@@ -23,3 +23,6 @@ class Point:
     
     def get_distance(self):
         return math.sqrt(self.x**2 + self.y**2)
+    
+    def __lt__(self, other):
+        return self.get_angle() < other.get_angle()
