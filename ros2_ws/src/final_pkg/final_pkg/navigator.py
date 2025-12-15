@@ -22,6 +22,15 @@ class Navigator(Node):
             Bool, 'localization_complete', self.localized_cb, 10
         )
 
+        self.subscriber_start_move_robot_to_point = self.create_subscription(
+            String,
+            'start_move_robot_to_point',
+            self.start_move_robot_callback,
+            10
+        )
+        self.publisher_move_robot_to_point_complete = self.create_publisher(Bool, 'move_robot_to_point_complete', 10)
+        self.recieved_goal = False
+
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
         self.position = None
@@ -41,7 +50,7 @@ class Navigator(Node):
             self.get_logger().info("Navigation started")
 
     def navigate(self):
-        if not self.localized or self.position is None or self.arrived:
+        if not self.localized or self.position is None or self.arrived or not self.recieved_goal:
             return
 
         x, y = self.position
@@ -57,6 +66,9 @@ class Navigator(Node):
             elif time.time() - self.wait_start >= 3.0:
                 self.arrived = True
                 self.cmd_pub.publish(Twist())
+                msg = Bool()
+                msg.data = True
+                self.publisher_move_robot_to_point_complete.publish(msg)
                 self.get_logger().info("Done.")
             return
 
@@ -67,6 +79,14 @@ class Navigator(Node):
         cmd.linear.x = 0.15 if abs(angle) < 0.3 else 0.0
         self.cmd_pub.publish(cmd)
 
+    def start_move_robot_callback(self, msg):
+        x, y = msg.data.strip().split(',')
+        self.goal_x = float(x)
+        self.goal_y = float(y)
+        self.arrived = False
+        self.wait_start = None
+        self.recieved_goal = True
+        self.get_logger().info(f"Received new goal: x={self.goal_x}, y={self.goal_y}")
 
 def main():
     rclpy.init()
