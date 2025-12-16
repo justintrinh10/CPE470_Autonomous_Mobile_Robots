@@ -40,13 +40,29 @@ private:
 class Init_ParametersToTarget_alignment_error
 {
 public:
-  Init_ParametersToTarget_alignment_error()
-  : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
+  explicit Init_ParametersToTarget_alignment_error(::checkpoint_interfaces::msg::ParametersToTarget & msg)
+  : msg_(msg)
   {}
   Init_ParametersToTarget_distance_seperation alignment_error(::checkpoint_interfaces::msg::ParametersToTarget::_alignment_error_type arg)
   {
     msg_.alignment_error = std::move(arg);
     return Init_ParametersToTarget_distance_seperation(msg_);
+  }
+
+private:
+  ::checkpoint_interfaces::msg::ParametersToTarget msg_;
+};
+
+class Init_ParametersToTarget_marker_id
+{
+public:
+  Init_ParametersToTarget_marker_id()
+  : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
+  {}
+  Init_ParametersToTarget_alignment_error marker_id(::checkpoint_interfaces::msg::ParametersToTarget::_marker_id_type arg)
+  {
+    msg_.marker_id = std::move(arg);
+    return Init_ParametersToTarget_alignment_error(msg_);
   }
 
 private:
@@ -64,7 +80,7 @@ template<>
 inline
 auto build<::checkpoint_interfaces::msg::ParametersToTarget>()
 {
-  return checkpoint_interfaces::msg::builder::Init_ParametersToTarget_alignment_error();
+  return checkpoint_interfaces::msg::builder::Init_ParametersToTarget_marker_id();
 }
 
 }  // namespace checkpoint_interfaces

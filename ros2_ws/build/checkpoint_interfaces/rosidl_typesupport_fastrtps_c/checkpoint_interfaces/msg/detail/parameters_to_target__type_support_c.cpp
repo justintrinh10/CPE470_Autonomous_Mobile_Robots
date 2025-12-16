@@ -49,6 +49,11 @@ static bool _ParametersToTarget__cdr_serialize(
     return false;
   }
   const _ParametersToTarget__ros_msg_type * ros_message = static_cast<const _ParametersToTarget__ros_msg_type *>(untyped_ros_message);
+  // Field name: marker_id
+  {
+    cdr << ros_message->marker_id;
+  }
+
   // Field name: alignment_error
   {
     cdr << ros_message->alignment_error;
@@ -71,6 +76,11 @@ static bool _ParametersToTarget__cdr_deserialize(
     return false;
   }
   _ParametersToTarget__ros_msg_type * ros_message = static_cast<_ParametersToTarget__ros_msg_type *>(untyped_ros_message);
+  // Field name: marker_id
+  {
+    cdr >> ros_message->marker_id;
+  }
+
   // Field name: alignment_error
   {
     cdr >> ros_message->alignment_error;
@@ -98,6 +108,12 @@ size_t get_serialized_size_checkpoint_interfaces__msg__ParametersToTarget(
   (void)padding;
   (void)wchar_size;
 
+  // field.name marker_id
+  {
+    size_t item_size = sizeof(ros_message->marker_id);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
   // field.name alignment_error
   {
     size_t item_size = sizeof(ros_message->alignment_error);
@@ -139,6 +155,14 @@ size_t max_serialized_size_checkpoint_interfaces__msg__ParametersToTarget(
   full_bounded = true;
   is_plain = true;
 
+  // member: marker_id
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
   // member: alignment_error
   {
     size_t array_size = 1;

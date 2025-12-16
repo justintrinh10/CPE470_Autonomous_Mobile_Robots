@@ -38,6 +38,7 @@ struct ParametersToTarget_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
+      this->marker_id = 0l;
       this->alignment_error = 0.0f;
       this->distance_seperation = 0.0f;
     }
@@ -49,12 +50,16 @@ struct ParametersToTarget_
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
+      this->marker_id = 0l;
       this->alignment_error = 0.0f;
       this->distance_seperation = 0.0f;
     }
   }
 
   // field types and members
+  using _marker_id_type =
+    int32_t;
+  _marker_id_type marker_id;
   using _alignment_error_type =
     float;
   _alignment_error_type alignment_error;
@@ -63,6 +68,12 @@ struct ParametersToTarget_
   _distance_seperation_type distance_seperation;
 
   // setters for named parameter idiom
+  Type & set__marker_id(
+    const int32_t & _arg)
+  {
+    this->marker_id = _arg;
+    return *this;
+  }
   Type & set__alignment_error(
     const float & _arg)
   {
@@ -118,6 +129,9 @@ struct ParametersToTarget_
   // comparison operators
   bool operator==(const ParametersToTarget_ & other) const
   {
+    if (this->marker_id != other.marker_id) {
+      return false;
+    }
     if (this->alignment_error != other.alignment_error) {
       return false;
     }

@@ -1,2 +1,3 @@
+int32 marker_id
 float32 alignment_error
 float32 distance_seperation

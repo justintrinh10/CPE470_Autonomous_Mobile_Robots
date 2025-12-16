@@ -18,6 +18,7 @@ class UserInterface(Node):
             self.listener_callback,
             10,
         )
+        self.get_logger().info("User Interface Node has been started.")
     
     def listener_callback(self, msg):
         self.get_logger().info("Enter desired point. (meters)")

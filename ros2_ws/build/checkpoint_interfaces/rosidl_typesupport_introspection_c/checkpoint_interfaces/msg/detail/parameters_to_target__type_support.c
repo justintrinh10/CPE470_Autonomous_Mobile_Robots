@@ -31,7 +31,24 @@ void checkpoint_interfaces__msg__ParametersToTarget__rosidl_typesupport_introspe
   checkpoint_interfaces__msg__ParametersToTarget__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember checkpoint_interfaces__msg__ParametersToTarget__rosidl_typesupport_introspection_c__ParametersToTarget_message_member_array[2] = {
+static rosidl_typesupport_introspection_c__MessageMember checkpoint_interfaces__msg__ParametersToTarget__rosidl_typesupport_introspection_c__ParametersToTarget_message_member_array[3] = {
+  {
+    "marker_id",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(checkpoint_interfaces__msg__ParametersToTarget, marker_id),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
   {
     "alignment_error",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_FLOAT,  // type
@@ -71,7 +88,7 @@ static rosidl_typesupport_introspection_c__MessageMember checkpoint_interfaces__
 static const rosidl_typesupport_introspection_c__MessageMembers checkpoint_interfaces__msg__ParametersToTarget__rosidl_typesupport_introspection_c__ParametersToTarget_message_members = {
   "checkpoint_interfaces__msg",  // message namespace
   "ParametersToTarget",  // message name
-  2,  // number of fields
+  3,  // number of fields
   sizeof(checkpoint_interfaces__msg__ParametersToTarget),
   checkpoint_interfaces__msg__ParametersToTarget__rosidl_typesupport_introspection_c__ParametersToTarget_message_member_array,  // message members
   checkpoint_interfaces__msg__ParametersToTarget__rosidl_typesupport_introspection_c__ParametersToTarget_init_function,  // function to initialize message memory (memory has to be allocated)

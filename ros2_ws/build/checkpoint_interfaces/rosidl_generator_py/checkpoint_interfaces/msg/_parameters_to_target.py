@@ -57,16 +57,19 @@ class ParametersToTarget(metaclass=Metaclass_ParametersToTarget):
     """Message class 'ParametersToTarget'."""
 
     __slots__ = [
+        '_marker_id',
         '_alignment_error',
         '_distance_seperation',
     ]
 
     _fields_and_field_types = {
+        'marker_id': 'int32',
         'alignment_error': 'float',
         'distance_seperation': 'float',
     }
 
     SLOT_TYPES = (
+        rosidl_parser.definition.BasicType('int32'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
         rosidl_parser.definition.BasicType('float'),  # noqa: E501
     )
@@ -75,6 +78,7 @@ class ParametersToTarget(metaclass=Metaclass_ParametersToTarget):
         assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
             'Invalid arguments passed to constructor: %s' % \
             ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
+        self.marker_id = kwargs.get('marker_id', int())
         self.alignment_error = kwargs.get('alignment_error', float())
         self.distance_seperation = kwargs.get('distance_seperation', float())
 
@@ -107,6 +111,8 @@ class ParametersToTarget(metaclass=Metaclass_ParametersToTarget):
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
+        if self.marker_id != other.marker_id:
+            return False
         if self.alignment_error != other.alignment_error:
             return False
         if self.distance_seperation != other.distance_seperation:
@@ -117,6 +123,21 @@ class ParametersToTarget(metaclass=Metaclass_ParametersToTarget):
     def get_fields_and_field_types(cls):
         from copy import copy
         return copy(cls._fields_and_field_types)
+
+    @builtins.property
+    def marker_id(self):
+        """Message field 'marker_id'."""
+        return self._marker_id
+
+    @marker_id.setter
+    def marker_id(self, value):
+        if __debug__:
+            assert \
+                isinstance(value, int), \
+                "The 'marker_id' field must be of type 'int'"
+            assert value >= -2147483648 and value < 2147483648, \
+                "The 'marker_id' field must be an integer in [-2147483648, 2147483647]"
+        self._marker_id = value
 
     @builtins.property
     def alignment_error(self):
