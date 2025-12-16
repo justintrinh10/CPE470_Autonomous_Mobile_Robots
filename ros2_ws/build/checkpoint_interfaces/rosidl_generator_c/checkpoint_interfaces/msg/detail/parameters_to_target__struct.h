@@ -20,6 +20,7 @@ extern "C"
 /// Struct defined in msg/ParametersToTarget in the package checkpoint_interfaces.
 typedef struct checkpoint_interfaces__msg__ParametersToTarget
 {
+  int32_t marker_id;
   float alignment_error;
   float distance_seperation;
 } checkpoint_interfaces__msg__ParametersToTarget;

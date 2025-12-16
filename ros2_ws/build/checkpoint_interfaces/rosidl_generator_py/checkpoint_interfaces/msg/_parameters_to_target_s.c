@@ -50,6 +50,15 @@ bool checkpoint_interfaces__msg__parameters_to_target__convert_from_py(PyObject 
     assert(strncmp("checkpoint_interfaces.msg._parameters_to_target.ParametersToTarget", full_classname_dest, 66) == 0);
   }
   checkpoint_interfaces__msg__ParametersToTarget * ros_message = _ros_message;
+  {  // marker_id
+    PyObject * field = PyObject_GetAttrString(_pymsg, "marker_id");
+    if (!field) {
+      return false;
+    }
+    assert(PyLong_Check(field));
+    ros_message->marker_id = (int32_t)PyLong_AsLong(field);
+    Py_DECREF(field);
+  }
   {  // alignment_error
     PyObject * field = PyObject_GetAttrString(_pymsg, "alignment_error");
     if (!field) {
@@ -90,6 +99,17 @@ PyObject * checkpoint_interfaces__msg__parameters_to_target__convert_to_py(void 
     }
   }
   checkpoint_interfaces__msg__ParametersToTarget * ros_message = (checkpoint_interfaces__msg__ParametersToTarget *)raw_ros_message;
+  {  // marker_id
+    PyObject * field = NULL;
+    field = PyLong_FromLong(ros_message->marker_id);
+    {
+      int rc = PyObject_SetAttrString(_pymessage, "marker_id", field);
+      Py_DECREF(field);
+      if (rc) {
+        return NULL;
+      }
+    }
+  }
   {  // alignment_error
     PyObject * field = NULL;
     field = PyFloat_FromDouble(ros_message->alignment_error);

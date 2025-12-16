@@ -6,6 +6,8 @@
 module checkpoint_interfaces {
   module msg {
     struct ParametersToTarget {
+      int32 marker_id;
+
       float alignment_error;
 
       float distance_seperation;

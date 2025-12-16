@@ -17,6 +17,7 @@ checkpoint_interfaces__msg__ParametersToTarget__init(checkpoint_interfaces__msg_
   if (!msg) {
     return false;
   }
+  // marker_id
   // alignment_error
   // distance_seperation
   return true;
@@ -28,6 +29,7 @@ checkpoint_interfaces__msg__ParametersToTarget__fini(checkpoint_interfaces__msg_
   if (!msg) {
     return;
   }
+  // marker_id
   // alignment_error
   // distance_seperation
 }
@@ -36,6 +38,10 @@ bool
 checkpoint_interfaces__msg__ParametersToTarget__are_equal(const checkpoint_interfaces__msg__ParametersToTarget * lhs, const checkpoint_interfaces__msg__ParametersToTarget * rhs)
 {
   if (!lhs || !rhs) {
+    return false;
+  }
+  // marker_id
+  if (lhs->marker_id != rhs->marker_id) {
     return false;
   }
   // alignment_error
@@ -57,6 +63,8 @@ checkpoint_interfaces__msg__ParametersToTarget__copy(
   if (!input || !output) {
     return false;
   }
+  // marker_id
+  output->marker_id = input->marker_id;
   // alignment_error
   output->alignment_error = input->alignment_error;
   // distance_seperation

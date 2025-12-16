@@ -52,16 +52,20 @@ class RobotManager(Node):
         )
         self.moving_robot_to_aruco = False
 
+        self.get_logger().info('Robot Manager Node has been started.')
         self.start_robot_manager()
 
     def start_robot_manager(self):
+        self.get_logger().info('Starting Robot Manager...')
         msg = Bool()
         msg.data = True
         self.publisher_start_user_interface.publish(msg)
         self.user_interface_running = True
+        self.get_logger().info('User interface started. Waiting for user input...')
 
         while self.user_interface_running == True:
             rclpy.spin_once(self)
+        self.get_logger().info(f'User input received: {self.user_point}')
         
         move_point_msg = String()
         move_point_msg.data = self.user_point

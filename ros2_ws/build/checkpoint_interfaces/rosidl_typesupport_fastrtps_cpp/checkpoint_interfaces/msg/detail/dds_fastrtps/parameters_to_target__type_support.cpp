@@ -32,6 +32,8 @@ cdr_serialize(
   const checkpoint_interfaces::msg::ParametersToTarget & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
+  // Member: marker_id
+  cdr << ros_message.marker_id;
   // Member: alignment_error
   cdr << ros_message.alignment_error;
   // Member: distance_seperation
@@ -45,6 +47,9 @@ cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
   checkpoint_interfaces::msg::ParametersToTarget & ros_message)
 {
+  // Member: marker_id
+  cdr >> ros_message.marker_id;
+
   // Member: alignment_error
   cdr >> ros_message.alignment_error;
 
@@ -67,6 +72,12 @@ get_serialized_size(
   (void)padding;
   (void)wchar_size;
 
+  // Member: marker_id
+  {
+    size_t item_size = sizeof(ros_message.marker_id);
+    current_alignment += item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
   // Member: alignment_error
   {
     size_t item_size = sizeof(ros_message.alignment_error);
@@ -102,6 +113,15 @@ max_serialized_size_ParametersToTarget(
   full_bounded = true;
   is_plain = true;
 
+
+  // Member: marker_id
+  {
+    size_t array_size = 1;
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
 
   // Member: alignment_error
   {

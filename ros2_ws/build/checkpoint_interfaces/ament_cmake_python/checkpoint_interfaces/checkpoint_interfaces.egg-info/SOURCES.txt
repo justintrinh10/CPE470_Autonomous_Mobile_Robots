@@ -4,3 +4,5 @@ checkpoint_interfaces.egg-info/PKG-INFO
 checkpoint_interfaces.egg-info/SOURCES.txt
 checkpoint_interfaces.egg-info/dependency_links.txt
 checkpoint_interfaces.egg-info/top_level.txt
+checkpoint_interfaces/msg/__init__.py
+checkpoint_interfaces/msg/_parameters_to_target.py
