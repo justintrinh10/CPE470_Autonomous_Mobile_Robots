@@ -21,6 +21,8 @@ class Navigator(Node):
         self.goal_received = False
         self.arrived = False
         self.running_distance_move = False
+        self.rotated = False
+        self.moved_complete = False
 
         # ---------- Publishers ----------
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
@@ -64,15 +66,26 @@ class Navigator(Node):
             self.goal_y = float(y)
             self.goal_received = True
             self.arrived = False
+            self.rotated = False
+            self.moved_complete = False
             self.running_distance_move = False
             self.get_logger().info(f"Navigator: New goal ({self.goal_x}, {self.goal_y})")
         except:
             self.get_logger().warn("Navigator: Bad goal format")
 
     def move_distance_done_callback(self, msg):
+        if self.arrived:
+            return
         if msg.data:
             self.running_distance_move = False
+            self.moved_complete = True
+            self.arrived = True
             self.get_logger().info("Navigator: Distance movement complete")
+            done_msg = Bool()
+            done_msg.data = True
+            self.done_pub.publish(done_msg)
+            Twist_cmd = Twist()
+            self.cmd_pub.publish(Twist_cmd)
 
     def odom_cb(self, msg):
         q = msg.pose.pose.orientation
@@ -93,18 +106,6 @@ class Navigator(Node):
         dy = self.goal_y - y
         dist = math.hypot(dx, dy)
 
-        # ---- Check if reached goal ---- #
-        if dist < 0.12:
-            self.arrived = True
-            self.cmd_pub.publish(Twist())
-
-            done = Bool()
-            done.data = True
-            self.done_pub.publish(done)
-
-            self.get_logger().info("Navigator: Goal reached")
-            return
-
         # ---- Rotate toward goal ---- #
         angle_to_goal = math.atan2(dy, dx)
         angle_error = math.atan2(
@@ -112,22 +113,27 @@ class Navigator(Node):
             math.cos(angle_to_goal - self.yaw)
         )
 
-        if abs(angle_error) > 0.3:
+        if abs(angle_error) > 0.3 and not self.rotated:
             cmd = Twist()
             cmd.angular.z = 2.0 * angle_error
             self.cmd_pub.publish(cmd)
             return
+        elif not self.rotated:
+            self.rotated = True
+            # Stop rotation
+            cmd = Twist()
+            self.cmd_pub.publish(cmd)
+        else:
+            self.rotated = True
 
-        # ---- Move a short distance chunk ---- #
-        if not self.running_distance_move:
-            travel_dist = min(0.25, dist)
-            msg = Float32()
-            msg.data = travel_dist
+            if not self.running_distance_move:
+                msg = Float32()
+                msg.data = dist
 
-            self.move_dist_pub.publish(msg)
-            self.running_distance_move = True
+                self.move_dist_pub.publish(msg)
+                self.running_distance_move = True
 
-            self.get_logger().info(f"Navigator: Moving {travel_dist:.2f} m toward goal")
+                self.get_logger().info(f"Navigator: Moving {dist:.2f} m toward goal")
 
 
 def main():
