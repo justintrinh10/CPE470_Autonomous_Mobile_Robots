@@ -50,13 +50,18 @@ class RobotManager(Node):
 
         self.state = "INIT"
 
-        self.get_logger().info('Robot Manager Node has been started.')
-        self.get_logger().info('Starting Robot Manager...')
-        self.state = "USER_INTERFACE"
-        msg = Bool()
-        msg.data = True
-        self.publisher_start_user_interface.publish(msg)
-        self.get_logger().info('User interface started. Waiting for user input...')
+        self.create_timer(1.0, self.timer_callback)
+
+    def timer_callback(self):
+        if self.state == "INIT":
+            self.get_logger().info('Robot Manager Node has been started.')
+            self.get_logger().info('Starting Robot Manager...')
+            self.state = "USER_INTERFACE"
+            msg = Bool()
+            msg.data = True
+            self.publisher_start_user_interface.publish(msg)
+            self.get_logger().info('User interface started. Waiting for user input...')
+
 
     def user_interface_complete_callback(self, msg):
         if self.state != "USER_INTERFACE":

@@ -13,6 +13,8 @@ alignment_threshold = 1.5  # degrees
 class MoveRobotToAruco(Node):
     def __init__(self):
         super().__init__('move_robot_to_aruco')
+        self.state = "IDLE"
+
         self.subscription_aruco_pose_parameter = self.create_subscription(
             ParametersToTarget,
             'aruco_pose_parameters',
@@ -50,9 +52,6 @@ class MoveRobotToAruco(Node):
 
         self.publisher_move_robot_to_aruco_complete = self.create_publisher(Bool, 'move_robot_to_aruco_complete', 10)
 
-        self.Running = False
-        self.Rotating = False
-        self.Moving = False
         self.Wanted_ID = 1
         self.distance_seperation = 0.0
 
@@ -62,7 +61,6 @@ class MoveRobotToAruco(Node):
         start_msg.data = self.Wanted_ID
         self.publisher_start_aruco_detection.publish(start_msg)
         self.get_logger().info(f"Started Move Robot to Aruco with ID: {self.Wanted_ID}")
-        self.Running = True
 
         start_msg = Bool()
         start_msg.data = True
