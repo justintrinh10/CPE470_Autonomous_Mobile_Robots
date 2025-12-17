@@ -5,7 +5,6 @@ from std_msgs.msg import String, Bool, Float32
 from nav_msgs.msg import Odometry
 from rclpy.qos import QoSProfile, ReliabilityPolicy
 import math
-import time
 
 
 class Navigator(Node):
@@ -46,10 +45,7 @@ class Navigator(Node):
         # Publishers
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.done_pub = self.create_publisher(Bool, 'move_robot_to_point_complete', 10)
-
-        self.move_dist_pub = self.create_publisher(
-            Float32, 'move_robot_distance', 10
-        )
+        self.move_dist_pub = self.create_publisher(Float32, 'move_robot_distance', 10)
 
         self.move_dist_done_sub = self.create_subscription(
             Bool, 'move_robot_distance_complete',
@@ -81,7 +77,7 @@ class Navigator(Node):
     def odom_cb(self, msg):
         q = msg.pose.pose.orientation
         siny_cosp = 2.0 * (q.w * q.z + q.x * q.y)
-        cosy_cosp = 1.0 - 2.0 * (q.y*q.y + q.z*q.z)
+        cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
         self.yaw = math.atan2(siny_cosp, cosy_cosp)
 
     def move_distance_done_callback(self, msg):
@@ -96,10 +92,6 @@ class Navigator(Node):
             return
 
         if self.arrived:
-            return
-
-        # If currently using move_robot_distance, wait for callback
-        if self.running_distance_move:
             return
 
         x, y = self.position
@@ -117,28 +109,41 @@ class Navigator(Node):
             self.get_logger().info("Navigator: Goal complete")
             return
 
-        # ---------- Rotate toward goal ----------
+        # ---------- Rotate toward goal (unchanged) ----------
         angle_target = math.atan2(dy, dx)
         angle_error = math.atan2(math.sin(angle_target - self.yaw),
                                  math.cos(angle_target - self.yaw))
 
-        # Rotate if needed
         if abs(angle_error) > 0.3:
             cmd = Twist()
             cmd.angular.z = 2.0 * angle_error
             self.cmd_pub.publish(cmd)
             return
 
-        # ---------- Move forward using move_robot_distance ----------
-        travel_dist = float(min(dist, 0.25))  # move in 25 cm chunks
+        # ---------- Move forward once ----------
+        if not self.running_distance_move:
+            travel_dist = float(dist)  # move full distance at once
+            self.get_logger().info(f"Navigator: Moving {travel_dist:.3f}m forward")
 
-        self.get_logger().info(f"Navigator: Moving {travel_dist:.3f}m forward")
+            msg = Float32()
+            msg.data = travel_dist
+            self.move_dist_pub.publish(msg)
 
-        msg = Float32()
-        msg.data = travel_dist
-        self.move_dist_pub.publish(msg)
+            self.running_distance_move = True
 
-        self.running_distance_move = True
+            # Wait 3 seconds, then stop and publish completion
+            def finish_move():
+                self.cmd_pub.publish(Twist())  # stop robot
+                done = Bool()
+                done.data = True
+                self.done_pub.publish(done)
+                self.get_logger().info("Navigator: Goal complete")
+                self.running_distance_move = False
+                self.arrived = True
+
+            # One-shot timer (fires once after 3 seconds)
+            self.create_timer(3.0, lambda: finish_move())
+
 
 
 def main():
