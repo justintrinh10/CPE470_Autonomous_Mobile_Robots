@@ -8,7 +8,7 @@ from std_msgs.msg import Bool
 from irobot_create_msgs.msg import WheelTicks
 from rclpy.qos import QoSProfile, ReliabilityPolicy
 
-desired_distance = 0.30  # meters
+desired_distance = 1  # meters
 
 class MoveRobot(Node):
     def __init__(self):
