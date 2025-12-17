@@ -35,25 +35,40 @@ class Localizer(Node):
             self.measurements[msg.marker_id] = msg.distance_seperation
 
     def try_localize(self):
-        if self.localized or len(self.measurements) < 2:
+        if self.localized or len(self.measurements) < 3:
             return
 
-        A = []
-        b = []
+        # Extract marker IDs and distances
+        ids = list(self.measurements.keys())
+        m1, m2, m3 = ids[0], ids[1], ids[2]
 
-        for mid, d in self.measurements.items():
-            xm, ym = MARKER_MAP[mid]
-            A.append([2 * xm, 2 * ym])
-            b.append([xm**2 + ym**2 - d**2])
+        x1, y1 = MARKER_MAP[m1]
+        x2, y2 = MARKER_MAP[m2]
+        x3, y3 = MARKER_MAP[m3]
 
-        A = np.array(A)
-        b = np.array(b)
+        d1 = self.measurements[m1]
+        d2 = self.measurements[m2]
+        d3 = self.measurements[m3]
 
-        # Solve linear system using least squares
+        # Solve linear system from two circle differences
+        # (x-x1)^2 + (y-y1)^2 = d1^2
+        # (x-x2)^2 + (y-y2)^2 = d2^2
+        # Subtract to get linear equation:
+        # 2(x2-x1)x + 2(y2-y1)y = x2^2 - x1^2 + y2^2 - y1^2 + d1^2 - d2^2
+        A = np.array([
+            [2*(x2 - x1), 2*(y2 - y1)],
+            [2*(x3 - x1), 2*(y3 - y1)]
+        ])
+        b = np.array([
+            [x2**2 - x1**2 + y2**2 - y1**2 + d1**2 - d2**2],
+            [x3**2 - x1**2 + y3**2 - y1**2 + d1**2 - d3**2]
+        ])
+
+        # Solve for x, y
         pos, _, _, _ = np.linalg.lstsq(A, b, rcond=None)
-        x, y = pos.flatten()  # <-- fix: convert from array([[x],[y]]) to scalars
+        x, y = pos.flatten()
 
-        # Check if position is within bounds
+        # Check bounds and publish
         if 0 <= x <= 1.15 and 0 <= y <= 0.93:
             self.localized = True
 
@@ -68,7 +83,7 @@ class Localizer(Node):
             self.done_pub.publish(done)
 
             self.get_logger().info(
-                f"LOCALIZED at x={x:.3f}, y={y:.3f} using markers {list(self.measurements.keys())}"
+                f"LOCALIZED at x={x:.3f}, y={y:.3f} using markers {ids}"
             )
 
 
