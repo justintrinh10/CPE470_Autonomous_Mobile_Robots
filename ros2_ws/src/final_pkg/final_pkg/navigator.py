@@ -12,75 +12,55 @@ class Navigator(Node):
     def __init__(self):
         super().__init__('navigator')
 
-        # ---- Goal ----
+        # Goal
         self.goal_x = 0.0
         self.goal_y = 0.0
 
-        # ---- State ----
+        # State
         self.position = None
         self.yaw = None
         self.goal_received = False
         self.arrived = False
-        self.wait_start = None
 
-        # ---- Subscriptions ----
+        # Distance movement flag
+        self.running_distance_move = False
+
+        # Subscriptions
         self.position_sub = self.create_subscription(
-            String,
-            'robot_position',
-            self.position_cb,
-            10
+            String, 'robot_position', self.position_cb, 10
         )
 
         self.start_sub = self.create_subscription(
-            String,
-            'start_move_robot_to_point',
-            self.start_move_robot_callback,
-            10
+            String, 'start_move_robot_to_point', self.start_move_robot_callback, 10
         )
 
-        # /odom subscription (matches Gazebo)
+        # Odom QoS
         odom_qos = QoSProfile(
             reliability=ReliabilityPolicy.BEST_EFFORT,
             depth=10
         )
         self.odom_sub = self.create_subscription(
-            Odometry,
-            '/odom',
-            self.odom_cb,
-            odom_qos
+            Odometry, '/odom', self.odom_cb, odom_qos
         )
 
-        # ---- Publishers ----
+        # Publishers
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.done_pub = self.create_publisher(Bool, 'move_robot_to_point_complete', 10)
 
-        self.done_pub = self.create_publisher(
-            Bool,
-            'move_robot_to_point_complete',
+        self.move_dist_pub = self.create_publisher(
+            Float32, 'move_robot_distance', 10
+        )
+
+        self.move_dist_done_sub = self.create_subscription(
+            Bool, 'move_robot_distance_complete',
+            self.move_distance_done_callback,
             10
         )
 
-        # ---- Distance movement publisher (new) ----
-        self.pub_distance = self.create_publisher(
-            Float32,
-            'move_robot_distance',
-            10
-        )
-
-        self.sub_distance_done = self.create_subscription(
-            Bool,
-            'move_robot_distance_complete',
-            self.distance_done_callback,
-            10
-        )
-
-        self.distance_task_active = False
-
-        # Timer loop
+        # Timer
         self.timer = self.create_timer(0.1, self.navigate)
 
-    # =====================================================
-    # CALLBACKS
-    # =====================================================
+    # ---------------- Callbacks ---------------- #
 
     def position_cb(self, msg):
         try:
@@ -90,18 +70,13 @@ class Navigator(Node):
             self.get_logger().warn("Navigator: Bad robot_position format")
 
     def start_move_robot_callback(self, msg):
-        try:
-            x, y = msg.data.strip().split(',')
-            self.goal_x = float(x)
-            self.goal_y = float(y)
-            self.goal_received = True
-            self.arrived = False
-            self.wait_start = None
-            self.get_logger().info(
-                f"Navigator: Goal received ({self.goal_x}, {self.goal_y})"
-            )
-        except:
-            self.get_logger().warn("Navigator: Bad goal format")
+        x, y = msg.data.split(',')
+        self.goal_x = float(x)
+        self.goal_y = float(y)
+        self.goal_received = True
+        self.arrived = False
+        self.running_distance_move = False
+        self.get_logger().info(f"Navigator new goal: ({self.goal_x}, {self.goal_y})")
 
     def odom_cb(self, msg):
         q = msg.pose.pose.orientation
@@ -109,73 +84,61 @@ class Navigator(Node):
         cosy_cosp = 1.0 - 2.0 * (q.y*q.y + q.z*q.z)
         self.yaw = math.atan2(siny_cosp, cosy_cosp)
 
-    def distance_done_callback(self, msg):
+    def move_distance_done_callback(self, msg):
         if msg.data:
-            self.distance_task_active = False
-            self.get_logger().info("Navigator: move_robot_distance completed")
+            self.running_distance_move = False
+            self.get_logger().info("Navigator: Finished move_robot_distance")
 
-    # =====================================================
-    # MAIN NAVIGATION LOGIC
-    # =====================================================
+    # ---------------- Navigation Logic ---------------- #
+
     def navigate(self):
         if not self.goal_received or self.position is None or self.yaw is None:
             return
 
-        if self.arrived or self.distance_task_active:
+        if self.arrived:
+            return
+
+        # If currently using move_robot_distance, wait for callback
+        if self.running_distance_move:
             return
 
         x, y = self.position
-
         dx = self.goal_x - x
         dy = self.goal_y - y
-
         dist = math.hypot(dx, dy)
 
-        # If far away, use move_robot_distance
-        if dist > 0.6:
-            self.get_logger().info(f"Navigator: Far from goal ({dist:.2f}m). Using move_robot_distance")
-            msg = Float32()
-            msg.data = float(dist)
-            self.pub_distance.publish(msg)
-            self.distance_task_active = True
+        # ---------- Check if arrived ----------
+        if dist < 0.12:
+            self.arrived = True
+            self.cmd_pub.publish(Twist())
+            done = Bool()
+            done.data = True
+            self.done_pub.publish(done)
+            self.get_logger().info("Navigator: Goal complete")
             return
 
-        cmd = Twist()
+        # ---------- Rotate toward goal ----------
+        angle_target = math.atan2(dy, dx)
+        angle_error = math.atan2(math.sin(angle_target - self.yaw),
+                                 math.cos(angle_target - self.yaw))
 
-        # ---- Arrived ----
-        if dist < 0.12:  # 12 cm tolerance
-            if self.wait_start is None:
-                self.cmd_pub.publish(Twist())
-                self.wait_start = time.time()
-                self.get_logger().info("Reached goal — waiting 3 secs")
-            elif time.time() - self.wait_start >= 3.0:
-                self.arrived = True
-                self.cmd_pub.publish(Twist())
-                done = Bool()
-                done.data = True
-                self.done_pub.publish(done)
-                self.get_logger().info("Navigator: Goal complete")
+        # Rotate if needed
+        if abs(angle_error) > 0.3:
+            cmd = Twist()
+            cmd.angular.z = 2.0 * angle_error
+            self.cmd_pub.publish(cmd)
             return
 
-        # ---- Move toward goal ----
+        # ---------- Move forward using move_robot_distance ----------
+        travel_dist = float(min(dist, 0.25))  # move in 25 cm chunks
 
-        angle_to_goal = math.atan2(dy, dx)
-        angle_error = math.atan2(
-            math.sin(angle_to_goal - self.yaw),
-            math.cos(angle_to_goal - self.yaw)
-        )
+        self.get_logger().info(f"Navigator: Moving {travel_dist:.3f}m forward")
 
-        # Angular control
-        P_ANG = 2.0
-        ang = P_ANG * angle_error
-        ang = max(-1.5, min(1.5, ang))
-        cmd.angular.z = ang
+        msg = Float32()
+        msg.data = travel_dist
+        self.move_dist_pub.publish(msg)
 
-        # Move forward only when aligned
-        if abs(angle_error) < 0.3:
-            cmd.linear.x = 0.15
-
-        self.cmd_pub.publish(cmd)
+        self.running_distance_move = True
 
 
 def main():
