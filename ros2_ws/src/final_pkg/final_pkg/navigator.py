@@ -3,6 +3,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, Bool
 from nav_msgs.msg import Odometry
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 import math
 import time
 
@@ -28,8 +29,14 @@ class Navigator(Node):
         self.start_sub = self.create_subscription(
             String, 'start_move_robot_to_point', self.start_move_robot_callback, 10
         )
+
+        # /odom subscription with QoS matching publisher
+        odom_qos = QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            depth=10
+        )
         self.odom_sub = self.create_subscription(
-            Odometry, '/odom', self.odom_cb, 10
+            Odometry, '/odom', self.odom_cb, odom_qos
         )
 
         # Publishers
@@ -126,6 +133,7 @@ def main():
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
