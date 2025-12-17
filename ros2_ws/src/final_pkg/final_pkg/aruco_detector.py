@@ -44,8 +44,6 @@ class ArucoDetector(Node):
         self.scanning = True
         self.timer = self.create_timer(0.1, self.process_frame)
 
-        self.start_rotation()
-
     def start_rotation(self):
         cmd = Twist()
         cmd.angular.z = 0.3
@@ -73,6 +71,8 @@ class ArucoDetector(Node):
     def process_frame(self):
         if not self.scanning:
             return
+        
+        self.start_rotation()
 
         ret, frame = self.cap.read()
         if not ret:
