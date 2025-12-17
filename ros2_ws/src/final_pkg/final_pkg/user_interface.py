@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Bool
+from std_msgs.msg import String
+from std_msgs.msg import Bool
 import threading
 
 class UserInterface(Node):

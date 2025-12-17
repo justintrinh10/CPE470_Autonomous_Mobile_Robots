@@ -50,7 +50,7 @@ class RobotManager(Node):
 
         self.state = "INIT"
 
-        self.create_timer(1.0, self.timer_callback)
+        self.create_timer(2.0, self.timer_callback)
 
     def timer_callback(self):
         if self.state == "INIT":
