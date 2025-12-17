@@ -127,5 +127,3 @@ echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
 echo "export ROS_DOMAIN_ID=99" >> ~/.bashrc
 export ROS_DOMAIN_ID=99
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-cd /root/ros2_ws
-source install/setup.bash

@@ -9,6 +9,7 @@ class Localizer(Node):
     def __init__(self):
         super().__init__('localizer')
 
+        # Subscribe to ArUco measurements
         self.sub = self.create_subscription(
             ParametersToTarget,
             'aruco_measurement',
@@ -16,12 +17,14 @@ class Localizer(Node):
             10
         )
 
+        # Publishers
         self.position_pub = self.create_publisher(String, 'robot_position', 10)
         self.done_pub = self.create_publisher(Bool, 'localization_complete', 10)
 
-        self.measurements = {}
+        self.measurements = {}  # Store marker measurements
         self.localized = False
 
+        # Timer to attempt localization every 0.5s
         self.timer = self.create_timer(0.5, self.try_localize)
 
     def measurement_cb(self, msg):
@@ -46,16 +49,20 @@ class Localizer(Node):
         A = np.array(A)
         b = np.array(b)
 
+        # Solve linear system using least squares
         pos, _, _, _ = np.linalg.lstsq(A, b, rcond=None)
-        x, y = pos
+        x, y = pos.flatten()  # <-- fix: convert from array([[x],[y]]) to scalars
 
+        # Check if position is within bounds
         if 0 <= x <= 1.15 and 0 <= y <= 0.93:
             self.localized = True
 
+            # Publish position
             msg = String()
             msg.data = f"{x:.3f},{y:.3f}"
             self.position_pub.publish(msg)
 
+            # Publish done signal
             done = Bool()
             done.data = True
             self.done_pub.publish(done)
@@ -71,6 +78,7 @@ def main():
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
