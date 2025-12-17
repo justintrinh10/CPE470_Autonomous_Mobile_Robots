@@ -33,7 +33,10 @@ setup(
             'robot_manager = final_pkg.robot_manager:main',
             'rotate_robot_to_aruco = final_pkg.rotate_robot_to_aruco:main',
             'rotate_robot = final_pkg.rotate_robot:main',
-            'user_interface = final_pkg.user_interface:main',  
+            'user_interface = final_pkg.user_interface:main',
+            'robot_manager2 = final_pkg.robot_manager2:main',
+            'rotate_robot2 = final_pkg.rotate_robot2:main',
+            'aruco_pose_parameters2 = final_pkg.aruco_pose_parameters2:main',
         ],
     },
 )

@@ -63,6 +63,7 @@ source /opt/ros/humble/setup.bash
 cd /root/ros2_ws
 # (optional) install Python dependencies if colcon fails to fetch them
 # pip3 install --user opencv-python pyserial numpy matplotlib
+
 colcon build --symlink-install --packages-select final_pkg
 source install/setup.bash
 
@@ -114,7 +115,22 @@ tail -f /root/ros2_ws/logs/lidar.log
 #   --device=/dev/ttyUSB0 (or /dev/video0) and optionally --privileged (less secure).
 # - For convenience, use tmux or screen inside the container to manage multiple node terminals.
 
+
+
+** COMMANDS FOR FINAL DEMO?? **
+
+ros2 run final_pkg user_interface
+ros2 run final_pkg move_robot
+ros2 run final_pkg robot_manager2
+ros2 run final_pkg aruco_pose_parameters2
+ros2 run final_pkg rotate_robot2
+ros2 run final_pkg navigator
+ros2 run final_pkg localizer
+ros2 run final_pkg aruco_detector
+
+
 fastdds discovery -i 0 -l 192.168.186.3 -p 11811
+
 
 docker exec -it teamjk bash
 

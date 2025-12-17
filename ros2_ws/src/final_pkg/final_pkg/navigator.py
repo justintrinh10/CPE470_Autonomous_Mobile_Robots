@@ -80,6 +80,7 @@ class Navigator(Node):
             self.running_distance_move = False
             self.moved_complete = True
             self.arrived = True
+            self.position = (self.goal_x, self.goal_y)
             self.get_logger().info("Navigator: Distance movement complete")
             done_msg = Bool()
             done_msg.data = True
