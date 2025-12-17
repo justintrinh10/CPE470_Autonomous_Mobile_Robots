@@ -56,7 +56,19 @@ class ArucoDetector(Node):
         if msg.data:
             self.scanning = False
             self.cmd_pub.publish(Twist())
-            self.get_logger().info("Stopping rotation — localization complete")
+
+            # Release camera
+            if self.cap.isOpened():
+                self.cap.release()
+
+            self.get_logger().info("Localization complete. Stopping ArUco detection.")
+
+            # Stop timers
+            self.timer_frame.cancel()
+            self.timer_rotate.cancel()
+
+            # Schedule node destruction after spin returns
+            rclpy.shutdown()
 
     def process_frame(self):
         if not self.scanning:

@@ -40,10 +40,7 @@ class ArucoPoseNode(Node):
 
         self.publisher_rotate_robot = self.create_publisher(Float32, 'rotate_robot_angle', 10)
 
-        # Camera setup
-        self.cap = cv2.VideoCapture(0)
-        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        self.cap = None
 
         # ArUco marker setup
         self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
@@ -62,6 +59,11 @@ class ArucoPoseNode(Node):
         self.timer = self.create_timer(0.1, self.process_frame)
     
     def start_callback(self, msg):
+        # Camera setup
+        self.cap = cv2.VideoCapture(0)
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        
         self.Wanted_ID = msg.data
         self.Running = True
         self.get_logger().info(f"ArUco detection started. Looking for ID: {self.Wanted_ID}")
