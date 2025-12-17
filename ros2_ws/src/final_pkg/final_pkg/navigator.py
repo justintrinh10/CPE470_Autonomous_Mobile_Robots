@@ -1,8 +1,9 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
-from std_msgs.msg import String, Bool, Float32
 from nav_msgs.msg import Odometry
+from std_msgs.msg import String, Bool, Float32
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 import math
 
 
@@ -10,23 +11,23 @@ class Navigator(Node):
     def __init__(self):
         super().__init__('navigator')
 
-        # Goal
+        # ---------- Goal ----------
         self.goal_x = 0.0
         self.goal_y = 0.0
 
-        # State
+        # ---------- State ----------
         self.position = None
         self.yaw = None
         self.goal_received = False
         self.arrived = False
         self.running_distance_move = False
 
-        # Publishers
+        # ---------- Publishers ----------
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.done_pub = self.create_publisher(Bool, 'move_robot_to_point_complete', 10)
         self.move_dist_pub = self.create_publisher(Float32, 'move_robot_distance', 10)
 
-        # Subscriptions
+        # ---------- Subscriptions ----------
         self.position_sub = self.create_subscription(
             String, 'robot_position', self.position_cb, 10
         )
@@ -39,21 +40,21 @@ class Navigator(Node):
             Bool, 'move_robot_distance_complete', self.move_distance_done_callback, 10
         )
 
-        # ✅ MISSING BEFORE — REQUIRED
+        # ---- FIX: Add /odom subscription so self.yaw updates ----
+        odom_qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
         self.odom_sub = self.create_subscription(
-            Odometry, '/odom', self.odom_cb, 10
+            Odometry, '/odom', self.odom_cb, odom_qos
         )
 
-        # Timer
+        # Timer for navigation loop
         self.timer = self.create_timer(0.1, self.navigate)
 
     # ---------------- Callbacks ---------------- #
-
     def position_cb(self, msg):
         try:
             x, y = msg.data.split(',')
             self.position = (float(x), float(y))
-        except Exception:
+        except:
             self.get_logger().warn("Navigator: Bad robot_position format")
 
     def start_move_robot_callback(self, msg):
@@ -64,10 +65,8 @@ class Navigator(Node):
             self.goal_received = True
             self.arrived = False
             self.running_distance_move = False
-            self.get_logger().info(
-                f"Navigator: New goal received ({self.goal_x}, {self.goal_y})"
-            )
-        except Exception:
+            self.get_logger().info(f"Navigator: New goal ({self.goal_x}, {self.goal_y})")
+        except:
             self.get_logger().warn("Navigator: Bad goal format")
 
     def move_distance_done_callback(self, msg):
@@ -77,12 +76,11 @@ class Navigator(Node):
 
     def odom_cb(self, msg):
         q = msg.pose.pose.orientation
-        siny_cosp = 2.0 * (q.w * q.z + q.x * q.y)
-        cosy_cosp = 1.0 - 2.0 * (q.y * q.y + q.z * q.z)
+        siny_cosp = 2 * (q.w * q.z + q.x * q.y)
+        cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
         self.yaw = math.atan2(siny_cosp, cosy_cosp)
 
     # ---------------- Navigation Logic ---------------- #
-
     def navigate(self):
         if not self.goal_received or self.position is None or self.yaw is None:
             return
@@ -95,17 +93,19 @@ class Navigator(Node):
         dy = self.goal_y - y
         dist = math.hypot(dx, dy)
 
-        # Arrived
+        # ---- Check if reached goal ---- #
         if dist < 0.12:
             self.arrived = True
             self.cmd_pub.publish(Twist())
-            done_msg = Bool()
-            done_msg.data = True
-            self.done_pub.publish(done_msg)
+
+            done = Bool()
+            done.data = True
+            self.done_pub.publish(done)
+
             self.get_logger().info("Navigator: Goal reached")
             return
 
-        # Rotate first
+        # ---- Rotate toward goal ---- #
         angle_to_goal = math.atan2(dy, dx)
         angle_error = math.atan2(
             math.sin(angle_to_goal - self.yaw),
@@ -118,14 +118,16 @@ class Navigator(Node):
             self.cmd_pub.publish(cmd)
             return
 
-        # Move forward via distance mover
+        # ---- Move a short distance chunk ---- #
         if not self.running_distance_move:
             travel_dist = min(0.25, dist)
             msg = Float32()
             msg.data = travel_dist
+
             self.move_dist_pub.publish(msg)
             self.running_distance_move = True
-            self.get_logger().info(f"Navigator: Moving {travel_dist:.2f} m")
+
+            self.get_logger().info(f"Navigator: Moving {travel_dist:.2f} m toward goal")
 
 
 def main():
