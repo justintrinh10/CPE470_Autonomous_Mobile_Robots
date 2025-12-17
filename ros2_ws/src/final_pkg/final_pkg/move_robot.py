@@ -69,8 +69,6 @@ class MoveRobot(Node):
             complete_msg = Bool()
             complete_msg.data = True
             self.publisher_move_robot_distance_complete.publish(complete_msg)
-            self.destroy_node()
-            rclpy.shutdown()
             return
 
         command = Twist()

@@ -75,8 +75,6 @@ class RotateRobot(Node):
             complete_msg = Bool()
             complete_msg.data = True
             self.publisher_stop_.publish(complete_msg)
-            self.destroy_node()
-            rclpy.shutdown()
             return
         
         angular_velocity_val = self.angular_velocity
