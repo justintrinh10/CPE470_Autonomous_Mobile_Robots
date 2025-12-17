@@ -36,39 +36,62 @@ class MoveRobotFollowPath(Node):
             10,
         )
 
-        self.moving = False
-        self.rotating = False
+        self.state = "IDLE"
+        self.current_index = 0
+        self.num_segments = 0
+        self.path = None
 
     def listener_callback_move_robot_follow_path(self, msg):
-        path = self.convert_msg_to_path(msg)
-        for i in range(len(path.points)):
-            angle_command = path.angle_changes[i]
-            distance_command = path.distances[i]
+        self.path = self.convert_msg_to_path(msg)
+        self.current_index = 0
+        self.num_segments = len(self.path.distances)
+        self.state = "IDLE"
+        
+        if self.num_segments < 1:
+            self.get_logger().info("Path has less than 2 points. Nothing to do.")
+            complete_msg = Bool()
+            complete_msg.data = True
+            self.publisher_.publish(complete_msg)
+            return
+        
+        angle_command = self.path.angle_changes[self.current_index]
+        angle_msg = Float32()
+        angle_msg.data = float(angle_command)
+        self.publisher_rotate_angle_.publish(angle_msg)
+        self.state = "ROTATING"
+
+    def listener_callback_move_distance_complete(self, msg):
+        if self.state != "MOVING":
+            return
+        self.current_index += 1
+        if self.current_index < self.num_segments:
+            self.get_logger().info(f"Move Distance Complete {self.current_index}")
+
+            angle_command = self.path.angle_changes[self.current_index]
             angle_msg = Float32()
             angle_msg.data = float(angle_command)
             self.publisher_rotate_angle_.publish(angle_msg)
-            self.rotating = True
+            self.state = "ROTATING"
 
-            while self.rotating:
-                rclpy.spin_once(self)
+        else:
+            self.get_logger().info("Move Robot Follow Path Complete")
 
-            distance_msg = Float32()
-            distance_msg.data = float(distance_command)
-            self.publisher_move_distance_.publish(distance_msg)
-            self.moving = True
-
-            while self.moving:
-                rclpy.spin_once(self)
-
-        complete_msg = Bool()
-        complete_msg.data = True
-        self.publisher_.publish(complete_msg)
-            
-    def listener_callback_move_distance_complete(self, msg):
-        self.moving = False
+            complete_msg = Bool()
+            complete_msg.data = True
+            self.publisher_.publish(complete_msg)
+            self.state = "IDLE"
+            return
 
     def listener_callback_rotate_angle_complete(self, msg):
-        self.rotating = False
+        if self.state != "ROTATING":
+            return
+        if msg.data:
+            self.get_logger().info(f"Rotation Complete {self.current_index}")
+
+            self.state = "MOVING"
+            distance_msg = Float32()
+            distance_msg.data = float(self.path.distances[self.current_index])
+            self.publisher_move_distance_.publish(distance_msg)
 
     def convert_msg_to_path(self, msg):
         path_points = msg.data.strip().split("\n")
