@@ -1,0 +1,59 @@
+[0.000000] (-) TimerEvent: {}
+[0.001309] (-) JobUnselected: {'identifier': 'checkpoint_interfaces'}
+[0.001936] (-) JobUnselected: {'identifier': 'checkpoint_pkg'}
+[0.002073] (-) JobUnselected: {'identifier': 'hw1_pkg'}
+[0.002133] (-) JobUnselected: {'identifier': 'hw3_pkg'}
+[0.002167] (final_pkg) JobQueued: {'identifier': 'final_pkg', 'dependencies': OrderedDict()}
+[0.002240] (final_pkg) JobStarted: {'identifier': 'final_pkg'}
+[0.099175] (-) TimerEvent: {}
+[0.199677] (-) TimerEvent: {}
+[0.301164] (-) TimerEvent: {}
+[0.405746] (-) TimerEvent: {}
+[0.508077] (-) TimerEvent: {}
+[0.608462] (-) TimerEvent: {}
+[0.708839] (-) TimerEvent: {}
+[0.809211] (-) TimerEvent: {}
+[0.909587] (-) TimerEvent: {}
+[1.010084] (-) TimerEvent: {}
+[1.068772] (final_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'develop', '--editable', '--build-directory', '/root/ros2_ws/build/final_pkg/build', '--no-deps', 'symlink_data'], 'cwd': '/root/ros2_ws/build/final_pkg', 'env': {'HOSTNAME': 'teamjk-desktop', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/root/ros2_ws/install/checkpoint_interfaces/lib:/root/create3_ws/install/create3_coverage/lib:/root/create3_ws/install/create3_examples_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/root', 'OLDPWD': '/root/ros2_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/root/ros2_ws/install:/root/create3_ws/install', 'ROS_DISTRO': 'humble', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'FASTRTPS_DEFAULT_PROFILES_FILE': '/fastrtps_config/super_client_configuration_file.xml', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_fastrtps_cpp', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'ROS_DOMAIN_ID': '99', 'AMENT_PREFIX_PATH': '/root/ros2_ws/install/hw3_pkg:/root/ros2_ws/install/hw1_pkg:/root/ros2_ws/install/final_pkg:/root/ros2_ws/install/checkpoint_pkg:/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_teleop:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_examples_py:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs:/opt/ros/humble', 'DEBIAN_FRONTEND': 'noninteractive', 'PWD': '/root/ros2_ws/build/final_pkg', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/root/ros2_ws/build/final_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/root/ros2_ws/install/final_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw3_pkg:/root/ros2_ws/install/hw3_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/hw1_pkg:/root/ros2_ws/install/hw1_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/final_pkg:/root/ros2_ws/install/final_pkg/lib/python3.10/site-packages:/root/ros2_ws/build/checkpoint_pkg:/root/ros2_ws/install/checkpoint_pkg/lib/python3.10/site-packages:/root/ros2_ws/install/checkpoint_interfaces/local/lib/python3.10/dist-packages:/root/create3_ws/install/create3_teleop/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_py/lib/python3.10/site-packages:/root/create3_ws/install/create3_examples_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'TZ': 'America/Los_Angeles', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/root/ros2_ws/install/checkpoint_interfaces:/root/create3_ws/install/create3_republisher:/root/create3_ws/install/create3_lidar_slam:/root/create3_ws/install/create3_coverage:/root/create3_ws/install/create3_examples_msgs'}, 'shell': False}
+[1.110181] (-) TimerEvent: {}
+[1.210559] (-) TimerEvent: {}
+[1.310910] (-) TimerEvent: {}
+[1.413118] (-) TimerEvent: {}
+[1.457511] (final_pkg) StdoutLine: {'line': b'running develop\n'}
+[1.458100] (final_pkg) StderrLine: {'line': b'/usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.\n'}
+[1.458323] (final_pkg) StderrLine: {'line': b'  warnings.warn(\n'}
+[1.515109] (-) TimerEvent: {}
+[1.617093] (-) TimerEvent: {}
+[1.717481] (-) TimerEvent: {}
+[1.724933] (final_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[1.725340] (final_pkg) StdoutLine: {'line': b'writing final_pkg.egg-info/PKG-INFO\n'}
+[1.725753] (final_pkg) StdoutLine: {'line': b'writing dependency_links to final_pkg.egg-info/dependency_links.txt\n'}
+[1.732373] (final_pkg) StdoutLine: {'line': b'writing entry points to final_pkg.egg-info/entry_points.txt\n'}
+[1.732916] (final_pkg) StdoutLine: {'line': b'writing requirements to final_pkg.egg-info/requires.txt\n'}
+[1.733618] (final_pkg) StdoutLine: {'line': b'writing top-level names to final_pkg.egg-info/top_level.txt\n'}
+[1.738967] (final_pkg) StdoutLine: {'line': b"reading manifest file 'final_pkg.egg-info/SOURCES.txt'\n"}
+[1.740825] (final_pkg) StdoutLine: {'line': b"writing manifest file 'final_pkg.egg-info/SOURCES.txt'\n"}
+[1.743720] (final_pkg) StdoutLine: {'line': b'running build_ext\n'}
+[1.744069] (final_pkg) StdoutLine: {'line': b'Creating /root/ros2_ws/install/final_pkg/lib/python3.10/site-packages/final-pkg.egg-link (link to .)\n'}
+[1.746407] (final_pkg) StdoutLine: {'line': b'Installing aruco_detector script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.747816] (final_pkg) StdoutLine: {'line': b'Installing aruco_pose_node script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.748153] (final_pkg) StdoutLine: {'line': b'Installing lidar script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.749419] (final_pkg) StdoutLine: {'line': b'Installing localizer script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.750170] (final_pkg) StdoutLine: {'line': b'Installing move_robot script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.750424] (final_pkg) StdoutLine: {'line': b'Installing move_robot_follow_path script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.752056] (final_pkg) StdoutLine: {'line': b'Installing move_robot_outside_box script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.752784] (final_pkg) StdoutLine: {'line': b'Installing move_robot_to_aruco script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.753070] (final_pkg) StdoutLine: {'line': b'Installing navigator script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.753302] (final_pkg) StdoutLine: {'line': b'Installing process_lidar script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.753431] (final_pkg) StdoutLine: {'line': b'Installing robot_manager script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.753595] (final_pkg) StdoutLine: {'line': b'Installing rotate_robot script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.753700] (final_pkg) StdoutLine: {'line': b'Installing rotate_robot_to_aruco script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.753794] (final_pkg) StdoutLine: {'line': b'Installing user_interface script to /root/ros2_ws/install/final_pkg/lib/final_pkg\n'}
+[1.756417] (final_pkg) StdoutLine: {'line': b'\n'}
+[1.756896] (final_pkg) StdoutLine: {'line': b'Installed /root/ros2_ws/build/final_pkg\n'}
+[1.757068] (final_pkg) StdoutLine: {'line': b'running symlink_data\n'}
+[1.817692] (-) TimerEvent: {}
+[1.832351] (final_pkg) CommandEnded: {'returncode': 0}
+[1.860904] (final_pkg) JobEnded: {'identifier': 'final_pkg', 'rc': 0}
+[1.862067] (-) EventReactorShutdown: {}
