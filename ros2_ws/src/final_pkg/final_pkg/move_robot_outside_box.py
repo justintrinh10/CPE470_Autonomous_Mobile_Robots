@@ -13,6 +13,8 @@ class MoveRobotOutsideBox(Node):
     def __init__(self):
         super().__init__('move_robot_outside_box')
 
+        self.state = "INIT"
+
         self.publisher_move_robot_outside_box_complete = self.create_publisher(Bool, 'move_robot_outside_box_complete', 10)
         self.subscriber_start_move_robot_outside_box = self.create_subscription(
             Bool,
@@ -30,7 +32,6 @@ class MoveRobotOutsideBox(Node):
         )
         self.num_points = 500
         self.points = ""
-        self.lidar_running = False
 
         self.publisher_start_process_lidar = self.create_publisher(String, 'start_process_lidar', 10)
         self.subscriber_process_lidar_complete = self.create_subscription(
@@ -40,7 +41,6 @@ class MoveRobotOutsideBox(Node):
             10
         )
         self.path = ""
-        self.processing_lidar = False
 
         self.publisher_move_robot_follow_path = self.create_publisher(String, 'move_robot_follow_path', 10)
         self.subscriber_move_robot_follow_path_complete = self.create_subscription(
@@ -49,51 +49,45 @@ class MoveRobotOutsideBox(Node):
             self.move_robot_follow_path_complete_callback,
             10
         )
-        self.moving_robot_follow_path = False
 
     def start_move_callback(self, msg):
         lidar_msg = Int32()
         lidar_msg.data = self.num_points
         self.publisher_start_lidar.publish(lidar_msg)
-        self.lidar_running = True
+        self.state = "LIDAR_RUNNING"
 
-        while self.lidar_running:
-            rclpy.spin_once(self)
-        
+    def lidar_complete_callback(self, msg):
+        if self.state != "LIDAR_RUNNING":
+            return
+        self.points = msg.data
+        self.get_logger().info("Lidar Data Received")
+
         process_lidar_msg = String()
         process_lidar_msg.data = self.points
         self.publisher_start_process_lidar.publish(process_lidar_msg)
-        self.processing_lidar = True
-
-        while self.processing_lidar:
-            rclpy.spin_once(self)
+        self.state = "PROCESSING_LIDAR"
+    
+    def process_lidar_complete_callback(self, msg):
+        if self.state != "PROCESSING_LIDAR":
+            return
+        self.path = msg.data
+        self.get_logger().info("Processed Lidar Data Received")
 
         move_robot_follow_path_msg = String()
         move_robot_follow_path_msg.data = self.path
         self.publisher_move_robot_follow_path.publish(move_robot_follow_path_msg)
-        self.moving_robot_follow_path = True
+        self.state = "MOVING_ROBOT_FOLLOW_PATH"
+    
+    def move_robot_follow_path_complete_callback(self, msg):
+        if self.state != "MOVING_ROBOT_FOLLOW_PATH":
+            return
+        self.get_logger().info("Move Robot Follow Path Complete Received")
 
-        while self.moving_robot_follow_path:
-            rclpy.spin_once(self)
-        
         complete_msg = Bool()
         complete_msg.data = True
         self.publisher_move_robot_outside_box_complete.publish(complete_msg)
         self.get_logger().info("Move Robot Outside Box Complete")
-
-    def lidar_complete_callback(self, msg):
-        self.points = msg.data
-        self.lidar_running = False
-        self.get_logger().info("Lidar Data Received")
-    
-    def process_lidar_complete_callback(self, msg):
-        self.path = msg.data
-        self.processing_lidar = False
-        self.get_logger().info("Processed Lidar Data Received")
-    
-    def move_robot_follow_path_complete_callback(self, msg):
-        self.moving_robot_follow_path = False
-        self.get_logger().info("Move Robot Follow Path Complete Received")
+        self.state = "COMPLETE"
 
 def main(args=None):
     rclpy.init(args=args)
@@ -104,5 +98,3 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-
-
