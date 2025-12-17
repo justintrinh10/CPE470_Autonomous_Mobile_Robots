@@ -98,16 +98,7 @@ class Navigator(Node):
         dx = self.goal_x - x
         dy = self.goal_y - y
         dist = math.hypot(dx, dy)
-
-        # ---------- Check if arrived ----------
-        if dist < 0.12:
-            self.arrived = True
-            self.cmd_pub.publish(Twist())
-            done = Bool()
-            done.data = True
-            self.done_pub.publish(done)
-            self.get_logger().info("Navigator: Goal complete")
-            return
+        self.get_logger().info(f"Navigator: Distance to goal: {dist:.3f}m")
 
         # ---------- Rotate toward goal (unchanged) ----------
         angle_target = math.atan2(dy, dx)
