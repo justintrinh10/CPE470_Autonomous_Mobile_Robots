@@ -11,6 +11,7 @@ class UserInterface(Node):
         self.get_logger().info("User Interface Node has been started.")
 
     def listener_callback(self, msg):
+        self.get_logger().info("Received start signal for user interface.")
         threading.Thread(target=self.get_user_input).start()
 
     def get_user_input(self):
