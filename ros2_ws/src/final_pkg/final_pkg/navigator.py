@@ -24,12 +24,10 @@ class Navigator(Node):
         self.rotated = False
         self.moved_complete = False
 
-        # ---------- Publishers ----------
         self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.done_pub = self.create_publisher(Bool, 'move_robot_to_point_complete', 10)
         self.move_dist_pub = self.create_publisher(Float32, 'move_robot_distance', 10)
 
-        # ---------- Subscriptions ----------
         self.position_sub = self.create_subscription(
             String, 'robot_position', self.position_cb, 10
         )
@@ -42,7 +40,6 @@ class Navigator(Node):
             Bool, 'move_robot_distance_complete', self.move_distance_done_callback, 10
         )
 
-        # ---- FIX: Add /odom subscription so self.yaw updates ----
         odom_qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)
         self.odom_sub = self.create_subscription(
             Odometry, '/odom', self.odom_cb, odom_qos
@@ -51,7 +48,6 @@ class Navigator(Node):
         # Timer for navigation loop
         self.timer = self.create_timer(0.1, self.navigate)
 
-    # ---------------- Callbacks ---------------- #
     def position_cb(self, msg):
         try:
             x, y = msg.data.split(',')
@@ -93,7 +89,6 @@ class Navigator(Node):
         cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
         self.yaw = math.atan2(siny_cosp, cosy_cosp)
 
-    # ---------------- Navigation Logic ---------------- #
     def navigate(self):
         if not self.goal_received or self.position is None or self.yaw is None:
             return
@@ -106,7 +101,6 @@ class Navigator(Node):
         dy = self.goal_y - y
         dist = math.hypot(dx, dy)
 
-        # ---- Rotate toward goal ---- #
         angle_to_goal = math.atan2(dy, dx)
         angle_error = math.atan2(
             math.sin(angle_to_goal - self.yaw),
@@ -120,7 +114,6 @@ class Navigator(Node):
             return
         elif not self.rotated:
             self.rotated = True
-            # Stop rotation
             cmd = Twist()
             self.cmd_pub.publish(cmd)
         else:
